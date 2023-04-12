@@ -1,0 +1,203 @@
+
+
+/* --------------------------- Compare Cars Begins --------------------*/
+
+.CompareTable table {
+  border-collapse:collapse;
+  font-family: 'Roboto';
+  border-spacing: 0 10px;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 3vw;
+  
+}
+
+.ComparingTable tr {
+  border-bottom: 1px solid #1C2F36;
+}
+
+.ComparingTable td {
+  padding: 20px 20px;
+  text-align: center;
+  color: #1C2F36;
+}
+
+.ComparingTable td:first-child {
+  text-align: left;
+  color: #1C2F36;
+  font-weight: 700;
+}
+
+ #firstCar, #secondCar{
+  background-color: transparent;
+
+ }
+ #firstCar img, #secondCar img{
+  background-color: transparent;
+  width:100%;
+  padding: 20px;
+ } 
+
+/* --------------------------- Compare Cars Ends --------------------*/
+
+/* --------------------------- Car Listing Begins --------------------*/
+.mainCarSection {
+    display: flex;
+    background-color: #A0AEB3;
+    padding: 20px;
+    padding-bottom: 0px;
+}
+  
+.mainImg { 
+    display:flex;
+    height: 30vw;
+    float: right;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+  
+.big-car-info {
+    text-align: left;
+}
+  
+.big-car-info h2 {
+    position: absolute;
+    color: #1C2F36;
+    font-family: 'Roboto';
+    margin-top: 10px;
+    font-size: 6vw;
+    margin-left: 1%;
+    margin-top:1%
+}
+.big-car-info .buffer{
+    position:static;
+    visibility: hidden;
+    margin:12px;
+}
+
+.mainCarSection button {
+    font-family: 'Roboto';
+    background-color: #1C2F36; 
+    border: none;
+    color: white;
+    padding: 12px 45px;
+    text-align: center;
+    margin-left: 9%;
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.POWER{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    float:left;
+    background-color: #1C2F36;
+    width:50%;
+    padding-top: 7%;
+    padding-bottom: 5%;
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+.POWER h2, .FUEL h2{
+    color:#A0AEB3;
+    font-size: 2.3vw;
+    line-height: 36px;
+}
+.POWER p, .FUEL p{
+    color:white;
+    font-size: 4vw;
+    margin: 35px;
+}
+
+.FUEL{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    float: right;
+    background-color:#192A31;
+    width:50%;
+    padding-top: 7%;
+    padding-bottom: 5%;
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+.info{
+    align-items: center;
+    background-color:#A0AEB3 ;
+}
+
+.images{
+    width:50%;
+    float: left;
+}
+.aside{
+    margin: 0;
+    float: right;
+    /* padding-left:15px; */
+    width:50%;
+    justify-content: center; 
+    /* padding-left: 3%; */
+    background-color:#A0AEB3 ;
+    padding-bottom: 0.18%;
+}
+
+.aside h1{
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.8vw;
+    padding: 4% 7%;
+    color: #192A31;
+}
+.title-band {
+    position: relative;
+    height: 2vw;
+    align-items: center;
+  }
+
+.title:before,
+.title:after {
+  content: "";
+  position: absolute;
+  top: 1.5vw;
+  height: 1vw;
+  margin: 0.8vw 0;
+  padding: 0;
+  background-color:#1C2F36;
+}
+
+.title:before {
+  left: 0;
+  width: 2.2vw;
+}
+.title:after {
+  right: 0;
+  width: 30vw;
+}
+
+.aside ol{
+    padding: 6%;
+}
+.aside li{
+    justify-content: space-between;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 1.6vw;
+    line-height: 3vw;
+    font-weight: 400;
+    padding: 0px 5px;
+    list-style-type: none;
+    color: white;
+}
+.aside li strong{
+    color:#192A31;
+}
+
+/* ------------- Car Listing Ends ---------------- */
+
