@@ -9,9 +9,9 @@ const Footer = () => {
     <div>
         <footer>
             <section>
-                <img class="Logo_footer" src="Logos/LOGO.png" alt="logo" />
+                <img className="Logo_footer" src="Logos/LOGO.png" alt="logo" />
             </section>
-            <section class="mainNavButtons" style={{width: '20%'}}>
+            <section className="mainNavButtons" style={{width: '20%'}}>
                 <a href="HomePage" style={{textDecoration: 'none', color:'white'}}>Home Page</a> <br/>
                 <a href="CompareCars" style={{textDecoration: 'none', color:'white'}}>Compare Cars</a> <br/>
                 <a onClick={() => scrollToElement('nav')} style={{cursor: 'pointer', textDecoration: 'none', color:'white'}}>Go Back Up</a> <br/>
@@ -20,16 +20,16 @@ const Footer = () => {
                 )}<br />
 
             </section>
-            <section class="icons">
-                <p><span class="fa fa-user-o" aria-hidden="true"></span>
+            <section className="icons">
+                <p><span className="fa fa-user-o" aria-hidden="true"></span>
                 <span>&nbsp;Log in / Sign Up</span><br/>
-                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                <i className="fa fa-envelope-o" aria-hidden="true"></i>
                 <span>&nbsp;Contact Us</span></p>
             </section>
-            <section class="HQ">
+            <section className="HQ">
                     <p style={{fontWeight: '600'}}>Location </p>
                     <p>Clemenceau St. Hamra, Beirut</p>
-                    <p class="padding" >Subscribe to our mailing list
+                    <p className="padding" >Subscribe to our mailing list
                     <input type="email" name="email" placeholder="example@domain.com" /></p>
             </section>
         </footer>
