@@ -1,38 +1,46 @@
 import React from 'react';
 
 const CarListing = () => {
+    // const carName = "test1";
+    // https://royalmotors.azurewebsites.net/car/${carName}
+    // fetch('./CarAPI.json')
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(error => console.error(error));
+
+
   return (
     <div>
-        <div class="mainCarSection">
-            <div class="big-car-info">
+        <div className="mainCarSection">
+            <div className="big-car-info">
                 <h2>GAC GS5 270T</h2>
-                <h2 class="buffer">buffer</h2>
+                <h2 className="buffer">buffer</h2>
                 <button>TEST DRIVE</button>
             </div>
-        <img class="mainImg" src="Car pictures/noBackground.png" alt="Main" />
+        <img className="mainImg" src="Car pictures/noBackground.png" alt="Main" />
         </div>
 
-        <div class="POWER">
-            <div class="Power_inner">
+        <div className="POWER">
+            <div className="Power_inner">
                 <h2>HORSE POWER</h2>
                 <p>167 hp</p>
             </div>
         </div>
 
-        <div class="FUEL">
-            <div class="Power_inner">
+        <div className="FUEL">
+            <div className="Power_inner">
                 <h2>FUEL CONSUMPTION</h2>
                 <p>7L/100Km</p>
             </div>
         </div>
 
-        <div class="info" style={{marginBottom: '0'}}>
-            <div class="picture">
-                <img class="images" src="Car pictures/2.jpg" alt="pics" />
+        <div className="info" style={{marginBottom: '0'}}>
+            <div className="picture">
+                <img className="images" src="Car pictures/2.jpg" alt="pics" />
             </div>
-            <div class="aside">
-                <div class="title-band">
-                    <h1 class="title" id="SPECIFICATIONS">SPECIFICATIONS</h1>
+            <div className="aside">
+                <div className="title-band">
+                    <h1 className="title" id="SPECIFICATIONS">SPECIFICATIONS</h1>
                 </div>
                 <ol>
                     <li><strong>Vehicle Type:</strong> SUV</li>

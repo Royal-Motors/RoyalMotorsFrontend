@@ -1,0 +1,15 @@
+{
+    "id": 4,
+    "name": "test1",
+    "make": "string",
+    "model": "string",
+    "year": 0,
+    "color": "string",
+    "used": true,
+    "price": 0,
+    "description": "string",
+    "mileage": 0,
+    "image_id_list": "string",
+    "video_id": "string",
+    "testDrives": null
+}
