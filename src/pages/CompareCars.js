@@ -1,5 +1,25 @@
 import React from 'react';
+import { useState, useEffect } from "react";
+
 const CompareCars = () => {
+  const carName1 = "test3";
+    const [data1, setData] = useState([]);
+
+    useEffect(() => {
+        fetch(`https://royalmotors.azurewebsites.net/car/${carName1}`)
+        .then((response) => response.json())
+        .then((data1) => setData(data1));
+    }, []);
+  
+    const carName2 = "test2";
+    const [data2, setData2] = useState([]);
+
+    useEffect(() => {
+        fetch(`https://royalmotors.azurewebsites.net/car/${carName2}`)
+        .then((response) => response.json())
+        .then((data2) => setData2(data2));
+    }, []);
+
   return (
     <div className='CompareTable'>
         <table className='ComparingTable'>
@@ -8,25 +28,15 @@ const CompareCars = () => {
         <td id="firstCar"><img src="Car pictures/noBackground - flipped.png" alt="" /></td>
         <td id="secondCar"><img src="Car pictures/noBackground.png" alt="" /></td>
       </tr>
-      <tr>
-        <td >Vehicle Type</td>
-        <td>Row 1, Column 2</td>
-        <td>Row 1, Column 2</td>
-      </tr>
       <tr >
-        <td>Brand</td>
-        <td>Row 2, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>Make</td>
+        <td>{data1.make}</td>
+        <td>{data2.make}</td>
       </tr>
       <tr>
         <td>Model</td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
-      </tr>
-      <tr>
-        <td>Version</td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>{data1.model}</td>
+        <td>{data2.model}</td>
       </tr>
       <tr>
         <td>Capacity</td>
@@ -34,14 +44,14 @@ const CompareCars = () => {
         <td>Row 1, Column 2</td>
       </tr>
       <tr>
-        <td>Fuel</td>
+        <td>Fuel Consumption</td>
         <td>Row 3, Column 2</td>
         <td>Row 1, Column 2</td>
       </tr>
       <tr>
         <td>Color</td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>{data1.color}</td>
+        <td>{data2.color}</td>
       </tr>
       <tr>
         <td>Transmission Type</td>
@@ -50,18 +60,18 @@ const CompareCars = () => {
       </tr>
       <tr>
         <td>Model Year</td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>{data1.year}</td>
+        <td>{data2.year}</td>
       </tr>
       <tr >
         <td>Mileage</td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>{data1.mileage} km</td>
+        <td>{data2.mileage} km</td>
       </tr>
       <tr >
         <td>Price</td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>{data1.price} USD</td>
+        <td>{data2.price} USD</td>
       </tr>
     </table>
     </div>
