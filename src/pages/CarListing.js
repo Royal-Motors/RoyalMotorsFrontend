@@ -1,12 +1,15 @@
 import React from 'react';
 
 const CarListing = () => {
-    // const carName = "test1";
-    // https://royalmotors.azurewebsites.net/car/${carName}
-    // fetch('./CarAPI.json')
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(error => console.error(error));
+    const carName = "test1";
+    // // https://royalmotors.azurewebsites.net/car/${carName}
+    // // ./CarAPI.json
+    fetch(`https://royalmotors.azurewebsites.net/car/${carName}`)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+
+
 
 
   return (
