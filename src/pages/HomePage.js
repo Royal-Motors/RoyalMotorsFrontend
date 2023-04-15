@@ -1,8 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import "./HomePage.css"
+import CarDisplayHP from '../components/CarDisplayHP';
+import { useState, useEffect }from 'react';
+import { Switch, Route ,Router } from 'react-router-dom';
 
 const HomePage = () => {
+    const [data_all, setData] = useState([]);
+    useEffect(() => {
+        fetch('https://royalmotors.azurewebsites.net/car')
+        .then((response) => response.json())
+        .then((data_all) => setData(data_all));
+    }, []);
   return (
     <div>
         <div className="kitkat"></div>
@@ -45,85 +54,18 @@ const HomePage = () => {
     <div className="kitkat"></div>
     {/* <!-- Multiple images displayed --> */}
     <div className="seinfeld">
+        {data_all.length > 0 ? (
         <div className="image-grid">
-            <div className="image-box">
-                <img id="GridPic" src="Car pictures/3.jpg" alt="" />
-                <a style={{cursor: 'pointer'}}>
-                    <div className="color-box">
-                        <p className="CarName">Car name</p>
-                    </div>
-                </a>
-            </div>
-            <div className="image-box">
-                <img id="GridPic" src="Car pictures/3.jpg" alt="" />
-                <a style={{cursor: 'pointer'}}>
-                    <div className="color-box">
-                        <p className="CarName">Car name</p>
-                    </div>
-                </a>
-            </div>
-            <div className="image-box">
-                <img id="GridPic" src="Car pictures/3.jpg" alt="" />
-                <a style={{cursor: 'pointer'}}>
-                    <div className="color-box">
-                        <p className="CarName">Car name</p>
-                    </div>
-                </a>
-            </div>
-            <div className="image-box">
-                <img id="GridPic" src="Car pictures/3.jpg" alt="" />
-                <a style={{cursor: 'pointer'}}>
-                    <div className="color-box">
-                        <p className="CarName">Car name</p>
-                    </div>
-                </a>
-            </div>
-            <div className="image-box">
-                <img id="GridPic" src="Car pictures/3.jpg" alt="" />
-                <a style={{cursor: 'pointer'}}>
-                    <div className="color-box">
-                        <p className="CarName">Car name</p>
-                    </div>
-                </a>
-            </div>
-            <div className="image-box">
-                <img id="GridPic" src="Car pictures/3.jpg" alt="" />
-                <a style={{cursor: 'pointer'}}>
-                    <div className="color-box">
-                        <p className="CarName">Car name</p>
-                    </div>
-                </a>
-            </div>
-            <div className="image-box">
-                <img id="GridPic" src="Car pictures/3.jpg" alt="" />
-                <a style={{cursor: 'pointer'}}>
-                    <div className="color-box">
-                        <p className="CarName">Car name</p>
-                    </div>
-                </a>
-            </div>
-            <div className="image-box">
-                <img id="GridPic" src="Car pictures/3.jpg" alt="" />
-                <a style={{cursor: 'pointer'}}>
-                    <div className="color-box">
-                        <p className="CarName">Car name</p>
-                    </div>
-                </a>
-            </div>
-            <div className="image-box">
-                <img id="GridPic" src="Car pictures/3.jpg" alt="" />
-                <a style={{cursor: 'pointer'}}>
-                    <div className="color-box">
-                        <p className="CarName">Car name</p>
-                    </div>
-                </a>
-            </div>
+            {data_all.map((car, i) => (
+                <CarDisplayHP key={i} name={car.name}/>
+            ))}
         </div>
-
+        ) : (
+        <p>Loading data...</p>
+        )}
     </div>
     {/* <!-- Section break --> */}
     <div className="kitkat"></div>
-
     </div>
   )
 }
