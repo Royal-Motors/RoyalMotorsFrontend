@@ -17,7 +17,8 @@ function App() {
           <Route path="/CarListing" element={<CarListing />} />
           <Route path="/CompareCars" element={<CompareCars />} />
           <Route path="/HomePage" element={<HomePage />} />
-          <Route path="/" element={<HomePage />} />
+          <Route exact path="/" element={<HomePage />} />
+          <Route exact path=":name" element={<CarListing />} />
         </Routes>
         <Footer />
       </Router>
@@ -27,3 +28,4 @@ function App() {
 
 export default App;
 //hi
+//hi crispy :D
