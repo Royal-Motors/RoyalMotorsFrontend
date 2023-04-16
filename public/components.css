@@ -17,7 +17,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-    text-align: left;
+  /* text-align: left; */
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
     background-color:#A0AEB3 ;
-    text-align: center;
+    /* text-align: center; */
 }
 ol, ul {
 	list-style: none;
