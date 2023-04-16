@@ -26,6 +26,20 @@
   text-align: left;
   color: #1C2F36;
   font-weight: 700;
+  width: 200px;
+}
+
+#carSelection{
+    /* background-color: red; */
+    vertical-align: middle;
+}
+
+#carSelection select{
+    background-color: #1C2F36;
+    color:#A0AEB3;
+    border-radius: 5px;
+    padding: 3px;
+
 }
 
  #firstCar, #secondCar{

@@ -1,15 +1,17 @@
 import React from 'react';
 import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
+
 
 const CarListing = () => {
-    const carName = "test3";
+    const {name}= useParams();
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch(`https://royalmotors.azurewebsites.net/car/${carName}`)
+        fetch(`https://royalmotors.azurewebsites.net/car/${name}`)
         .then((response) => response.json())
         .then((data) => setData(data));
-    }, []);
+    }, [name]);
 
   return (
     <div>
@@ -47,12 +49,12 @@ const CarListing = () => {
                 <ol>
                     <li><strong>Make: </strong>{data.make}</li>
                     <li><strong>Model: </strong>{data.model}</li>
-                    <li><strong>Fuel tank capacity: </strong> 55L</li>
+                    <li><strong>Fuel Tank Capacity: </strong> 55L</li>
                     <li><strong>Color: </strong>{data.color}</li>
                     <li><strong>Transmission Type: </strong>AUTOMATIC</li>
                     <li><strong>Model Year: </strong>{data.year}</li>
-                    <li><strong>Mileage: </strong>{data.mileage}</li>
-                    <li><strong>Price Including VAT: </strong>{data.price}</li>
+                    <li><strong>Mileage: </strong>{data.name ? `${data.mileage} km` : ""}</li>
+                    <li><strong>Price Including VAT: </strong>{data.name ? `${data.price} USD` : ""}</li>
                 </ol>
             </div>
         </div>
