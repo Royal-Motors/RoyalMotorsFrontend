@@ -15,9 +15,6 @@ const Footer = () => {
                 <a href="HomePage" style={{textDecoration: 'none', color:'white'}}>Home Page</a> <br/>
                 <a href="CompareCars" style={{textDecoration: 'none', color:'white'}}>Compare Cars</a> <br/>
                 <a onClick={() => scrollToElement('nav')} style={{cursor: 'pointer', textDecoration: 'none', color:'white'}}>Go Back Up</a> <br/>
-                {location.pathname === '/CarListing' && (
-                    <a href="hh" style={{textDecoration: 'none', color:'white'}}>Test Drive</a>
-                )}<br />
 
             </section>
             <section className="icons">
