@@ -14,7 +14,7 @@ const HomePage = () => {
     }, []);
   return (
     <div>
-        <div className="kitkat"></div>
+        <div className="kitkat" style={{marginTop:"10px"}}></div>
     {/* <!-- Pictures with info 1 --> */}
     <div className="Info">
         <div className="TestedCar" >
