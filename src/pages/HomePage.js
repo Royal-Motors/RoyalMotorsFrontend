@@ -15,6 +15,7 @@ const HomePage = () => {
     const [carPrices, setCarPrices] = useState([]);
     const [filter, setFilter] = useState("");
     const [sort, setSort] =useState([]);
+    const [selectedSort, setSelectedSort] = useState('');
 
     useEffect(() => {
       fetch('https://royalmotors.azurewebsites.net/car')
@@ -59,6 +60,8 @@ const HomePage = () => {
     };
     
     const handleSortChange = (event) => {
+      const selectedSort = event.target.value;
+      setSelectedSort(selectedSort);
       console.log(`Selected ${filter} filter and ${event.target.value} sort`);
     };
 
@@ -100,7 +103,7 @@ const HomePage = () => {
             </form>
 
             <div className="butt2">
-              <select className="sort" value="" onChange={handleSortChange}>
+              <select className="sort" value={selectedSort} onChange={handleSortChange}>
                 <option value="">Select {filter} to sort by</option>
                   {sort.map((value) => (
                   <option key={value} value={value}>{value}</option>
@@ -117,8 +120,7 @@ const HomePage = () => {
         {data_all.length > 0 ? (
         <div className="image-grid">
             {data_all.map((car, i) => (
-                <CarDisplayHP key={i} name={car.name}/>
-            ))}
+                <CarDisplayHP key={i} name={car.name}/>))}
         </div>
         ) : (
         <p>Loading data...</p>
