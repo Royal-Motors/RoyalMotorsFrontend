@@ -14,7 +14,7 @@ const Footer = () => {
             <section className="mainNavButtons" style={{width: '20%'}}>
                 <a href="HomePage" style={{textDecoration: 'none', color:'white'}}>Home Page</a> <br/>
                 <a href="CompareCars" style={{textDecoration: 'none', color:'white'}}>Compare Cars</a> <br/>
-                <a onClick={() => scrollToElement('nav')} style={{cursor: 'pointer', textDecoration: 'none', color:'white'}}>Go Back Up</a> <br/>
+                <a onClick={() => scrollToElement('nav')} style={{cursor: 'pointer', textDecoration: 'none', color:'white'}}>Back to Top</a> <br/>
 
             </section>
             <section className="icons">
