@@ -40,7 +40,7 @@ const CompareCars = () => {
     <div className='CompareTable'>
         <table className='ComparingTable'>
       <tr style={{borderRadius: '0px', boxShadow: '2px 2px 2px 2px rgba(0, 0, 0, 0)'}}>
-        <td id="carSelection"> Select both cars<br /><br />
+        <td id="carSelection"> Select cars<br /><br />
           <select value={carName1} onChange={(event) => handleCarSelect(event, setCarName1)}>
             <option value=''>Select a car</option>
             {carList.map((car) => (
