@@ -1,0 +1,166 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+  /* text-align: left; */
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+    background-color:#A0AEB3 ;
+    /* text-align: center; */
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* -----CSS RESETS------- */
+
+
+/* ---------------NAV BAR----------- */
+nav {
+    background-color: #1C2F36;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    margin: auto;
+    padding-right: 30px;
+    justify-content: center;
+    align-items: center;
+}
+nav a{
+    float:left;
+    color : white;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 20px;
+    padding: 10px 16px; 
+    margin: 40px 16px;
+}
+nav a:hover,.icon:hover {
+    background-color: rgba(242, 242, 242,0.40);
+    color: #f2f2f2;
+}
+.Logo {
+    float:left;
+    width: 149px;
+    height: 63px;
+    margin: 24px 22px 24px 15px;
+    vertical-align: middle;
+    line-height: 120px;
+}
+
+.icon{
+    float: right;
+    text-align: center;
+    float: right;
+    color: white;
+    text-align: center;
+    margin:35px 10px;
+    padding: 10px 6px;
+    height:28px;
+    vertical-align: middle;
+    line-height: 120px;
+}
+/* ---------NAV BAR---------- */
+
+
+/* -----FOOTER---------- */
+footer{
+  
+    display: flex;
+    align-items: center;
+    height: 100%;
+    clear: both;
+    margin-bottom: 0;
+    background-color: #1C2F36;
+    height: 15vw;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 0;
+    clear:both;
+  }
+  section{
+    float:left;
+    width: 22%;
+    justify-content:center;
+    color:#ffffff;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    margin:0;
+    padding:0;
+  }
+  .Logo_footer {
+    width: 18vw;
+    padding:0vw 0vw 0 2vw;
+    margin:0;
+  }
+  
+  .mainNavButtons{
+    font-size: 1.6vw;
+    line-height: 2.5vw;
+    padding:0vw 0 0 5vw;
+    margin:0;
+  
+  }
+  
+  section .fa{
+    font-size: 1.9vw;
+  }
+  .icons{
+    font-size: 1.6vw;
+    line-height: 2.9vw;
+    padding:0 2vw 0 2vw;
+    margin: 0vw 0 0 0;
+  }
+  
+  .HQ{
+    font-size: 1.5vw;
+    line-height: 2vw;
+    padding:0vw 0 0 0;
+  }
+  
+  .HQ .padding{
+    margin:15px 0 0 0;
+  } 
+  /* -------FOOTER--------- */
+
+  /*   
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+  need to add these two lines in your html head, 
+  one is for the font 'Roboto', the second is for the icons  
+  */
