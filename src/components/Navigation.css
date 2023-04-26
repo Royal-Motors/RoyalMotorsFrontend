@@ -1,0 +1,19 @@
+.dropdown-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dropdown-buttons button {
+    border: none;
+    background-color: #e6e6e6;
+    color: #000;
+    padding: 5px 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .dropdown-buttons button:hover {
+    background-color: #ccc;
+  }
+  

@@ -19,7 +19,7 @@ var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
 function AppSignIn() {
 
     let [userToken, setUserToken] = useState(getUserToken());
-    let [showSignInDialog, setShowSignInDialog] = useState(false);
+    let [showSignUpDialog, setShowSignUpDialog] = useState(false);
 
     const States = {
         PENDING: "PENDING",
@@ -76,7 +76,7 @@ function AppSignIn() {
         </header>
 
         <UserCredentialsDialog
-            open = {authState === States.USER_CREATION}
+            open = {showSignUpDialog}
             title = "Registration"
             submitText={"Submit"}
             onSubmit={(email, password, firstname, lastname) => sign_up(email, password, firstname, lastname)}
@@ -104,25 +104,16 @@ function AppSignIn() {
           <body>
               <div className="header">
               <AppBar position="static">
-                <Toolbar classes={{ root: "nav" }}>
-                    <Typography variant="h5">Profile</Typography>
-                    <div style={{ marginLeft: 'auto' }}>
-                    {userToken !== null ? (
-                        <Button color="inherit" onClick={sign_out}>Logout</Button>):(
-                        <div>
-                            <Button color="inherit" onClick={() => setAuthState(States.USER_CREATION)}>Register</Button>
-                        <Button color="inherit" onClick={() => setAuthState(States.USER_LOG_IN)} > Login </Button>
-                        </div>
-                        )}
-                    </div>
+                <Toolbar>
+                    <img src="/images/user.png" alt="user icon" className="user-icon"/>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    Royal Motors
+                    </Typography>
+                    <Button color="inherit" onClick={() => setShowSignUpDialog(true)}>Sign up</Button>
                 </Toolbar>
-               </AppBar>
+                </AppBar>
               </div>
-            
-
-
               <script src="script.js"></script>
-              
           </body>
       </html>
     </div>
