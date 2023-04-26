@@ -7,7 +7,13 @@ const Navigation = () => {
   const [showSignIn, setShowSignIn] = useState(false);
 
   const handleProfileClick = () => {
-    setShowSignIn(true);}
+    if(showSignIn==false){
+    setShowSignIn(true);
+    }
+    else{
+      setShowSignIn(false);
+      }
+  }
 
   return (
     <div>
