@@ -7,6 +7,7 @@ import CarListing from './pages/CarListing';
 import './App.css';
 import HomePage from './pages/HomePage';
 import CarListingDealer from './pages/CarListingDealer'
+import CarListingEdit from './pages/CarListingEdit';
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
           <Route path="/CompareCars" element={<CompareCars />} />
           <Route path="/HomePage" element={<HomePage />} />
           <Route exact path="/" element={<HomePage />} />
-          <Route exact path=":name" element={<CarListing />} />
+          {/* <Route exact path=":name" element={<CarListing />} /> */}
+          <Route exact path=":name" element={<CarListingEdit />} />
         </Routes>
         <Footer />
       </Router>
@@ -28,5 +30,3 @@ function App() {
 }
 
 export default App;
-//hi
-//hi crispy :D
