@@ -256,7 +256,7 @@ const HomePage = () => {
         {displayedCars.length > 0 ? (
         <div className="image-grid">
             {displayedCars.map((car, i) => (
-                <CarDisplayHP key={i} name={car.name} make={car.make} model={car.model} price={car.price}/>))}
+                <CarDisplayHP key={i} name={car.name} year={car.year} price={car.price}/>))}
         </div>
         ) : (
         <p>Loading data...</p>

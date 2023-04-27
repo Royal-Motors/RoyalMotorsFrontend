@@ -8,8 +8,8 @@ const CarDisplayHP = (props) => {
       <Link to={`/${props.name}`} style={{ cursor: 'pointer',textDecoration: 'none' }}>
         <div className="color-box">
           <p className="CarName">{props.name}</p>
-          <p className="subText">{props.make} -- {props.model}</p>
-          <p className="subText">{props.price}$</p>
+          <p className="subText">Year: {props.year}</p>
+          <p className="subText">Price: {props.price}$</p>
         </div>
       </Link>
     </div>
