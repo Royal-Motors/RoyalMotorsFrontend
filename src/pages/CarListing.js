@@ -14,59 +14,13 @@ const CarListing = () => {
     }, [name]);
 
 
-
-    // const send = {
-    //     "id":9,
-    //     "name": "GAC GS3 ",
-    //     "make": "GAC",
-    //     "model": "GS3",
-    //     "year": 2020,
-    //     "color": "Golden",
-    //     "used": true,
-    //     "price": 12000,
-    //     "description": "",
-    //     "mileage": 15000,
-    //     "horsepower": 135,
-    //     "fuelconsumption": 6.9,
-    //     "fueltankcapacity": 50,
-    //     "transmissiontype": "Automatic",
-    //     "image_id_list": "string",
-    //     "video_id": "string"
-    //   };
-      
-    //   const handleTestDriveClick = () => {
-    //     fetch("https://royalmotors.azurewebsites.net/car", {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify(send)
-    //     })
-    //     .then(response => response.json())
-    //     .then(send=> console.log(send))
-    //     .catch(error => console.error(error))
-    //   };
-
-      const handleTestDriveClick = () => {
-        fetch("https://royalmotors.azurewebsites.net/car/nadim", {
-          method: 'DELETE',
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
-      };
-
-    // const handleTestDriveClick =()=>{
-        
-    // }
-
   return (
     <div>
         <div className="mainCarSection">
             <div className="big-car-info">
                 <h2>{data.name}</h2>
                 <h2 className="buffer">buffer</h2> 
-                <button onClick={handleTestDriveClick}>TEST DRIVE</button>
+                <button>TEST DRIVE</button>
             </div>
         <img className="mainImg" src="https://royalmotors.azurewebsites.net/image/GS51" alt="Main" />
         </div>
