@@ -14,22 +14,17 @@ const CarListing = () => {
     }, [name]);
 
 
-
     // const send = {
     //     "id":9,
-    //     "name": "GAC GS3 ",
-    //     "make": "GAC",
-    //     "model": "GS3",
-    //     "year": 2020,
-    //     "color": "Golden",
+    //     "name": "BMW X6 XDRIVE 35I",
+    //     "make": "BMW",
+    //     "model": "X6 XDRIVE 35I",
+    //     "color": "Sophisto Grey",
+    //     "year": 2016,
     //     "used": true,
-    //     "price": 12000,
+    //     "mileage": 21000,
+    //     "price": 40900,
     //     "description": "",
-    //     "mileage": 15000,
-    //     "horsepower": 135,
-    //     "fuelconsumption": 6.9,
-    //     "fueltankcapacity": 50,
-    //     "transmissiontype": "Automatic",
     //     "image_id_list": "string",
     //     "video_id": "string"
     //   };
@@ -47,18 +42,18 @@ const CarListing = () => {
     //     .catch(error => console.error(error))
     //   };
 
-      const handleTestDriveClick = () => {
-        fetch("https://royalmotors.azurewebsites.net/car/nadim", {
-          method: 'DELETE',
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
-      };
+    //   const handleTestDriveClick = () => {
+    //     fetch("https://royalmotors.azurewebsites.net/car/GAC GS5 270T", {
+    //       method: 'DELETE',
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => console.log(data))
+    //     .catch(error => console.error(error));
+    //   };
 
-    // const handleTestDriveClick =()=>{
+    const handleTestDriveClick =()=>{
         
-    // }
+    }
 
   return (
     <div>
@@ -68,7 +63,7 @@ const CarListing = () => {
                 <h2 className="buffer">buffer</h2> 
                 <button onClick={handleTestDriveClick}>TEST DRIVE</button>
             </div>
-        <img className="mainImg" src="https://royalmotors.azurewebsites.net/image/GS51" alt="Main" />
+        <img className="mainImg" src="Car pictures/noBackground.png" alt="Main" />
         </div>
 
         <div className="POWER">
@@ -87,7 +82,7 @@ const CarListing = () => {
 
         <div className="info" style={{marginBottom: '0'}}>
             <div className="picture">
-                <img className="images" src="https://royalmotors.azurewebsites.net/image/GS52" alt="pics" />
+                <img className="images" src="Car pictures/2.jpg" alt="pics" />
             </div>
             <div className="aside">
                 <div className="title-band">
