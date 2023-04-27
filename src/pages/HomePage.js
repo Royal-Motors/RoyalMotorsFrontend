@@ -4,20 +4,25 @@ import CarDisplayHP from '../components/CarDisplayHP';
 import { useState, useEffect }from 'react';
 
 const HomePage = () => {
-    const [data_all, setData] = useState([]);
-    const [carNames, setCarNames] = useState([]);
-    const [carMakes, setCarMakes] = useState([]);
-    const [carModels, setCarModels] = useState([]);
-    const [carYears, setCarYears] = useState([]);
-    const [carColor, setCarColor] = useState([]);
-    const [carUsed, setCarUsed] = useState([]);
-    const [carPrices, setCarPrices] = useState([]);
+    const [data_all, setData] = useState([]); //array of jsons with all cars
+    const [carNames, setCarNames] = useState([]); //array for car names
+    const [carMakes, setCarMakes] = useState([]); //array for car makes
+    const [carModels, setCarModels] = useState([]); //array for car models
+    const [carYears, setCarYears] = useState([]); //array for car years
+    const [carColor, setCarColor] = useState([]); //array for car colors
+    const [carUsed, setCarUsed] = useState([]); //array for used or new cars
+    const [carPrices, setCarPrices] = useState([]); //array for car prices
 
-    const [filter, setFilter] = useState("");//active filter
-    const [sort, setSort] =useState([]);//array with attributes to sort by
-    const [selectedSort, setSelectedSort] = useState('');//active attribute
-    const [displayedSortedCars, setDisplayedSortedCars] = useState([]);//array with cars => active attribute
+    const [filter_1, setFilter_1] = useState(""); //active filter
+    const [filter_2, setFilter_2] =useState([]); //array with attributes to sort by
+    const [selectedFilter_2, setSelectedFilter_2] = useState(''); //active attribute
+    const [displayedCars, setDisplayedCars] = useState([]);//array with cars => active attribute
+    const [sort, setSort] = useState(''); //active sort
+    const [temp, setTemp] = useState([]); //temporarry array for traceback
 
+    const [searchQuery, setSearchQuery] = useState(''); //user input in search bar
+
+    //fetch car information from API runs once at the stat
     useEffect(() => {
       fetch('https://royalmotors.azurewebsites.net/car')
         .then((response) => response.json())
@@ -30,99 +35,163 @@ const HomePage = () => {
           setCarColor(Array.from(new Set(data_all.map((car) => car.color))));
           setCarUsed(Array.from(new Set(data_all.map((car) => car.used))));
           setCarPrices(Array.from(new Set(data_all.map((car) => car.price))));
-          setDisplayedSortedCars(data_all);
+          setDisplayedCars(data_all);
         });
     }, []);
 
+    //updates temp everytime displayedFiltered cars changes (must be a less space consuming way but no time for that)
+    useEffect(() => {
+      setTemp(displayedCars);
+    }, [displayedCars]);   
+
+    //change bool values to stings for the USED attribute of the cars
     const carUsedString = carUsed.map(value => value ? "Used" : "New");
 
+    //changes the second filter dropdown list contents
     const handleFilterChange = (event) => {
       const selectedFilter = event.target.value;
-      setFilter(selectedFilter);
+      setFilter_1(selectedFilter);
       if (selectedFilter === ""){
-        setSort([]);
+        setFilter_2([]);
       }
       else if (selectedFilter === 'name') {
-        setSort(carNames);
+        setFilter_2(carNames);
       } 
       else if (selectedFilter === 'make') {
-        setSort(carMakes);
+        setFilter_2(carMakes);
       }
       else if (selectedFilter === 'model') {
-        setSort(carModels);
+        setFilter_2(carModels);
       }
       else if (selectedFilter === 'year') {
-        setSort(carYears);
+        setFilter_2(carYears);
       }
       else if (selectedFilter === 'color') {
-        setSort(carColor);
+        setFilter_2(carColor);
       }
       else if (selectedFilter === 'used') {
-        setSort(carUsedString);
+        setFilter_2(carUsedString);
       }
       else if (selectedFilter === 'price') {
-        setSort(carPrices);
+        setFilter_2(carPrices);
       }
     };
 
+    //resets the cars shown upon clicking the no filter or no selected option
     const handleReset = (event) => {
-      setDisplayedSortedCars(data_all);
+      
+      setDisplayedCars(data_all);
+    };
+
+    //reset for sort button in case of an active filter
+    const handleReset2 = (event) => {
+      setDisplayedCars(temp);
     };
     
-    const handleSortChange = (event) => {
+    //changes the cars shown upon clicking the apply filter button
+    const handleFilter2Change = (event) => {
       const selectedSort = event.target.value;
-      setSelectedSort(selectedSort);
+      setSelectedFilter_2(selectedSort);
     };
 
+    //function that chooses which cars are going to be shown based on filter
     const handleDisplayedCars = (event) => {
-      const selectedSort = event.target.value;
-      let filteredData = data_all;
-      // Apply filter if there is one
-      if (filter === ""){
+      const selectedFilter = event.target.value;
+      let filteredData = data_all; //makes my life easier :)
+      //filter the arrays based on input of filter_1
+      if (filter_1 === ""){
         filteredData=data_all;
       }
-      else if (filter === "name") {
-        filteredData = filteredData.filter(car => car.name === selectedSort);
+      else if (filter_1 === "name") {
+        filteredData = filteredData.filter(car => car.name === selectedFilter);
       } 
-      else if (filter === "make") {
-        filteredData = filteredData.filter(car => car.make === selectedSort);
+      else if (filter_1 === "make") {
+        filteredData = filteredData.filter(car => car.make === selectedFilter);
       } 
-      else if (filter === "model") {
-        filteredData = filteredData.filter(car => car.model === selectedSort);
+      else if (filter_1 === "model") {
+        filteredData = filteredData.filter(car => car.model === selectedFilter);
       } 
-      else if (filter === "year") {
-        filteredData = filteredData.filter(car => car.year === selectedSort);
+      else if (filter_1 === "year") {
+        filteredData = filteredData.filter(car => parseInt(car.year) === parseInt(selectedFilter));
       }
-      else if (filter === "color") {
-        filteredData = filteredData.filter(car => car.color === selectedSort);
+      else if (filter_1 === "color") {
+        filteredData = filteredData.filter(car => car.color === selectedFilter);
       }
-      else if (filter === "used") {
-        filteredData = filteredData.filter(car => car.used === (selectedSort === "Used"));
-      } 
-      else if (filter === "price") {
-        filteredData = filteredData.filter(car => car.price === selectedSort);
+      else if (filter_1 === "price") {
+        filteredData = filteredData.filter(car => parseInt(car.price) === parseInt(selectedFilter));
       }
-      // Sort the filtered data based on the selected sort attribute
-      if (sort.includes(selectedSort)) {
-        filteredData.sort((a, b) => {
-          if (a[selectedSort] < b[selectedSort]) {
-            return -1;
-          } else if (a[selectedSort] > b[selectedSort]) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+      else if (filter_1 === "used") {
+        filteredData = filteredData.filter(car => car.used === true);
       }
-      setDisplayedSortedCars(filteredData);
+      else if (filter_1 === "new") {
+        filteredData = filteredData.filter(car => car.used === false);
+      }
+      setDisplayedCars(filteredData);
     };
 
-    const handleMultipleChange = (event) => {
-      handleDisplayedCars(event);
-      handleSortChange(event);
+    //handler for sorting
+    const handleDisplayedFinitoCars = (event) => {
+      const selectedSort = event.target.value;
+      let sortedData = displayedCars; //makes my life easier :)
+      //sort the arrays based on input of sort
+      if (selectedSort === ""){
+        sortedData = displayedCars;
+      }
+      else if (selectedSort === "alphab") {
+        if (sortedData.length === 1){
+          sortedData = displayedCars;
+        }
+        else{
+          sortedData = sortedData.sort((a, b) => a.name[0].localeCompare(b.name[0]));
+        }
+      } 
+      else if (selectedSort === "PI") {
+        if (sortedData.length === 1){
+          sortedData = displayedCars;
+        }
+        else{
+          sortedData = sortedData.sort((a, b) => a.price - b.price);
+        }
+      } 
+      else if (selectedSort === "PD") {
+        if (sortedData.length === 1){
+          sortedData = displayedCars;
+        }
+        else{
+          sortedData = sortedData.sort((a, b) => b.price - a.price);
+        }
+      }
+      setDisplayedCars(sortedData);
+    };
+
+    //changes the displayed car when search bar used
+    const handleSearchDisplayedCars = (event) => {
+      let dummy = data_all; //badum tisssssssss
+      setSearchQuery(event.target.value);
+      const results = dummy.filter((car) =>
+        car.name.toLowerCase().includes(event.target.value.toLowerCase())
+      );
+      setDisplayedCars(results);
     }
 
-    console.log(filter)
+    //check previous comments for definitions :)
+    const handleMultipleChange = (event) => {
+      handleDisplayedCars(event);
+      handleFilter2Change(event);
+    };
+
+    //updates cars to display user input and stores value in searchQuery
+    function handleSearchInputChange(event) {
+      setSearchQuery(event.target.value);
+      handleSearchDisplayedCars(event);
+    };
+
+    //updates sort dropdown and stores value in sort
+    const handleSortChange = (event) => {
+      setSort(event.target.value);
+      handleDisplayedCars(event);
+      handleDisplayedFinitoCars(event);
+    };
 
   return (
     <div>
@@ -143,9 +212,9 @@ const HomePage = () => {
     {/* <!-- Search bar, Filter and  Sort --> */}
     <div className="SFS">
         <div className="search-container">
-            {/* Filter dropdown */}
+            {/* Filter dropdown 1*/}
           <div className="butt1">
-          <select className="filter" value={filter} onChange={handleFilterChange}>
+          <select className="filter" value={filter_1} onChange={handleFilterChange}>
               <option value="" onClick={handleReset}>No Filter</option>
               <option value="name">Name</option>
               <option value="make">Make</option>
@@ -153,35 +222,41 @@ const HomePage = () => {
               <option value="year">Year</option>
               <option value="color">Color</option>
               <option value="used">Used</option>
-              <option value="price">Price</option>
+              <option value="new">New</option>
+              <option value="price">Price in $</option>
               </select>
             </div>
-
+            {/* Filter dropdown 2*/}
             <div className="butt2">
-              <select className="sort" value={selectedSort} onChange={handleMultipleChange}> 
+              <select className="filter" value={selectedFilter_2} onChange={handleMultipleChange}> 
                 <option value="" onClick={handleReset}>No Selection</option>
-                  {sort.map((value) => (
+                  {filter_2.map((value) => (
                   <option key={value} value={value}>{value}</option>
                   ))}  
               </select>
             </div>
-
-            <form action="/search">
-                <input type="text" placeholder="Search..." />
-                <button type="submit"><i className="fa fa-search"></i></button>
-            </form>
-
+            {/* Search bar */}
+            <input type="text" placeholder="Search car name..." value={searchQuery} onChange={handleSearchInputChange}/>
+            {/* Sort dropdown */}
+            <div className="butt3">
+                <select className="sort" value={sort} onChange={handleSortChange}> 
+                  <option value="" onClick={handleReset2}>No Sort</option>
+                  <option value="alphab">Alphabetically</option>
+                  <option value="PI">Price Increasing</option>  
+                  <option value="PD">Price Decreasing</option>
+                </select>
+              </div>
         </div>
+               
     </div>
-
     {/* <!-- Section break --> */}
     <div className="kitkat"></div>
     {/* <!-- Multiple images displayed --> */}
     <div className="seinfeld">
-        {displayedSortedCars.length > 0 ? (
+        {displayedCars.length > 0 ? (
         <div className="image-grid">
-            {displayedSortedCars.map((car, i) => (
-                <CarDisplayHP key={i} name={car.name}/>))}
+            {displayedCars.map((car, i) => (
+                <CarDisplayHP key={i} name={car.name} make={car.make} model={car.model} price={car.price}/>))}
         </div>
         ) : (
         <p>Loading data...</p>
