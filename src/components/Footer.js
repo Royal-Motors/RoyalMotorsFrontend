@@ -1,13 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { useLocation } from 'react-router-dom';
 import { scrollToElement } from './Functions';
 
 const Footer = () => {
-    const location = useLocation();
   return (
     <div>
-        <footer>
+        <footer id="footer">
             <section>
                 <img className="Logo_footer" src="Logos/LOGO.png" alt="logo" />
             </section>
@@ -18,10 +16,12 @@ const Footer = () => {
 
             </section>
             <section className="icons">
-                <p><span className="fa fa-user-o" aria-hidden="true"></span>
-                <span>&nbsp;Log in / Sign Up</span><br/>
-                <i className="fa fa-envelope-o" aria-hidden="true"></i>
-                <span>&nbsp;Contact Us</span></p>
+                <p style={{marginBottom:'1vw'}}><span className="fa fa-user-o" aria-hidden="true"></span>
+                <span>&nbsp;Log in / Sign Up</span><br/></p>
+                <p><i className="fa fa-envelope-o" aria-hidden="true"></i>
+                <span>&nbsp;Contact Us:</span></p>
+                <p>+961 1 234 567</p>
+                <p>royalmotorslb@gmail.com</p>
             </section>
             <section className="HQ">
                     <p style={{fontWeight: '600'}}>Location </p>

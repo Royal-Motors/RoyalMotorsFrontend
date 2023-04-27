@@ -74,14 +74,14 @@ const CarListing = () => {
         <div className="POWER">
             <div className="Power_inner">
                 <h2>HORSE POWER</h2>
-                <p>167 hp</p>
+                <p>{data.name ? `${data.horsepower} hp` : ""}</p>
             </div>
         </div>
 
         <div className="FUEL">
             <div className="Power_inner">
                 <h2>FUEL CONSUMPTION</h2>
-                <p>7L/100Km</p>
+                <p>{data.name ? `${data.fuelconsumption} L/100Km` : ""}</p>
             </div>
         </div>
 
@@ -96,9 +96,9 @@ const CarListing = () => {
                 <ol>
                     <li><strong>Make: </strong>{data.make}</li>
                     <li><strong>Model: </strong>{data.model}</li>
-                    <li><strong>Fuel Tank Capacity: </strong> 55L</li>
+                    <li><strong>Fuel Tank Capacity: </strong>{data.name ? `${data.fueltankcapacity} L` : ""}</li>
                     <li><strong>Color: </strong>{data.color}</li>
-                    <li><strong>Transmission Type: </strong>AUTOMATIC</li>
+                    <li><strong>Transmission Type: </strong>{data.transmissiontype}</li>
                     <li><strong>Model Year: </strong>{data.year}</li>
                     <li><strong>Mileage: </strong>{data.name ? `${data.mileage} km` : ""}</li>
                     <li><strong>Price Including VAT: </strong>{data.name ? `${data.price} USD` : ""}</li>
