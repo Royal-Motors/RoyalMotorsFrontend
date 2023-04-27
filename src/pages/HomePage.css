@@ -46,6 +46,8 @@
 /*Search bar, Filter and  Sort*/
 .SFS {
     background-color: #192A31;
+    align-items: center;
+    justify-content: center;
 }
 
 .filter {
@@ -113,15 +115,15 @@
         }
 
 .butt1{
-    padding-right: 1%;
+    padding-right: 0.7vw;
 }
 
 .butt2 {
-    padding-right: 13%;
+    padding-right: 10vw;
 }
 
 .butt3 {
-    padding-left: 10%;
+    padding-left: 7vw;
 }
 
 /*Pictures*/
