@@ -1,67 +1,90 @@
 import React from 'react';
-import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useState} from "react";
+import "./CarListingDealer.css"
 
 
 const CarListing = () => {
-    const {name}= useParams();
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        fetch(`https://royalmotors.azurewebsites.net/car/${name}`)
-        .then((response) => response.json())
-        .then((data) => setData(data));
-    }, [name]);
-
+    // const [carName, setCarName] = useState('');
+    // const [make, setMake] = useState('');
+    // const [model, setModel] = useState('');
+    // const [year, setYear] = useState('');
+    // const [color, setColor] = useState('');
+    // const [price, setPrice] = useState('');
+    // const [mileage, setMileage] = useState('');
+    // const [horsepower, setHorsepower] = useState('');
+    // const [fuelconsumption, setFuelconsumption] = useState('');
+    // const [fueltankcapacity, setFueltankcapacity] = useState('');
+    // const [transmissiontype, setTransmissiontype] = useState('');
 
     // const send = {
     //     "id":9,
-    //     "name": "BMW X6 XDRIVE 35I",
-    //     "make": "BMW",
-    //     "model": "X6 XDRIVE 35I",
-    //     "color": "Sophisto Grey",
-    //     "year": 2016,
+    //     "name": {carName},
+    //     "make": {make},
+    //     "model": {model},
+    //     "year": {year},
+    //     "color": {color},
     //     "used": true,
-    //     "mileage": 21000,
-    //     "price": 40900,
+    //     "price": {price},
     //     "description": "",
+    //     "mileage": {mileage},
+    //     "horsepower": {horsepower},
+    //     "fuelconsumption": {fuelconsumption},
+    //     "fueltankcapacity": {fueltankcapacity},
+    //     "transmissiontype": {transmissiontype},
     //     "image_id_list": "string",
     //     "video_id": "string"
     //   };
-      
-    //   const handleTestDriveClick = () => {
-    //     fetch("https://royalmotors.azurewebsites.net/car", {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify(send)
-    //     })
-    //     .then(response => response.json())
-    //     .then(send=> console.log(send))
-    //     .catch(error => console.error(error))
+
+        const [formValues, setFormValues] = useState({
+            name: '',
+            make: '',
+            model: '',
+            year: '',
+            color:'',
+            used : true,
+            price : 0,
+            description: "",
+            mileage: '',
+            horsepower: '',
+            fuelconsumption: '', 
+            fueltankcapacity: '',
+            transmissiontype: '',
+            image_id_list: "string",
+            video_id: "string"
+        });
+    
+      const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormValues({ ...formValues, [name]: value });
+      };
+
+      const handleSubmit = (event) => {
+        event.preventDefault();
+        fetch("https://royalmotors.azurewebsites.net/car", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formValues)
+        })
+        .then(response => response.json())
+        .then(formValues=> console.log(formValues))
+        .catch(error => console.error(error))
+        console.log(formValues)
+    };
+
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     console.log(formValues); // do something with formValues
     //   };
-
-    //   const handleTestDriveClick = () => {
-    //     fetch("https://royalmotors.azurewebsites.net/car/GAC GS5 270T", {
-    //       method: 'DELETE',
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => console.log(data))
-    //     .catch(error => console.error(error));
-    //   };
-
-    const handleTestDriveClick =()=>{
-        
-    }
-
+    
   return (
     <div>
         <div className="mainCarSection">
             <div className="big-car-info">
-                <h2>{data.name}</h2>
+                <input className="carName" type="text" name="name" value={formValues.name} onChange={handleInputChange} />
                 <h2 className="buffer">buffer</h2> 
-                <button onClick={handleTestDriveClick}>TEST DRIVE</button>
+                <button >TEST DRIVE</button>
             </div>
         <img className="mainImg" src="Car pictures/noBackground.png" alt="Main" />
         </div>
@@ -69,14 +92,16 @@ const CarListing = () => {
         <div className="POWER">
             <div className="Power_inner">
                 <h2>HORSE POWER</h2>
-                <p>167 hp</p>
+                <input className="horsepower" type="number"  name="horsepower" value={formValues.horsepower} onChange={handleInputChange} />
+                <p style={{display:"inline-block"}}>hp</p>
             </div>
         </div>
 
         <div className="FUEL">
             <div className="Power_inner">
                 <h2>FUEL CONSUMPTION</h2>
-                <p>7L/100Km</p>
+                <input className="fuelconsumption" type="number"  name="fuelconsumption" value={formValues.fuelconsumption} onChange={handleInputChange}/>
+                <p style={{display:"inline-block"}}>L/100Km</p>
             </div>
         </div>
 
@@ -89,17 +114,22 @@ const CarListing = () => {
                     <h1 className="title" id="SPECIFICATIONS">SPECIFICATIONS</h1>
                 </div>
                 <ol>
-                    <li><strong>Make: </strong>{data.make}</li>
-                    <li><strong>Model: </strong>{data.model}</li>
-                    <li><strong>Fuel Tank Capacity: </strong> 55L</li>
-                    <li><strong>Color: </strong>{data.color}</li>
-                    <li><strong>Transmission Type: </strong>AUTOMATIC</li>
-                    <li><strong>Model Year: </strong>{data.year}</li>
-                    <li><strong>Mileage: </strong>{data.name ? `${data.mileage} km` : ""}</li>
-                    <li><strong>Price Including VAT: </strong>{data.name ? `${data.price} USD` : ""}</li>
+                    <li><strong>Make: </strong><input className="listOfInfo" type="text" name="make" value={formValues.make} onChange={handleInputChange} /></li>
+                    <li><strong>Model: </strong><input className="listOfInfo" type="text" name="model" value={formValues.model} onChange={handleInputChange} /></li>
+                    <li><strong>Fuel Tank Capacity: </strong> <input className="listOfInfo" type="number" name="fueltankcapacity" value={formValues.fueltankcapacity} onChange={handleInputChange} style={{width:'5vw'}} />  L</li>
+                    <li><strong>Color: </strong><input className="listOfInfo" type="text"  name="color" value={formValues.color} onChange={handleInputChange} /></li>
+                    <li><strong>Transmission Type: </strong><input className="listOfInfo" type="text" name="transmissiontype" value={formValues.transmissiontype} onChange={handleInputChange} /></li>
+                    <li><strong>Model Year: </strong><input className="listOfInfo" type="number"  name="year" value={formValues.year} onChange={handleInputChange} /></li>
+                    <li><strong>Mileage: </strong><input className="listOfInfo" type="number"  name="mileage" value={formValues.mileage} onChange={handleInputChange} />  Km</li>
+                    <li><strong>Price Including VAT: </strong><input className="listOfInfo" type="number" name="price" value={formValues.price} onChange={handleInputChange} />  $</li>
                 </ol>
             </div>
         </div>
+
+        <div className='submit'>
+            <button onClick={handleSubmit}>SUBMIT</button>
+        </div>
+        <div style={{padding:'10px', backgroundColor: "#A0AEB3" }}></div>
     </div>
   )
 }

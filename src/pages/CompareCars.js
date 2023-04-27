@@ -69,18 +69,18 @@ const CompareCars = () => {
       </tr>
       <tr>
         <td>Fuel Tank Capacity </td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>{data1.name ? `${data1.fueltankcapacity} L` : ""}</td>
+        <td>{data2.name ? `${data2.fueltankcapacity} L` : ""}</td>
       </tr>
       <tr>
         <td>Horse Power </td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>{data1.name ? `${data1.horsepower} hp` : ""}</td>
+        <td>{data2.name ? `${data2.horsepower} hp` : ""}</td>
       </tr>
       <tr>
         <td>Fuel Consumption</td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>{data1.name ? `${data1.fuelconsumption} L/100Km` : ""}</td>
+        <td>{data2.name ? `${data2.fuelconsumption} L/100Km` : ""}</td>
       </tr>
       <tr>
         <td>Color</td>
@@ -89,8 +89,8 @@ const CompareCars = () => {
       </tr>
       <tr>
         <td>Transmission Type</td>
-        <td>Row 3, Column 2</td>
-        <td>Row 1, Column 2</td>
+        <td>{data1.transmissiontype}</td>
+        <td>{data2.transmissiontype}</td>
       </tr>
       <tr>
         <td>Model Year</td>
