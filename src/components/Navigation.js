@@ -1,18 +1,11 @@
 import { IconButton, Menu, MenuItem } from '@mui/material';
-import { AccountCircle } from '@mui/icons-material';
 import { useState, useCallback } from "react";
 import { useEffect } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import {Snackbar} from '@mui/material';
 import {Alert} from '@mui/material';
 import UserCredentialsDialog from '../pages/UserCredentialsDialog/UserCredentialsDialog';
 import UserCredentialsDialogIn from '../pages/UserCredentialsDialog/UserCredentialsDialogIn';
 import { getUserToken, saveUserToken, clearUserToken } from "../pages/localStorage";
-import { DataGrid } from '@mui/x-data-grid';
-import Select from '@mui/material/Select';
 import '../pages/sign-in.css';
 
 const Navigation = () => {
