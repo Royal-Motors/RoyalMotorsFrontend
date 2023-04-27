@@ -26,11 +26,12 @@ const Navigation = () => {
         };
 
 let [authState, setAuthState] = useState(States.PENDING);
+let menuContent = null;
 
 
     function sign_in(email, password) {
         return fetch(`${SERVER_URL}/sign_in`, {
-        method: "GET",
+        method: "POST",
         headers: {
         "Content-Type": "application/json",
         },
@@ -44,7 +45,8 @@ let [authState, setAuthState] = useState(States.PENDING);
         setAuthState(States.USER_AUTHENTICATED);
         setUserToken(body.token);
         saveUserToken(body.token);
-        });
+        })
+        .catch(error => console.error(error));
     }
 
     function sign_up(email, password, firstname, lastname) {
@@ -59,12 +61,15 @@ let [authState, setAuthState] = useState(States.PENDING);
         firstname: firstname,
         lastname: lastname
         }),
-        }).then(((response) => response.json()));
+        }).then(((response) => response.json()))
+        .catch(error => console.error(error));
     }
 
     function sign_out() {
         setUserToken(null);
         clearUserToken();
+        setAuthState(States.PENDING);
+
     }
 
   const handleProfileClick = (event) => {
@@ -85,6 +90,7 @@ let [authState, setAuthState] = useState(States.PENDING);
     handleClose();
   };
 
+  
   return (
     <div>
       <nav id="nav">
@@ -102,18 +108,34 @@ let [authState, setAuthState] = useState(States.PENDING);
               alt="logo"
               onClick={handleProfileClick}
             />
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={() => setAnchorEl(null)}
-        >
+    <div>
+    <Menu
+    anchorEl={anchorEl}
+    open={Boolean(anchorEl)}
+    onClose={() => setAnchorEl(null)}
+  >
+    {userToken !== null ?(
+        <>
+          <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }}>
+            Profile
+          </MenuItem>
+          <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={sign_out}>
+            Logout
+          </MenuItem>
+        </>
+      ):(
+        <>
           <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={handleSignUpClick}>
             Register
           </MenuItem>
           <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={handleSignInClick}>
-            Sign In
+            Login
           </MenuItem>
-        </Menu>
+        </>
+      )
+      }
+      </Menu>
+      </div>
       </nav>
 
       <div className="App">
@@ -133,7 +155,7 @@ let [authState, setAuthState] = useState(States.PENDING);
             title = "Sign In"
             submitText={"Submit"}
             onSubmit={(email, password) => sign_in(email, password)}
-            onClose = {() => setAuthState(States.PENDING)}
+            onClose = {() => setAuthState(States.USER_LOG_IN)}
         />
 
         <Snackbar
