@@ -72,6 +72,16 @@ nav a:hover,.icon:hover {
     background-color: rgba(242, 242, 242,0.40);
     color: #f2f2f2;
 }
+
+nav .noDesign{
+    float:none;
+    color : white;
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 20px;
+    padding: 0px 0px; 
+    margin: 0px 0px;
+}
 .Logo {
     float:left;
     width: 149px;
@@ -142,7 +152,7 @@ footer{
   }
   .icons{
     font-size: 1.6vw;
-    line-height: 2.9vw;
+    line-height: 2.3vw;
     padding:0 2vw 0 2vw;
     margin: 0vw 0 0 0;
   }

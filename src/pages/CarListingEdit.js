@@ -1,27 +1,88 @@
 import React from 'react';
-import {useState} from "react";
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import "./CarListingDealer.css"
 
 
-const CarListingDealer = () => {
+const CarListingEdit = () => {
+    const {name}= useParams();
+    const [data, setData] = useState({
+        name: '',
+        make: '',
+        model: '',
+        year: '',
+        color: '',
+        price: '',
+        description: '',
+        mileage: '',
+        horsepower: '',
+        fuelconsumption: '', 
+        fueltankcapacity: '',
+        transmissiontype: '',
+      });
+      
+
+    useEffect(() => {
+        fetch(`https://royalmotors.azurewebsites.net/car/${name}`)
+        .then((response) => response.json())
+        .then((data) => setData(data));
+    }, [name]);
+
+        // const [formValues, setFormValues] = useState({
+        //     name: `${data.name}`,
+        //     make: `${data.make}`,
+        //     model: `${data.model}`,
+        //     year: `${data.year}`,
+        //     color:`${data.color}`,
+        //     used : true,
+        //     price : `${data.price}`,
+        //     description: `${data.description}`,
+        //     mileage: `${data.mileage}`,
+        //     horsepower: `${data.horsepower}`,
+        //     fuelconsumption: `${data.fuelconsumption}`, 
+        //     fueltankcapacity: `${data.fueltankcapacity}`,
+        //     transmissiontype: `${data.transmissiontype}`,
+        //     image_id_list: "string",
+        //     video_id: "string"
+        // });
 
         const [formValues, setFormValues] = useState({
-            name: '',
-            make: '',
-            model: '',
-            year: '',
-            color:'',
+            name: "",
+            make: "",
+            model: "",
+            year: "",
+            color: "",
             used : true,
-            price : '',
+            price : "",
             description: "",
-            mileage: '',
-            horsepower: '',
-            fuelconsumption: '', 
-            fueltankcapacity: '',
-            transmissiontype: '',
+            mileage: "",
+            horsepower: "",
+            fuelconsumption: "", 
+            fueltankcapacity: "",
+            transmissiontype: "",
             image_id_list: "string",
             video_id: "string"
-        });
+          });
+          
+          useEffect(() => {
+            setFormValues({
+              name: data.name || "",
+              make: data.make || "",
+              model: data.model || "",
+              year: data.year || "",
+              color: data.color || "",
+              used : true,
+              price : data.price || "",
+              description: data.description || "",
+              mileage: data.mileage || "",
+              horsepower: data.horsepower || "",
+              fuelconsumption: data.fuelconsumption || "", 
+              fueltankcapacity: data.fueltankcapacity || "",
+              transmissiontype: data.transmissiontype || "",
+              image_id_list: "string",
+              video_id: "string"
+            });
+          }, [data]);
     
       const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -30,8 +91,8 @@ const CarListingDealer = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        fetch("https://royalmotors.azurewebsites.net/car", {
-          method: 'POST',
+        fetch(`https://royalmotors.azurewebsites.net/car/edit/${name}`, {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -99,4 +160,4 @@ const CarListingDealer = () => {
   )
 }
 
-export default CarListingDealer
+export default CarListingEdit
