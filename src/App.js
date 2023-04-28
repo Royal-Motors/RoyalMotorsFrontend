@@ -6,8 +6,8 @@ import CompareCars from './pages/CompareCars';
 import CarListing from './pages/CarListing';
 import './App.css';
 import HomePage from './pages/HomePage';
-import CarListingDealer from './pages/CarListingDealer'
-import CarListingEdit from './pages/CarListingEdit';
+import Profile from './pages/Profile';
+
 
 
 function App() {
@@ -16,13 +16,13 @@ function App() {
       <Router>
         <Navigation />
         <Routes>
-          <Route path="/CarListing" element={<CarListingDealer />} />
+          <Route path="/CarListing" element={<CarListing />} />
           <Route path="/CompareCars" element={<CompareCars />} />
           <Route path="/HomePage" element={<HomePage />} />
           <Route exact path="/" element={<HomePage />} />
-          {/* <Route exact path=":name" element={<CarListing />} /> */}
-          <Route exact path=":name" element={<CarListingEdit />} />
-        </Routes>
+          <Route exact path=":name" element={<CarListing />} />
+          <Route path="/Profile" element={<Profile />} />
+          </Routes>
         <Footer />
       </Router>
     </div>
