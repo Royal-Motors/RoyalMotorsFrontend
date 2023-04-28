@@ -6,6 +6,8 @@ import CompareCars from './pages/CompareCars';
 import CarListing from './pages/CarListing';
 import './App.css';
 import HomePage from './pages/HomePage';
+import Profile from './pages/Profile';
+
 
 
 function App() {
@@ -19,7 +21,8 @@ function App() {
           <Route path="/HomePage" element={<HomePage />} />
           <Route exact path="/" element={<HomePage />} />
           <Route exact path=":name" element={<CarListing />} />
-        </Routes>
+          <Route path="/Profile" element={<Profile />} />
+          </Routes>
         <Footer />
       </Router>
     </div>
@@ -27,5 +30,3 @@ function App() {
 }
 
 export default App;
-//hi
-//hi crispy :D

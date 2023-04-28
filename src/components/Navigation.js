@@ -8,6 +8,9 @@ import UserCredentialsDialogIn from '../pages/UserCredentialsDialog/UserCredenti
 import { getUserToken, saveUserToken, clearUserToken } from "../pages/localStorage";
 import '../pages/sign-in.css';
 
+import { Link } from 'react-router-dom';
+import { scrollToElement } from './Functions';
+
 const Navigation = () => {
 
   var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
@@ -40,13 +43,21 @@ let menuContent = null;
         password: password,
         }),
         })
-        .then((response) => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
         .then((body) => {
         setAuthState(States.USER_AUTHENTICATED);
         setUserToken(body.token);
         saveUserToken(body.token);
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+          console.error('Error:', error);
+          const errorMessage = error.message;
+                })
     }
 
     function sign_up(email, password, firstname, lastname) {
@@ -61,8 +72,16 @@ let menuContent = null;
         firstname: firstname,
         lastname: lastname
         }),
-        }).then(((response) => response.json()))
-        .catch(error => console.error(error));
+        })        .then(response => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          const errorMessage = error.message;
+        })
     }
 
     function sign_out() {
@@ -101,7 +120,6 @@ let menuContent = null;
         <a href="CompareCars" style={{ textDecoration: 'none' }}>
           Compare Cars
         </a>
-        <img className="icon" src="Logos/contact us.png" alt="" />
         <img
               className="icon"
               src={process.env.PUBLIC_URL + 'Logos/user.png'}
@@ -117,10 +135,12 @@ let menuContent = null;
     {userToken !== null ?(
         <>
           <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }}>
-            Profile
+          <a href="Profile" style={{ textDecoration: 'none' }}>
+          Profile
+        </a>
           </MenuItem>
           <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={sign_out}>
-            Logout
+          <a href="HomePage" style={{ textDecoration: 'none' }}>Logout</a>
           </MenuItem>
         </>
       ):(
@@ -155,7 +175,7 @@ let menuContent = null;
             title = "Sign In"
             submitText={"Submit"}
             onSubmit={(email, password) => sign_in(email, password)}
-            onClose = {() => setAuthState(States.USER_LOG_IN)}
+            onClose = {() => setAuthState(States.PENDING)}
         />
 
         <Snackbar
@@ -165,7 +185,15 @@ let menuContent = null;
             autoHideDuration={4000}
             onClose={() => setAuthState(States.PENDING)}
             >
-            <Alert severity="success">Success</Alert>
+            <Alert severity="success">Successfully logged in!</Alert>
+        </Snackbar>
+        <Snackbar
+            elevation={6}
+            variant="filled"
+            autoHideDuration={4000}
+            onClose={() => setAuthState(States.PENDING)}
+            >
+            <Alert severity="info">Please check your email for verification code.</Alert>
         </Snackbar>
     </div>
 

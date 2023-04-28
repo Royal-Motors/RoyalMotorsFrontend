@@ -28,7 +28,7 @@ submitText,
                     fullWidth
                     label="Email"
                     type="text"
-                    value={email}
+                    value={email} 
                     onChange={({ target: { value } }) => setEmail(value)}
                 />
 
@@ -38,7 +38,7 @@ submitText,
                 fullWidth
                 label="Password"
                 type="password"
-                value={password}
+                value={password} 
                 onChange={({ target: { value } }) => setPassword(value)}
             />
             </div>
@@ -47,7 +47,7 @@ submitText,
                 fullWidth
                 label="First Name"
                 type="text"
-                value={firstname}
+                value={firstname} 
                 onChange={({ target: { value } }) => setFirstname(value)}
             />
             </div>
@@ -56,7 +56,7 @@ submitText,
                 fullWidth
                 label="Last Name"
                 type="text"
-                value={lastname}
+                value={lastname} 
                 onChange={({ target: { value } }) => setLastname(value)}
             />
             </div>

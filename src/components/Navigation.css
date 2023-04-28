@@ -16,4 +16,8 @@
   .dropdown-buttons button:hover {
     background-color: #ccc;
   }
+  a:visited {
+    color:#000;
+  }
+  
   
