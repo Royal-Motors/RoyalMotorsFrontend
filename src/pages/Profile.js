@@ -63,7 +63,7 @@ const Profile = () => {
 
 
   return (
-    <div>
+    <div className="bodyProfile">
     <main>
       <section className="profile-info">
         <h1 style={{color: 'black', fontSize: '30px', paddingBottom:'30px', paddingTop:'0px'}}>Profile Information</h1>

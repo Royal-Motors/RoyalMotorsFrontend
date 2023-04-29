@@ -22,7 +22,7 @@ const CarListing = () => {
                 <h2 className="buffer">buffer</h2> 
                 <button>TEST DRIVE</button>
             </div>
-        <img className="mainImg" src="https://royalmotors.azurewebsites.net/image/GS51" alt="Main" />
+        <img className="mainImg" src="https://royalmotors.azurewebsites.net/image/BMW_X6_XDRIVE_35I_1" alt="Main" />
         </div>
 
         <div className="POWER">
@@ -41,7 +41,7 @@ const CarListing = () => {
 
         <div className="info" style={{marginBottom: '0'}}>
             <div className="picture">
-                <img className="images" src="https://royalmotors.azurewebsites.net/image/GS52" alt="pics" />
+                <img className="images" src="https://royalmotors.azurewebsites.net/image/BMW_X6_XDRIVE_35I_3" alt="pics" />
             </div>
             <div className="aside">
                 <div className="title-band">

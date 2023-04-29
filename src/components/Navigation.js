@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import { useState, useCallback } from "react";
 import { useEffect } from 'react';
@@ -111,15 +112,12 @@ let menuContent = null;
 
   
   return (
-    <div>
+    <div className='bodySignIn'>
       <nav id="nav">
         <img className="Logo" src={process.env.PUBLIC_URL + 'Logos/LOGO.png'} alt="logo" />
-        <a href="HomePage" style={{ textDecoration: 'none' }}>
-          Home Page
-        </a>
-        <a href="CompareCars" style={{ textDecoration: 'none' }}>
-          Compare Cars
-        </a>
+        <a href="HomePage" style={{ textDecoration: 'none' }}>Home Page</a>
+        <a href="CompareCars" style={{ textDecoration: 'none' }}>Compare Cars</a>
+        <a onClick={() => scrollToElement('footer')}style={{textDecoration: 'none'}}>Contact us</a>
         <img
               className="icon"
               src={process.env.PUBLIC_URL + 'Logos/user.png'}
