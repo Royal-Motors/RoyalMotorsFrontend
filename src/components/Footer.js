@@ -16,8 +16,6 @@ const Footer = () => {
 
             </section>
             <section className="icons">
-                <p style={{marginBottom:'1vw'}}><span className="fa fa-user-o" aria-hidden="true"></span>
-                <span>&nbsp;Log in / Sign Up</span><br/></p>
                 <p><i className="fa fa-envelope-o" aria-hidden="true"></i>
                 <span>&nbsp;Contact Us:</span></p>
                 <p>+961 1 234 567</p>
