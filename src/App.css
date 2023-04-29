@@ -20,13 +20,15 @@
   padding: 20px 20px;
   text-align: center;
   color: #1C2F36;
+  width: 33%;
 }
 
 .ComparingTable td:first-child {
   text-align: left;
   color: #1C2F36;
   font-weight: 700;
-  width: 200px;
+  width: 20%;
+  
 }
 
 #carSelection{
@@ -63,12 +65,12 @@
 }
   
 .mainImg { 
-    display:block;
+    display:flex;
     width: 60vw;
     float: right;
     margin-left: auto;
     margin-right: 20px;
-    margin-top: 55px;
+    margin-top: 30px;
     margin-bottom: 30px;
 }
   
@@ -106,11 +108,10 @@
 }
 
 .POWER{
-    display: flex;
+    display: inline-block;
     align-items: center;
     justify-content: center;
     text-align: center;
-    float:left;
     background-color: #1C2F36;
     width:50%;
     padding-top: 7%;
@@ -130,11 +131,10 @@
 }
 
 .FUEL{
-    display: flex;
+    display: inline-block;
     align-items: center;
     justify-content: center;
     text-align: center;
-    float: right;
     background-color:#192A31;
     width:50%;
     padding-top: 7%;
@@ -143,23 +143,55 @@
     font-weight: 700;
 }
 .info{
-    align-items: center;
     background-color:#A0AEB3 ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.images{
+.picture{
     width:50%;
     float: left;
+    position: relative;
+    /* background-color: #1C2F36; */
 }
+.picture:hover .prev, .picture:hover .next {
+    display: block;
+}
+.images{
+    width:100%;
+    float:left;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    display: none;
+  }
+  
+.prev {
+    left: 0;
+}
+  
+.next {
+    right: 0;
+}
+
+
 .aside{
     margin: 0;
     float: right;
-    /* padding-left:15px; */
     width:50%;
     justify-content: center; 
-    /* padding-left: 3%; */
     background-color:#A0AEB3 ;
-    padding-bottom: 0.18%;
 }
 
 .aside h1{
