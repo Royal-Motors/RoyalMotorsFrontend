@@ -1,3 +1,7 @@
+.mainCarSection {
+    padding-bottom: 20px;
+}
+
 .carName{
     background-color: #A0AEB3;
     position: absolute;
@@ -62,3 +66,34 @@
     color: white;
     font-family: 'Roboto';
 }
+
+.big-car-info {
+    text-align: left;
+    width: 55%;
+}
+
+.custom-file-upload {
+    border: 2px dashed #1C2F36;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    height: 200px;
+    margin:2%;
+    text-align: center;
+    width: 40%;
+  }
+  
+  .custom-file-upload i {
+    color: #1C2F36;
+    font-size: 50px;
+    margin-top: 70px;
+  }
+  
+  .custom-file-upload:hover {
+    border-color: #c5c5c5;
+  }
+  
+  .custom-file-upload:hover i {
+    color: #c5c5c5;
+  }
+  

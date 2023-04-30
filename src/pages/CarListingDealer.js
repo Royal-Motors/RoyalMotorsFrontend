@@ -5,31 +5,85 @@ import "./CarListingDealer.css"
 
 const CarListingDealer = () => {
 
-        const [formValues, setFormValues] = useState({
-            name: '',
-            make: '',
-            model: '',
-            year: '',
-            color:'',
-            used : true,
-            price : '',
-            description: "",
-            mileage: '',
-            horsepower: '',
-            fuelconsumption: '', 
-            fueltankcapacity: '',
-            transmissiontype: '',
-            image_id_list: "string",
-            video_id: "string"
-        });
+    const [formValues, setFormValues] = useState({
+        name: '',
+        make: '',
+        model: '',
+        year: '',
+        color:'',
+        used : true,
+        price : '',
+        description: "",
+        mileage: '',
+        horsepower: '',
+        fuelconsumption: '', 
+        fueltankcapacity: '',
+        transmissiontype: '',
+        image_id_list: "string",
+        video_id: "string"
+    });
     
-      const handleInputChange = (event) => {
+    const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormValues({ ...formValues, [name]: value });
-      };
+    };
+
+    // formMainData has the main picture
+    // formMainDataFixed has the main picture after the name has been fixed
+    // formData has all other pictures
+    // formDataAll loops through formData
+
+    // This is to save the picture with no background
+    const [selectedMainFile, setselectedMainFile] = useState(null);
+    const formMainData = new FormData();
+    const handleMainImageUpload = async (event) => {
+        const file = event.target.files[0];
+        setselectedMainFile(file);
+        formMainData.append("File", file);
+    };    
+    
+    const formData = new FormData();
 
     const handleSubmit = (event) => {
+
         event.preventDefault();
+
+        // Sending the no background picture
+        for (const [file] of formMainData.entries()) {
+            const formMainDataFixed = new FormData();
+            formMainDataFixed.append(`File`, file, `${formValues.name}_1`); //this is to fix the name 
+            fetch("https://royalmotors.azurewebsites.net/image", {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: formMainDataFixed
+              })
+              .then(response => response.json())
+              .then(formMainDataFixed=> console.log(formMainDataFixed))
+              .catch(error => console.error(error))
+        }
+
+        // Sending the rest of the pictures
+        // let i = 2; // start with name_2 because _1 is for the no background picture
+        // for (const [file] of formData.entries()) {
+        //     let formDataAll = new FormData();
+        //     formDataAll.append(`File`, file, `${formValues.name}_${i}`);
+        //     fetch("https://royalmotors.azurewebsites.net/image", {
+        //         method: 'POST',
+        //         headers: {
+        //           'Content-Type': 'application/json'
+        //         },
+        //         body: formDataAll
+        //       })
+        //       .then(response => response.json())
+        //       .then(formDataAll=> console.log(formDataAll))
+        //       .catch(error => console.error(error))
+        // i++;
+        // }
+
+        formValues.image_id_list = `${formValues.name}_1`
+
         fetch("https://royalmotors.azurewebsites.net/car", {
           method: 'POST',
           headers: {
@@ -40,7 +94,6 @@ const CarListingDealer = () => {
         .then(response => response.json())
         .then(formValues=> console.log(formValues))
         .catch(error => console.error(error))
-        console.log(formValues)
     };
     
   return (
@@ -49,9 +102,26 @@ const CarListingDealer = () => {
             <div className="big-car-info">
                 <input className="carName" type="text" name="name" value={formValues.name} onChange={handleInputChange} />
                 <h2 className="buffer">buffer</h2> 
-                <button >TEST DRIVE</button>
+                {selectedMainFile?(
+                <button onClick={() => setselectedMainFile(null)}>Delete Image</button>):("")}
             </div>
-        <img className="mainImg" src="Car pictures/noBackground.png" alt="Main" />
+            {selectedMainFile? (
+                <div style={{ width :'50%'}}>
+                    <img style={{ width :'100%'}}src={URL.createObjectURL(selectedMainFile)} alt="selected" />
+                </div>
+            ):(
+                <div className="custom-file-upload">
+                <label htmlFor="imageInput" >
+                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                </label>
+                <input
+                    id="imageInput"
+                    type="file"
+                    onChange={handleMainImageUpload}
+                    accept="image/*"
+                    style={{ display: "none" }}
+                /></div>
+            )}
         </div>
 
         <div className="POWER">
