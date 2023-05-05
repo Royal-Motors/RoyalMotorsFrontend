@@ -1,7 +1,7 @@
 import React from 'react';
 import "./HomePage.css"
 import CarDisplayHP from '../components/CarDisplayHP';
-import { useState, useEffect }from 'react';
+import { useState, useEffect } from 'react';
 
 const HomePage = () => {
     const [data_all, setData] = useState([]); //array of jsons with all cars

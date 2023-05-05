@@ -1,0 +1,170 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+    background-color: #A0AEB3;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content: '';
+        content: none;
+    }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/*Section break*/
+.kitkat {
+    padding: 5px;
+    background-color: #A0AEB3;
+}
+/*Table*/
+table {
+    border-collapse: collapse;
+    font-family: 'Roboto';
+    border-spacing: 0 10px;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 3vw;
+}
+
+tr {
+
+    border-bottom: 1px solid #1C2F36;
+}
+
+#top {
+    font-weight: bold;
+}
+
+td {
+    padding: 20px 20px;
+    text-align: center;
+    color: #1C2F36;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+    td:first-child {
+        text-align: left;
+        color: #1C2F36;
+        font-weight: 700;
+    }
+
+.delButton {
+    background-color: transparent;
+}
+
+    .delButton button {
+        background-color: #293f47;
+    }
+
+        .delButton button p {
+            font-family: 'Roboto';
+            font-style: normal;
+            color: #A0AEB3;
+            font-size: 1vw;
+            font-weight: 400;
+            text-align: center;
+        }
+
+    .delButton p:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+    }
+
+.editButton {
+    background-color: transparent;
+}
+
+    .editButton button {
+        background-color: #293f47;
+    }
+
+        .editButton button p {
+            font-family: 'Roboto';
+            font-style: normal;
+            color: #A0AEB3;
+            font-size: 1vw;
+            font-weight: 400;
+            text-align: center;
+        }
+
+    .editButton p:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+    }
+
+.SFS {
+    background-color: #192A31;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+    .search-container input[type="text"] {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 500px;
+        padding: 10px;
+        border: none;
+        font-size: 16px;
+    }
+
+    .search-container button[type="submit"] {
+        background-color: #ddd;
+        border: none;
+        color: #666;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .search-container button[type="submit"]:hover {
+            background-color: #aaa;
+            color: #fff;
+        }
