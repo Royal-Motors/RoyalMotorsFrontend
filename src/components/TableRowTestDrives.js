@@ -22,7 +22,7 @@ function TableRowTestDrives(props) {
       <td>{props.time}</td>
       <td>no</td>
       <td>
-        <div class="delButton">
+        <div className="delButton">
             <button onClick={handleDelete} id="HA">
                 <p>Delete</p>
             </button>
