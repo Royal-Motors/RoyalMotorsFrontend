@@ -13,13 +13,19 @@ const CarListing = () => {
         fetch(`https://royalmotors.azurewebsites.net/car/${name}`)
         .then((response) => response.json())
         .then((data) => setData(data));
-    }, [name]);
+        console.log(data)
+    }, [name,data]);
     
-    // 
+    //This is to display images
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [loadedImages, setLoadedImages] = useState([]);
     useEffect(() => {
-        const imageUrls = data.image_id_list ? data.image_id_list.split(",").map((word) => "https://royalmotors.azurewebsites.net/image/" + word).slice(1) : [];
+        // eslint-disable-next-line array-callback-return
+        const imageUrls = data.image_id_list ? data.image_id_list.split(",").map((word) => {
+    if (word) {
+        return "https://royalmotors.azurewebsites.net/image/" + word;
+    }
+}).filter(Boolean).slice(1) : [];
         const promises = imageUrls.map((url) => {
         return new Promise((resolve, reject) => {
             const img = new Image();

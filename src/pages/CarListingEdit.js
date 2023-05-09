@@ -28,23 +28,6 @@ const CarListingEdit = () => {
         .then((data) => setData(data));
     }, [name]);
 
-        // const [formValues, setFormValues] = useState({
-        //     name: `${data.name}`,
-        //     make: `${data.make}`,
-        //     model: `${data.model}`,
-        //     year: `${data.year}`,
-        //     color:`${data.color}`,
-        //     used : true,
-        //     price : `${data.price}`,
-        //     description: `${data.description}`,
-        //     mileage: `${data.mileage}`,
-        //     horsepower: `${data.horsepower}`,
-        //     fuelconsumption: `${data.fuelconsumption}`, 
-        //     fueltankcapacity: `${data.fueltankcapacity}`,
-        //     transmissiontype: `${data.transmissiontype}`,
-        //     image_id_list: "string",
-        //     video_id: "string"
-        // });
 
         const [formValues, setFormValues] = useState({
             name: "",
@@ -60,8 +43,8 @@ const CarListingEdit = () => {
             fuelconsumption: "", 
             fueltankcapacity: "",
             transmissiontype: "",
-            image_id_list: "string",
-            video_id: "string"
+            image_id_list: "",
+            video_id: ""
           });
           
           useEffect(() => {
@@ -79,8 +62,8 @@ const CarListingEdit = () => {
               fuelconsumption: data.fuelconsumption || "", 
               fueltankcapacity: data.fueltankcapacity || "",
               transmissiontype: data.transmissiontype || "",
-              image_id_list: "string",
-              video_id: "string"
+              image_id_list: data.image_id_list||"",
+              video_id: data.video_id||""
             });
           }, [data]);
     
