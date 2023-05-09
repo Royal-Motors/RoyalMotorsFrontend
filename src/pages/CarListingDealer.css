@@ -91,9 +91,78 @@
   
   .custom-file-upload:hover {
     border-color: #c5c5c5;
+    cursor: pointer;
   }
   
   .custom-file-upload:hover i {
     color: #c5c5c5;
+    cursor: pointer;
   }
+
+/* ------------ All images ----------- */
+  .pictures{
+    display: inline-block;
+    width: 30%;
+    height: 30%;
+    margin: 1%;
+  }
+  .image {
+    border: 2px dashed #1C2F36;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    padding:2%;
+    text-align: center;
+  }
+  .imageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .image i {
+    color: #1C2F36;
+    font-size: 2.5vw;
+    padding : 20%
+  }
+  
+  .image:hover {
+    border-color: #c5c5c5;
+    cursor: pointer;
+  }
+  
+  .image:hover i {
+    color: #c5c5c5;
+    cursor: pointer;
+  }
+
+  .containerForX {
+    position: relative;
+  }
+  
+  .deleteIcon {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    background-color: rgb(255, 255, 255,0.7);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .deleteIcon:hover {
+    background-color: #f44336;
+  }
+  
+  .fa-times {
+    font-size: 12.5px;
+  }
+
+
   
