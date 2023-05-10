@@ -54,7 +54,7 @@ const CompareCars = () => {
               ))}
           </select><br />
         </td>
-        <td id="firstCar"><img src={data1.image_id_list ? data1.image_id_list.split(",").map((word) => "https://royalmotors.azurewebsites.net/image/" + word)[0] : ""} alt="" /></td>
+        <td id="firstCar"><img src={data1.image_id_list ? data1.image_id_list.split(",").map((word) => "https://royalmotors.azurewebsites.net/image/" + word)[0] : ""} alt="" style={{transform: 'scaleX(-1)'}} /></td>
         <td id="secondCar"><img src={data2.image_id_list ? data2.image_id_list.split(",").map((word) => "https://royalmotors.azurewebsites.net/image/" + word)[0] : ""} alt="" /></td>
       </tr>
       <tr >
