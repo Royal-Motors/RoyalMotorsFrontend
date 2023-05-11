@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
 import { scrollToElement } from './Functions';
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -10,9 +11,9 @@ const Footer = () => {
                 <img className="Logo_footer" src="Logos/LOGO.png" alt="logo" />
             </section>
             <section className="mainNavButtons" style={{width: '20%'}}>
-                <a href="HomePage" style={{textDecoration: 'none', color:'white'}}>Home Page</a> <br/>
-                <a href="CompareCars" style={{textDecoration: 'none', color:'white'}}>Compare Cars</a> <br/>
-                <a onClick={() => scrollToElement('nav')} style={{cursor: 'pointer', textDecoration: 'none', color:'white'}}>Back to Top</a> <br/>
+                <NavLink to="/" style={{textDecoration: 'none', color:'white'}}>Home Page</NavLink> <br/>
+                <NavLink to="CompareCars" style={{textDecoration: 'none', color:'white'}}>Compare Cars</NavLink> <br/>
+                <a onClick={() => scrollToElement('nav')} style={{cursor: 'pointer', textDecoration: 'none', color:'white'}}>Back to Top</a><br/>
 
             </section>
             <section className="icons">
@@ -24,8 +25,6 @@ const Footer = () => {
             <section className="HQ">
                     <p style={{fontWeight: '600'}}>Location </p>
                     <p>Clemenceau St. Hamra, Beirut</p>
-                    <p className="padding" >Subscribe to our mailing list
-                    <input type="email" name="email" placeholder="example@domain.com" /></p>
             </section>
         </footer>
     </div>
