@@ -6,10 +6,10 @@ import {Snackbar} from '@mui/material';
 import {Alert} from '@mui/material';
 import UserCredentialsDialog from '../pages/UserCredentialsDialog/UserCredentialsDialog';
 import UserCredentialsDialogIn from '../pages/UserCredentialsDialog/UserCredentialsDialogIn';
-import { getUserToken, saveUserToken, clearUserToken } from "../pages/localStorage";
+import { getUserToken, saveUserToken, clearUserToken, setUserEmail, clearUserEmail, clearUserAuth, setUserAuth, reload } from "../pages/localStorage";
 import '../pages/sign-in.css';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { scrollToElement } from './Functions';
 
 const Navigation = () => {
@@ -54,10 +54,14 @@ let menuContent = null;
         setAuthState(States.USER_AUTHENTICATED);
         setUserToken(body.token);
         saveUserToken(body.token);
+        setUserEmail(email); 
+        setUserAuth();
+        reload();
         })
         .catch(error => {
           console.error('Error:', error);
           const errorMessage = error.message;
+          alert(`Sign-in failed: ${errorMessage==='Unauthorized' ? "Email and Password don't match" : ""}`);
                 })
     }
 
@@ -73,7 +77,7 @@ let menuContent = null;
         firstname: firstname,
         lastname: lastname
         }),
-        })        .then(response => {
+        }).then(response => {
           if (!response.ok) {
             throw new Error(response.statusText);
           }
@@ -88,6 +92,8 @@ let menuContent = null;
     function sign_out() {
         setUserToken(null);
         clearUserToken();
+        clearUserEmail();
+        clearUserAuth();
         setAuthState(States.PENDING);
 
     }
@@ -115,8 +121,8 @@ let menuContent = null;
     <div className='bodySignIn'>
       <nav id="nav">
         <img className="Logo" src={process.env.PUBLIC_URL + 'Logos/LOGO.png'} alt="logo" />
-        <a href="HomePage" style={{ textDecoration: 'none' }}>Home Page</a>
-        <a href="CompareCars" style={{ textDecoration: 'none' }}>Compare Cars</a>
+        <NavLink to="/" style={{ textDecoration: 'none' }}>Home Page</NavLink>
+        <NavLink to="CompareCars" style={{ textDecoration: 'none' }}>Compare Cars</NavLink>
         <a onClick={() => scrollToElement('footer')}style={{textDecoration: 'none'}}>Contact us</a>
         <img
               className="icon"
@@ -138,7 +144,7 @@ let menuContent = null;
         </a>
           </MenuItem>
           <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={sign_out}>
-          <a href="HomePage" style={{ textDecoration: 'none' }}>Logout</a>
+          <a href="/" style={{ textDecoration: 'none' }}>Logout</a>
           </MenuItem>
         </>
       ):(
@@ -181,7 +187,7 @@ let menuContent = null;
             variant="filled"
             open={authState === States.USER_AUTHENTICATED}
             autoHideDuration={4000}
-            onClose={() => setAuthState(States.PENDING)}
+            onClose={() => setAuthState(States.PENDING) }
             >
             <Alert severity="success">Successfully logged in!</Alert>
         </Snackbar>
