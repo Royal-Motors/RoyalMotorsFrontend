@@ -2,6 +2,7 @@ import React from 'react';
 import {useState, useEffect} from "react";
 import axios from 'axios';
 import "./CarListingDealer.css"
+import { getUserToken } from './localStorage';
 
 
 const CarListingDealer = () => {
@@ -180,23 +181,36 @@ const CarListingDealer = () => {
     const handleImage10Upload = async (event) => {
         const file = event.target.files[0];
         setselectedFile10(file);
-    };    
+    };  
+    
+    const submitBtn = document.getElementById('submit-btn');
 
     const handleSubmit = async (event) => {
 
         event.preventDefault();
 
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+        submitBtn.innerHTML = 'Loading...';
+
         // Sending car information
-        fetch("https://royalmotors.azurewebsites.net/car", {
-                method: 'POST',
+        try {
+            const info = await axios.post("https://royalmotors.azurewebsites.net/car",formValues, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${getUserToken()}`
                 },
-                body: JSON.stringify(formValues)
-                })
-                .then(response => response.json())
-                .then(formValues=> console.log(formValues))
-                .catch(error => console.error(error))
+                });
+        
+                console.log('New car added!', info.data);
+            } catch(error) {
+                console.log(error.message);
+                if (error.message==="Request failed with status code 400"){
+                    alert("Car already exists.\nOnly images will be updated")
+                }else if (error.message==="Request failed with status code 401"){
+                    alert("You don't have the needed authorization")
+                }
+            }
 
         // Sending the no background picture
         if (formMainData && formMainData.get('File')) {
@@ -204,7 +218,8 @@ const CarListingDealer = () => {
                 formMainData.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=1`, formMainData, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -219,7 +234,8 @@ const CarListingDealer = () => {
                 formData2.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=2`, formData2, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -233,7 +249,8 @@ const CarListingDealer = () => {
                 formData3.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=3`, formData3, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -246,7 +263,8 @@ const CarListingDealer = () => {
                 formData4.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=4`, formData4, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -259,7 +277,8 @@ const CarListingDealer = () => {
                 formData5.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=5`, formData5, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -272,7 +291,8 @@ const CarListingDealer = () => {
                 formData6.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=6`, formData6, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -285,7 +305,8 @@ const CarListingDealer = () => {
                 formData7.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=7`, formData7, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -298,7 +319,8 @@ const CarListingDealer = () => {
                 formData8.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=8`, formData8, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -311,7 +333,8 @@ const CarListingDealer = () => {
                 formData9.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=9`, formData9, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -324,7 +347,8 @@ const CarListingDealer = () => {
                 formData10.append('carName', formValues.name);
                 const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=10`, formData10, {
                     headers: {
-                      'Content-Type': 'multipart/form-data'
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
                     }
                   });
               
@@ -334,6 +358,10 @@ const CarListingDealer = () => {
                 }
         }
 
+
+        submitBtn.innerHTML = 'Submitted';
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('loading');
         
     };
     
@@ -352,15 +380,17 @@ const CarListingDealer = () => {
                 </div>
             ):(
                 <div className="custom-file-upload">
-                <label htmlFor="imageInput" >
-                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
-                </label>
-                <input
-                    id="imageInput"
-                    type="file"
-                    onChange={handleMainImageUpload}
-                    accept="image/*"
-                    style={{ display: "none" }}
+                    <label htmlFor="imageInput" >
+                        <div className='MainImageContainer'>
+                            <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                        </div>
+                    </label>
+                    <input
+                        id="imageInput"
+                        type="file"
+                        onChange={handleMainImageUpload}
+                        accept="image/*"
+                        style={{ display: "none" }}
                 /></div>
             )}
         </div>
@@ -610,7 +640,7 @@ const CarListingDealer = () => {
         </div>
 
         <div className='submit'>
-            <button onClick={handleSubmit}>SUBMIT</button>
+            <button onClick={handleSubmit} id="submit-btn">SUBMIT</button>
         </div>
         <div style={{padding:'10px', backgroundColor: "#A0AEB3" }}></div>
     </div>

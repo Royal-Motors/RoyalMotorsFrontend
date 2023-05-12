@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import "./CarListingDealer.css"
+import axios from 'axios';
+import { getUserToken } from './localStorage';
 
 
 const CarListingEdit = () => {
-    const {name}= useParams();
+    // const {name}= useParams();
+    const name = "GAC GS3"
     const [data, setData] = useState({
         name: '',
         make: '',
@@ -21,6 +24,32 @@ const CarListingEdit = () => {
         transmissiontype: '',
       });
       
+    //This is where I store the inputed images which I will next use URL.createObjectURL on
+    const [selectedMainFile, setselectedMainFile] = useState(null);
+    //This is where I store the main image URL which comes from the database
+    const [selectedMainFileURL, setselectedMainFileURL] = useState(null);
+    //This is to tell me I use the main image coming from the data base first then I only use the ones I upload
+    const [booleanMainFileURL, setbooleanMainFileURL] = useState(true);
+    const formMainData = new FormData();
+
+    // This to handle the upload for the main car image
+    useEffect(() => {
+      if (selectedMainFile) {
+        formMainData.append("File", selectedMainFile);
+        formMainData.append('order', 1);
+      }
+    },);
+
+    const handleMainImageUpload = async (event) => {
+      const file = event.target.files[0];
+      setselectedMainFile(file);
+    };  
+
+    //To delete the image
+    function imageDeleteButton() {
+      setselectedMainFile(null);
+      setbooleanMainFileURL(false);
+    };  
 
     useEffect(() => {
         fetch(`https://royalmotors.azurewebsites.net/car/${name}`)
@@ -28,56 +57,70 @@ const CarListingEdit = () => {
         .then((data) => setData(data));
     }, [name]);
 
+    const [formValues, setFormValues] = useState({
+        name: "",
+        make: "",
+        model: "",
+        year: "",
+        color: "",
+        used : true,
+        price : "",
+        description: "",
+        mileage: "",
+        horsepower: "",
+        fuelconsumption: "", 
+        fueltankcapacity: "",
+        transmissiontype: "",
+        image_id_list: "",
+        video_id: ""
+    });
+      
+    useEffect(() => {
+      setFormValues({
+        name: data.name || "",
+        make: data.make || "",
+        model: data.model || "",
+        year: data.year || "",
+        color: data.color || "",
+        used : true,
+        price : data.price || "",
+        description: data.description || "",
+        mileage: data.name ? data.mileage : "",
+        horsepower: data.horsepower || "",
+        fuelconsumption: data.fuelconsumption || "", 
+        fueltankcapacity: data.fueltankcapacity || "",
+        transmissiontype: data.transmissiontype || "",
+        image_id_list: data.image_id_list||"",
+        video_id: data.video_id||""
+      });
 
-        const [formValues, setFormValues] = useState({
-            name: "",
-            make: "",
-            model: "",
-            year: "",
-            color: "",
-            used : true,
-            price : "",
-            description: "",
-            mileage: "",
-            horsepower: "",
-            fuelconsumption: "", 
-            fueltankcapacity: "",
-            transmissiontype: "",
-            image_id_list: "",
-            video_id: ""
-          });
-          
-          useEffect(() => {
-            setFormValues({
-              name: data.name || "",
-              make: data.make || "",
-              model: data.model || "",
-              year: data.year || "",
-              color: data.color || "",
-              used : true,
-              price : data.price || "",
-              description: data.description || "",
-              mileage: data.mileage || "",
-              horsepower: data.horsepower || "",
-              fuelconsumption: data.fuelconsumption || "", 
-              fueltankcapacity: data.fueltankcapacity || "",
-              transmissiontype: data.transmissiontype || "",
-              image_id_list: data.image_id_list||"",
-              video_id: data.video_id||""
-            });
-          }, [data]);
-    
-      const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormValues({ ...formValues, [name]: value });
-      };
+      setselectedMainFileURL(data.image_id_list ? data.image_id_list.split(",").map((word) => "https://royalmotors.azurewebsites.net/image/" + word)[0] : null)
+      
+    }, [data]);
 
-    const handleSubmit = (event) => {
+
+    //This is to handle the changes in the car info
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      setFormValues({ ...formValues, [name]: value });
+    };
+  
+
+    const submitBtn = document.getElementById('submit-btn');
+
+    const handleSubmit =  async (event) => {
         event.preventDefault();
+
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+        submitBtn.innerHTML = 'Loading...';
+
+        //Sending car information
         fetch(`https://royalmotors.azurewebsites.net/car/edit/${name}`, {
           method: 'PUT',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getUserToken()}`
           },
           body: JSON.stringify(formValues)
         })
@@ -85,6 +128,27 @@ const CarListingEdit = () => {
         .then(formValues=> console.log(formValues))
         .catch(error => console.error(error))
         console.log(formValues)
+
+        //Sending the main image
+        if (formMainData && formMainData.get('File')) {
+          try {
+              formMainData.append('carName', formValues.name);
+              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${name}&order=1`, formMainData, {
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${getUserToken()}`
+                  }
+                });
+            
+                console.log('Main Image uploaded successfully!', response.data);
+              } catch (error) {
+                console.error('Error uploading image:', error);
+              }
+      }
+
+      submitBtn.innerHTML = 'Submitted';
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('loading');
     };
     
   return (
@@ -93,10 +157,29 @@ const CarListingEdit = () => {
             <div className="big-car-info">
                 <input className="carName" type="text" name="name" value={formValues.name} onChange={handleInputChange} />
                 <h2 className="buffer">buffer</h2> 
-                <button >TEST DRIVE</button>
+                {selectedMainFile || (selectedMainFileURL &&  booleanMainFileURL) ?(
+                <button onClick={imageDeleteButton}>Delete Image</button>):("")}
             </div>
-        <img className="mainImg" src="Car pictures/noBackground.png" alt="Main" />
-        </div>
+            {(selectedMainFileURL &&  booleanMainFileURL) || selectedMainFile? (
+                <div style={{ width :'50%'}}>
+                    <img style={{ width :'100%'}}src={selectedMainFile?(URL.createObjectURL(selectedMainFile)):(selectedMainFileURL)} alt="selected" />
+                </div>
+            ):(
+                <div className="custom-file-upload">
+                    <label htmlFor="imageInput" >
+                        <div className='MainImageContainer'>
+                            <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                        </div>
+                    </label>
+                    <input
+                        id="imageInput"
+                        type="file"
+                        onChange={handleMainImageUpload}
+                        accept="image/*"
+                        style={{ display: "none" }}
+                /></div>
+            )}
+            </div>
 
         <div className="POWER">
             <div className="Power_inner">
@@ -136,7 +219,7 @@ const CarListingEdit = () => {
         </div>
 
         <div className='submit'>
-            <button onClick={handleSubmit}>SUBMIT</button>
+            <button onClick={handleSubmit} id="submit-btn">SUBMIT</button>
         </div>
         <div style={{padding:'10px', backgroundColor: "#A0AEB3" }}></div>
     </div>
