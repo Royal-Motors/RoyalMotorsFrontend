@@ -27,9 +27,11 @@ function App() {
           <Route path="/CompareCars" element={<CompareCars />} />
           <Route path="/AccessDenied" element={<AccessDenied />} />
           <Route path="/carAdd" element={getUserAuth()==='admin' ? <CarListingDealer /> : <AccessDenied />} />
-          <Route exact path=":name" element={<CarListing />} >
-            {/* <Route path="edit" element={getUserAuth()==='admin' ? <CarListingEdit /> : <AccessDenied />} /> */}
-          </Route>
+          {/* <Route exact path=":name" element={<CarListing />} >
+            <Route path="edit" element={getUserAuth()==='admin' ? <CarListingEdit /> : <AccessDenied />} />
+          </Route> */}
+          <Route exact path=":name" element={<CarListing />} />
+          <Route exact path="edit" element={<CarListingEdit />} />
           <Route path="/Profile" element={<Profile />} />
         </Routes>
         <Footer />

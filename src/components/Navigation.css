@@ -1,3 +1,58 @@
+nav {
+  background-color: #1C2F36;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  margin: auto;
+  padding-right: 30px;
+  justify-content: center;
+  align-items: center;
+}
+nav a {
+  float:left;
+  color : white;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 20px;
+  padding: 10px 16px; 
+  margin: 40px 16px;
+}
+nav a:hover,.icon:hover {
+  background-color: rgba(242, 242, 242,0.40);
+  color: #f2f2f2;
+}
+
+nav .noDesign{
+  float:none;
+  color : white;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 20px;
+  padding: 0px 0px; 
+  margin: 0px 0px;
+}
+.Logo {
+  float:left;
+  width: 149px;
+  height: 63px;
+  margin: 24px 22px 24px 15px;
+  vertical-align: middle;
+  line-height: 120px;
+}
+
+.icon{
+  float: right;
+  text-align: center;
+  float: right;
+  color: white;
+  text-align: center;
+  margin:35px 10px;
+  padding: 10px 6px;
+  height:28px;
+  vertical-align: middle;
+  line-height: 120px;
+}
+
 .dropdown-buttons {
     display: flex;
     flex-direction: column;

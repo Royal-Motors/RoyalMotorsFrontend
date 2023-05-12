@@ -8,6 +8,7 @@ import UserCredentialsDialog from '../pages/UserCredentialsDialog/UserCredential
 import UserCredentialsDialogIn from '../pages/UserCredentialsDialog/UserCredentialsDialogIn';
 import { getUserToken, saveUserToken, clearUserToken, setUserEmail, clearUserEmail, clearUserAuth, setUserAuth, reload } from "../pages/localStorage";
 import '../pages/sign-in.css';
+import "./Navigation.css"
 
 import { Link, NavLink } from 'react-router-dom';
 import { scrollToElement } from './Functions';
@@ -121,8 +122,8 @@ let menuContent = null;
     <div className='bodySignIn'>
       <nav id="nav">
         <img className="Logo" src={process.env.PUBLIC_URL + 'Logos/LOGO.png'} alt="logo" />
-        <NavLink to="/" style={{ textDecoration: 'none' }}>Home Page</NavLink>
-        <NavLink to="CompareCars" style={{ textDecoration: 'none' }}>Compare Cars</NavLink>
+        <NavLink to="/" style={{ textDecoration: 'none', color : "white"}}>Home Page</NavLink>
+        <NavLink to="CompareCars" style={{ textDecoration: 'none', color : "white" }}>Compare Cars</NavLink>
         <a onClick={() => scrollToElement('footer')}style={{textDecoration: 'none'}}>Contact us</a>
         <img
               className="icon"
