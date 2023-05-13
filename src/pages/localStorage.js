@@ -9,7 +9,7 @@ export function clearUserToken() {
 }
 
 export function setUserEmail(userEmail){
-    localStorage.setItem("email", userEmail);
+    localStorage.setItem("email", userEmail.toLowerCase());
 }
 
 export function getUserEmail(){
