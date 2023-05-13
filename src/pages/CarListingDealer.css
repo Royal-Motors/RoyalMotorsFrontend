@@ -111,6 +111,16 @@
   }
 
 /* ------------ All images ----------- */
+
+.picture{
+  width:50%;
+  float: left;
+  position: relative;
+  /* background-color: #1C2F36; */
+}
+.picture:hover .prev, .picture:hover .next {
+  display: block;
+}
   .pictures{
     display: inline-block;
     width: 30%;

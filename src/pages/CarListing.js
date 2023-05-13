@@ -22,10 +22,10 @@ const CarListing = () => {
     useEffect(() => {
         // eslint-disable-next-line array-callback-return
         const imageUrls = data.image_id_list ? data.image_id_list.split(",").map((word) => {
-    if (word) {
-        return "https://royalmotors.azurewebsites.net/image/" + word;
-    }
-}).filter(Boolean).slice(1) : [];
+            if (word) {
+                return "https://royalmotors.azurewebsites.net/image/" + word;
+            }
+        }).filter(Boolean).slice(1) : [];
         const promises = imageUrls.map((url) => {
         return new Promise((resolve, reject) => {
             const img = new Image();
@@ -80,7 +80,7 @@ const CarListing = () => {
         </div>
 
         <div className="info" >
-            <div className="picture" >
+            <div className="pictureMain" >
             {currentImage && (<img src={currentImage.url} alt="" className="images" />)}
             {loadedImages.length > 1 && (
             <>

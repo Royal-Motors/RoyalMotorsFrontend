@@ -32,6 +32,7 @@ function App() {
           </Route> */}
           <Route exact path=":name" element={<CarListing />} />
           <Route exact path="edit" element={<CarListingEdit />} />
+          {/* <Route exact path="edit" element={getUserAuth()==='admin' ? <CarListingEdit /> : <AccessDenied />} /> */}
           <Route path="/Profile" element={<Profile />} />
         </Routes>
         <Footer />
