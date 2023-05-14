@@ -8,6 +8,7 @@ import CarListingDealer from './pages/CarListingDealer';
 import CarListingEdit from './pages/CarListingEdit';
 import HomePage from './pages/HomePage';
 import Profile from './pages/Profile';
+import AdminTestDrives from './components/AdminTestDrives';
 import TestDriveForm from './pages/TestDriveForm';
 import './App.css';
 import { getUserAuth } from './pages/localStorage';
@@ -35,7 +36,8 @@ function App() {
           <Route exact path="edit" element={<CarListingEdit />} />
           {/* <Route exact path="edit" element={getUserAuth()==='admin' ? <CarListingEdit /> : <AccessDenied />} /> */}
           <Route path="/Profile" element={<Profile />} />
-        </Routes>
+          <Route path="/AdminTest" element={<AdminTestDrives />} />
+          </Routes>
         <Footer />
       </Router>
     </div>
