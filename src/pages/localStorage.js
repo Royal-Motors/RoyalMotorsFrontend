@@ -40,4 +40,6 @@ export function reload(){
     setTimeout(() => {
         window.location.reload();
       }, 1000);
+
 }
+

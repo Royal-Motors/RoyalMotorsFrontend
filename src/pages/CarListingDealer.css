@@ -1,0 +1,189 @@
+.mainCarSection {
+    padding-bottom: 20px;
+}
+
+.carName{
+    background-color: #A0AEB3;
+    position: absolute;
+    color: #1C2F36;
+    font-family: 'Roboto';
+    font-size: 5vw;
+    margin-left: 1%;
+    border-radius:10px;
+    border: none;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    width: 45vw;
+}
+
+.horsepower {
+    background-color:#1C2F36;
+    border-radius:10px ;
+    border: none;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    color:white;
+    font-size: 4vw;
+    margin: 27.9px 0;
+    width: 15vw;
+}
+
+.fuelconsumption{
+    background-color:#1C2F36;
+    border: none;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    border-radius:10px ;
+    color:white;
+    font-size: 4vw;
+    margin: 27.9px 0;
+    width: 15vw;
+}
+
+.listOfInfo{
+    justify-content: space-between;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-size: 1.5vw;
+    line-height: 2vw;
+    font-weight: 400;
+    padding: 0px 5px;
+    list-style-type: none;
+    color: white;
+    background-color: #A0AEB3;
+    border: none;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    width: 10vw;
+    border-radius: 10px;
+}
+
+.submit button{
+    background-color: #1C2F36;
+    border-radius: 10px;
+    border: none;
+    height: 3vw;
+    width: 15vw;
+    float:right;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    color: white;
+    font-family: 'Roboto';
+    cursor: pointer;
+}
+
+#submit-btn.loading {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.big-car-info {
+    text-align: left;
+    width: 55%;
+}
+
+.custom-file-upload {
+    border: 2px dashed #1C2F36;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin:2%;
+    text-align: center;
+    width: 40%;
+  }
+  
+  .custom-file-upload i {
+    color: #1C2F36;
+    font-size: 50px;
+    padding: 20%;
+  }
+  
+  .custom-file-upload:hover {
+    border-color: #c5c5c5;
+    cursor: pointer;
+  }
+  
+  .custom-file-upload:hover i {
+    color: #c5c5c5;
+    cursor: pointer;
+  }
+
+/* ------------ All images ----------- */
+
+.picture{
+  width:50%;
+  float: left;
+  position: relative;
+  /* background-color: #1C2F36; */
+}
+.picture:hover .prev, .picture:hover .next {
+  display: block;
+}
+  .pictures{
+    display: inline-block;
+    width: 30%;
+    height: 30%;
+    margin: 1%;
+  }
+  .image {
+    border: 2px dashed #1C2F36;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    padding:2%;
+    text-align: center;
+  }
+  .imageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .image i {
+    color: #1C2F36;
+    font-size: 2.5vw;
+    padding : 20%
+  }
+  
+  .image:hover {
+    border-color: #c5c5c5;
+    cursor: pointer;
+  }
+  
+  .image:hover i {
+    color: #c5c5c5;
+    cursor: pointer;
+  }
+
+  .containerForX {
+    position: relative;
+  }
+  
+  .deleteIcon {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    background-color: rgb(255, 255, 255,0.7);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .deleteIcon:hover {
+    background-color: #f44336;
+  }
+  
+  .fa-times {
+    font-size: 12.5px;
+  }
+
+
+  

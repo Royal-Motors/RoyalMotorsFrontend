@@ -63,4 +63,4 @@ function CarSelection() {
     </div>
   );
 }
-In the above code, we're using the Link component from React Router to create links to the CarDetails component for each car. We're passing the car id as a parameter in the URL using the /:id syntax. When the user clicks on a car, they'll be taken to the CarDetails component, where we'll use the match.params.id property to get the car id from the URL and display the details of that car.
+In the above code, we're using the Link component from React Router to create links to the CarDetails component for each car. We're passing the car id as a parameter in the URL using the /:id syntax. When the user clicks on a car, they'll be taken to the CarDetails component, where we'll use the match.params.id property to get the car id from the URL and display the details of that car. HAHHHAHA

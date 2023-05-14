@@ -1,5 +1,4 @@
-//Parts of this code were omitted (alerts) to not cause the website to crash. Will be added when debugged and fully functional
-//In this version, compare cars takes you to a general test drive form page (work was being done on the indep car listing page)
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import { useState, useCallback } from "react";
 import { useEffect } from 'react';
@@ -7,12 +6,13 @@ import {Snackbar} from '@mui/material';
 import {Alert} from '@mui/material';
 import UserCredentialsDialog from '../pages/UserCredentialsDialog/UserCredentialsDialog';
 import UserCredentialsDialogIn from '../pages/UserCredentialsDialog/UserCredentialsDialogIn';
-import { getUserToken, saveUserToken, clearUserToken, getUserEmail, setUserEmail, clearUserEmail } from "../pages/localStorage";
 import '../pages/sign-in.css';
 import Profile from '../pages/Profile.js';
-import wrapper from '../pages/TestDriveForm';
 import CarListing from '../pages/CarListing';
-import { Link } from 'react-router-dom';
+import { getUserToken, saveUserToken, clearUserToken, setUserEmail, clearUserEmail, clearUserAuth, setUserAuth, reload } from "../pages/localStorage";
+import "./Navigation.css"
+
+import { Link, NavLink } from 'react-router-dom';
 import { scrollToElement } from './Functions';
 
 const Navigation = () => {
@@ -62,11 +62,13 @@ let [authState, setAuthState] = useState(States.PENDING);
         setUserEmail(email);
         //setSaveEmail(email);
         //handleSendEmail();
-
+        setUserAuth();
+        reload();
         })
         .catch(error => {
           console.error('Error:', error);
           const errorMessage = error.message;
+          alert(`Sign-in failed: ${errorMessage==='Unauthorized' ? "Email and Password don't match" : ""}`);
                 })
     }
 
@@ -82,7 +84,7 @@ let [authState, setAuthState] = useState(States.PENDING);
         firstname: firstname,
         lastname: lastname
         }),
-        })        .then(response => {
+        }).then(response => {
           if (!response.ok) {
             throw new Error(response.statusText);
           }
@@ -98,6 +100,7 @@ let [authState, setAuthState] = useState(States.PENDING);
         setUserToken(null);
         clearUserToken();
         clearUserEmail();
+        clearUserAuth();
         setAuthState(States.PENDING);
 
     }
@@ -129,15 +132,12 @@ let [authState, setAuthState] = useState(States.PENDING);
   //};
 
   return (
-    <div>
+    <div className='bodySignIn'>
       <nav id="nav">
         <img className="Logo" src={process.env.PUBLIC_URL + 'Logos/LOGO.png'} alt="logo" />
-        <a href="HomePage" style={{ textDecoration: 'none' }}>
-          Home Page
-        </a>
-        <a href="CompareCars" style={{ textDecoration: 'none' }}>
-          Compare Cars
-        </a>
+        <NavLink to="/" style={{ textDecoration: 'none', color : "white"}}>Home Page</NavLink>
+        <NavLink to="CompareCars" style={{ textDecoration: 'none', color : "white" }}>Compare Cars</NavLink>
+        <a onClick={() => scrollToElement('footer')}style={{textDecoration: 'none'}}>Contact us</a>
         <img
               className="icon"
               src={process.env.PUBLIC_URL + 'Logos/user.png'}
@@ -177,6 +177,7 @@ let [authState, setAuthState] = useState(States.PENDING);
   </div>
     <div>
     </div>
+
       </nav>
 
       <div className="App">
@@ -204,7 +205,7 @@ let [authState, setAuthState] = useState(States.PENDING);
             variant="filled"
             open={authState === States.USER_AUTHENTICATED}
             autoHideDuration={4000}
-            onClose={() => setAuthState(States.PENDING)}
+            onClose={() => setAuthState(States.PENDING) }
             >
             <Alert severity="success">Successfully logged in!</Alert>
         </Snackbar>

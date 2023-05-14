@@ -11,7 +11,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Navigation from '../components/Navigation.js';
 
-
 const CarListing = ({ email}) => {
 
     // I fetch the car 
@@ -34,11 +33,12 @@ const CarListing = ({ email}) => {
     useEffect(() => {
         // eslint-disable-next-line array-callback-return
         const imageUrls = data.image_id_list ? data.image_id_list.split(",").map((word) => {
-    if (word) {
-        return "https://royalmotors.azurewebsites.net/image/" + word;
-    }
-}).filter(Boolean).slice(1) : [];
-        const promises = imageUrls.map((url) => {
+
+            if (word) {
+                return "https://royalmotors.azurewebsites.net/image/" + word;
+            }
+        }).filter(Boolean).slice(1) : [];
+       const promises = imageUrls.map((url) => {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.onload = () => {
@@ -66,6 +66,7 @@ const CarListing = ({ email}) => {
   const currentImage = loadedImages[currentImageIndex];
       
 
+
     const [open, setOpen] = React.useState(false);
   
     const handleClickOpen = () => {
@@ -87,6 +88,7 @@ const CarListing = ({ email}) => {
                 <h2>{data.name}</h2>
                 <h2>{savedEmail}</h2>
                 <h2 className="buffer">buffer</h2> 
+
                 {userToken !== null ? (
         <Link to={`/TestDriveForm/${data.name}`}>
           <button>TEST DRIVE</button>
@@ -117,6 +119,7 @@ const CarListing = ({ email}) => {
     </div>
         
       )}
+
             </div>
         <img className="mainImg" src={data.image_id_list ? data.image_id_list.split(",").map((word) => "https://royalmotors.azurewebsites.net/image/" + word)[0] : ""} alt="Main" />
         </div>
@@ -136,7 +139,9 @@ const CarListing = ({ email}) => {
         </div>
 
         <div className="info" >
-            <div className="picture" >
+
+            <div className="pictureMain" >
+
             {currentImage && (<img src={currentImage.url} alt="" className="images" />)}
             {loadedImages.length > 1 && (
             <>

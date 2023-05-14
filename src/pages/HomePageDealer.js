@@ -3,7 +3,7 @@ import "./HomePage.css"
 import CarDisplayHP from '../components/CarDisplayHP';
 import { useState, useEffect }from 'react';
 
-const HomePage = () => {
+const HomePageDealer = () => {
     const [data_all, setData] = useState([]); //array of jsons with all cars
     const [carNames, setCarNames] = useState([]); //array for car names
     const [carMakes, setCarMakes] = useState([]); //array for car makes
@@ -202,9 +202,9 @@ const HomePage = () => {
             <img className="CarRight" src="Car pictures/noBackground.png" alt="" />
         </div>
         <div className="InfoLeft">
-            <p id="L1">Our deals</p>
-            <p id="L2">are</p>
-            <p id="L3">Wheely Good!</p>
+            <p id="L1">I am </p>
+            <p id="L2">the </p>
+            <p id="L3">Dealer!</p>
         </div>
         {/* <!-- Section break --> */}
         <div className="kitkat" id="inSection"></div>
@@ -268,4 +268,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default HomePageDealer
