@@ -23,7 +23,6 @@ function App() {
         <Navigation />
         <Routes>
           <Route path="/CarListing" element={<CarListing />} />
-          {/* <Route exact path="/" element={<HomePage />} /> */}
           <Route path="/" element={getUserAuth()==='admin' ? <HomePageDealer /> : <HomePage />} />
           <Route path="/CompareCars" element={<CompareCars />} />
           <Route path="/AccessDenied" element={<AccessDenied />} />
