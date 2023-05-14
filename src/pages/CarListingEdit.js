@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-// import { useParams } from 'react-router-dom';
 import "./CarListingDealer.css"
 import axios from 'axios';
 import { getUserToken } from './localStorage';
@@ -8,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 
 // {`/edit?id=${props.name}`}
 const CarListingEdit = () => {
-    const location = useLocation();
+    // const location = useLocation();
     // const name = new URLSearchParams(location.search).get('id');
     const name="GAC GS3"
     const [data, setData] = useState({
