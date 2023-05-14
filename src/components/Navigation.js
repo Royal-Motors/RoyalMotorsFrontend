@@ -7,7 +7,7 @@ import {Snackbar} from '@mui/material';
 import {Alert} from '@mui/material';
 import UserCredentialsDialog from '../pages/UserCredentialsDialog/UserCredentialsDialog';
 import UserCredentialsDialogIn from '../pages/UserCredentialsDialog/UserCredentialsDialogIn';
-import { getUserToken, saveUserToken, clearUserToken, getEmail, saveEmail, clearEmail } from "../pages/localStorage";
+import { getUserToken, saveUserToken, clearUserToken, getUserEmail, setUserEmail, clearUserEmail } from "../pages/localStorage";
 import '../pages/sign-in.css';
 import Profile from '../pages/Profile.js';
 import wrapper from '../pages/TestDriveForm';
@@ -24,7 +24,7 @@ const Navigation = () => {
   const [showSignInDialog, setShowSignInDialog] = useState(false);
 
   let [userToken, setUserToken] = useState(getUserToken());
-  let [email, setEmail] = useState(getEmail());
+  let [email, setEmail] = useState(getUserEmail());
   //let [saveEmail, setSaveEmail] = useState('');
 
     const States = {
@@ -59,7 +59,7 @@ let [authState, setAuthState] = useState(States.PENDING);
         setUserToken(body.token);
         saveUserToken(body.token);
         setEmail(email);
-        saveEmail(email);
+        setUserEmail(email);
         //setSaveEmail(email);
         //handleSendEmail();
 
@@ -97,7 +97,7 @@ let [authState, setAuthState] = useState(States.PENDING);
     function sign_out() {
         setUserToken(null);
         clearUserToken();
-        clearEmail();
+        clearUserEmail();
         setAuthState(States.PENDING);
 
     }

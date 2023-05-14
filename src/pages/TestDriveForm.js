@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useParams, useLocation } from 'react-router-dom';
-import { getEmail, getUserToken} from "./localStorage";
+import { getUserEmail, getUserToken} from "./localStorage";
 
 const TestDriveForm = () => {
   const { name } = useParams();
-  const [email, setEmail] = useState(getEmail());
+  const [email, setEmail] = useState(getUserEmail());
   const [selectedDate, setSelectedDate] = useState(null);
   const [unavailableDates, setUnavailableDates] = useState([]);
   let [token, setToken] = React.useState(getUserToken());
