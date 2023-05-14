@@ -9,6 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useParams } from 'react-router-dom';
+import {Alert} from '@mui/material';
 
 var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
 
@@ -19,12 +20,39 @@ const Profile = () => {
   let [token, setToken] = React.useState(getUserToken());
   let [email, setEmail] = React.useState(getUserEmail());
   const [open, setOpen] = React.useState(false);
+  const [openPass, setOpenPass] = React.useState(false);
   const [password, setPassword] = React.useState("");
+  const [newPassword, setNewPassword] = React.useState("");
+  const [newPasswordAgain, setNewPasswordAgain] = React.useState("");
   
+  function compare(newPassword,newPasswordAgain){
+    if(newPassword==newPasswordAgain){
+      console.log("equal");
+      setPassword(newPassword);
+      setOpenPass(false);
+      handleSaveNewPass(email,newPassword);
+      <Alert severity="success">Password updated successfully.</Alert>
+    }
+    else{
+      console.log("here");
+      <Alert severity="error">The two passwords do not match. Please try again.</Alert>
+    }
+  };
   const handlePassword = (event) => {
   setPassword(event.target.value);
 };
-
+const handleNewPassword = (event) => {
+  setNewPassword(event.target.value);
+};
+const handleNewPasswordAgain = (event) => {
+  setNewPasswordAgain(event.target.value);
+};
+ const handleClickOpenPass = () => {
+setOpenPass(true);
+ };
+ const handleClosePass = () => {
+  setOpenPass(false);
+};
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -32,11 +60,15 @@ const Profile = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleCloseNoChanges = () => {
+    setOpen(false);
+    setIsEditMode(false);
+  };
 
   const handleEditClick = () => {
     setIsEditMode(true);
   };
-  function sign_in() {
+  function sign_in(email, password) {
     return fetch(`${SERVER_URL}/sign_in`, {
     method: "POST",
     headers: {
@@ -51,19 +83,17 @@ const Profile = () => {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
+      console.log(response);
       return response.json();
     })
-    .then((body) => {
-    })
     .catch(error => {
-      console.log(password)
       console.error('Error:', error);
       const errorMessage = error.message;
       alert(`Sign-in failed: ${errorMessage==='Unauthorized' ? "Wrong Password: please try again" : ""}`);
             })
 }
   const handleSaveClick = () => {
-    sign_in();
+    sign_in(email, password);
     fetch(`${SERVER_URL}/edit/${email}`, {
       method: 'PUT',
       headers: {
@@ -85,7 +115,36 @@ const Profile = () => {
       .catch((error) => console.error(error));
   };  
 
-  
+  const handleSaveNewPass = (email,newpass) => {
+    fetch(`${SERVER_URL}/edit/${email}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+            },
+      body: JSON.stringify({
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: newpass,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.error(error));
+  };  
+  function handleNext() {
+    sign_in(email, password).then((response1) => {
+      if(response1.token){
+      console.log("comparing");
+      compare(newPassword,newPasswordAgain);
+        }
+    })
+    .catch((error) => {
+      console.error(error); });
+  };
   
   
   React.useEffect(() => {
@@ -127,6 +186,54 @@ const Profile = () => {
             >
               Edit Profile
             </Button>
+
+            <Button
+              style={{color: 'white'}}
+              className="change-password"
+              id="change-password"
+              onClick={handleClickOpenPass}
+            >
+              Change Password
+            </Button>
+        <Dialog open={openPass} onClose={handleClosePass}>
+        <DialogTitle>Change Password</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="current"
+            label="Current password"
+            type="password"
+            fullWidth
+            variant="standard"
+            onChange={handlePassword}
+          />
+                    <TextField
+            autoFocus
+            margin="dense"
+            id="new"
+            label="New password"
+            type="password"
+            fullWidth
+            variant="standard"
+            onChange={handleNewPassword}
+          />
+            <TextField
+            autoFocus
+            margin="dense"
+            id="new-again"
+            label="Re-enter New password"
+            type="password"
+            fullWidth
+            variant="standard"
+            onChange={handleNewPasswordAgain}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClosePass}>Cancel</Button>
+          <Button onClick={handleNext}>Enter</Button>
+        </DialogActions>
+      </Dialog>
           </>
         )}
         {isEditMode && (
@@ -150,8 +257,11 @@ const Profile = () => {
             <Button variant="outlined" onClick={handleClickOpen}>
         Save
             </Button>
+            <Button variant="outlined" onClick={handleCloseNoChanges}>
+        Cancel
+            </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>Confirm Changes</DialogTitle>
         <DialogContent>
           <DialogContentText>
             To confirm these changes, please re-enter your password:
