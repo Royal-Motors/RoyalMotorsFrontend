@@ -3,6 +3,7 @@ import axios from 'axios';
 import "./AdminTestDrives.css"
 import { useState, useEffect } from 'react';
 import TableRowTestDrives from './TableRowTestDrives';
+import { getUserToken } from '../pages/localStorage';
 
 const AdminTestDrives = () => {
   const [testDrives, setTestDrives] = useState([]);
@@ -10,14 +11,17 @@ const AdminTestDrives = () => {
   const [testName, setTestFirstName] = useState([]);
   const [testLastName, setTestLastName] = useState([]);
   const [testTime, setTestTime] = useState([]);
-  const [testCompleted, setTestCompleted] = useState(["Yes", "No"]);
 
   //make sorted by time test drive array
 
   const [searchQuery, setSearchQuery] = useState(''); //user input in search bar
 
   useEffect(() => {
-    fetch('https://royalmotors.azurewebsites.net/testdrive')
+    fetch('https://royalmotors.azurewebsites.net/testdrive', {
+      headers:{
+        'Authorization': `Bearer ${getUserToken()}`,
+      }
+    })
       .then((response) => response.json())
       .then((data_all) => {
         setTestDrives(data_all); //stores all the test drive info
@@ -25,7 +29,6 @@ const AdminTestDrives = () => {
         setTestFirstName(data_all.map((obj) => obj.account.firstname)); //stores all the first names
         setTestLastName(data_all.map((obj) => obj.account.lastname)); //stores all the last names
         setTestTime(data_all.map((obj) => obj.time)); //stores all the times
-        setTestid(data_all.map((obj) => obj.id)); //stores all the ids
       });
   }, []);
 
@@ -36,6 +39,16 @@ const AdminTestDrives = () => {
     // handleSearchDisplayedCars(event); I will add the function later
   };
 
+  const checkIfTimePassed = (unixTime) => {
+    const currentTime = new Date().getTime() / 1000; // Get current Unix time
+
+    if (unixTime < currentTime) {
+      return true; // Time has passed
+    } else {
+      return false; // Time has not passed
+    }
+  };
+
   return (
     <div>
       {/* Section break */}
@@ -44,6 +57,16 @@ const AdminTestDrives = () => {
     <div className="SFS">
       <div className="search-container">
         <input type="text" placeholder="Search car name..." value={searchQuery} onChange={handleSearchInputChange}/>
+
+        {/* Sort Button */}
+        <div className="butt3">
+          <select className="sort"> 
+            <option value="">No Sort</option>
+            <option value="alphab">Alphabetically</option>
+            <option value="DT">Date/Time</option>  
+          </select>
+        </div>
+
       </div>
     </div>
     {/* Table */}
@@ -51,21 +74,25 @@ const AdminTestDrives = () => {
         <tr>
           <td> </td> {/* car name */}
           <td id="top">Username</td>
-          <td id="top">Time</td>
-          <td id="top">Completed</td>
+          <td id="top">Date/Time</td>
         </tr>
         {/* Rows */}
         {testDrives.length > 0 ? (
-          testDrives.map((obj, i) => (
-            <TableRowTestDrives
-              key={i}
-              name={obj.car.name}
-              firstname={obj.account.firstname}
-              lastname={obj.account.lastname}
-              time={obj.time}
-              id={obj.id}
-            />
-          ))
+          testDrives.map((obj, i) => {
+            if (!checkIfTimePassed(obj.time)) {
+              return (
+                <TableRowTestDrives
+                  key={i}
+                  name={obj.car.name}
+                  firstname={obj.account.firstname}
+                  lastname={obj.account.lastname}
+                  time={obj.time}
+                  id={obj.id}
+                />
+              );
+            }
+            return null;
+          })
         ) : (
           <p>Loading data...</p>
         )}  
