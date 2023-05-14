@@ -156,17 +156,11 @@
     color: white;
     text-align: center;
     justify-content: center;
-    background-color: #192A31;
+    background-color: #1c2f36;
     padding: 4px;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
 }
-
-    .color-box:hover {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-    }
-
     .CarName{
         padding-top:0%;
         font-size: 1.5em;
@@ -176,4 +170,39 @@
         padding-top: 1%;
         font-size: 1em;
         color:#666;
+    }
+
+    .Pen{
+        background-color: #1c2f36;
+        color:white;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+    }
+
+    .Pen:hover{
+        background-color: transparent;
+        color:white;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+        cursor:pointer;
+    }
+    
+    .Trash{
+        background-color: #1c2f36;
+        color:white;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+
+    }
+
+    .Trash:hover{
+        background-color: transparent;
+        color:white;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+        cursor:pointer;
     }

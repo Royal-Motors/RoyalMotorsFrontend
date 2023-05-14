@@ -1,7 +1,8 @@
 import React from 'react';
 import "./HomePage.css"
-import CarDisplayHP from '../components/CarDisplayHP';
 import { useState, useEffect }from 'react';
+import CarDisplayHPAdmin from '../components/CarDisplayHPAdmin';
+import { getUserToken } from '../pages/localStorage';
 
 const HomePageDealer = () => {
     const [data_all, setData] = useState([]); //array of jsons with all cars
@@ -256,7 +257,7 @@ const HomePageDealer = () => {
         {displayedCars.length > 0 ? (
         <div className="image-grid">
             {displayedCars.map((car, i) => (
-                <CarDisplayHP key={i} name={car.name} year={car.year} price={car.price} image_id_list={car.image_id_list}/>))}
+                <CarDisplayHPAdmin key={i} name={car.name} year={car.year} price={car.price} image_id_list={car.image_id_list}/>))}
         </div>
         ) : (
         <p>Loading data...</p>
