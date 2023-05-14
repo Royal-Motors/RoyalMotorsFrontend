@@ -149,13 +149,17 @@
     justify-content: center;
 }
 
-.picture{
+.pictureMain{
     width:50%;
+    height: 410px;
     float: left;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* background-color: #1C2F36; */
 }
-.picture:hover .prev, .picture:hover .next {
+.pictureMain:hover .prev, .pictureMain:hover .next {
     display: block;
 }
 .images{

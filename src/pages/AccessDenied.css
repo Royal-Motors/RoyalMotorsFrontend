@@ -1,0 +1,19 @@
+.containerAccess {
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 50px 20px;
+	text-align: center;
+}
+
+.h1Access {
+	font-size: 36px;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+.pAccess {
+	font-size: 18px;
+	color: #666;
+	line-height: 1.5;
+	margin-bottom: 30px;
+}

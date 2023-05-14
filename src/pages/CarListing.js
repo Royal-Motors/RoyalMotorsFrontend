@@ -1,26 +1,44 @@
 import React from 'react';
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+import TestDriveForm from './TestDriveForm';
+import { getUserToken, saveUserToken, clearUserToken } from "./localStorage";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Navigation from '../components/Navigation.js';
 
-
-const CarListing = () => {
+const CarListing = ({ email}) => {
 
     // I fetch the car 
     const {name}= useParams();
+    const savedEmail=email;
     const [data, setData] = useState([]);
+    let [userToken, setUserToken] = useState(getUserToken());
+
 
     useEffect(() => {
         fetch(`https://royalmotors.azurewebsites.net/car/${name}`)
         .then((response) => response.json())
         .then((data) => setData(data));
-    }, [name]);
+        console.log(data)
+    }, [name,data]);
     
-    // 
+    //This is to display images
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [loadedImages, setLoadedImages] = useState([]);
     useEffect(() => {
-        const imageUrls = data.image_id_list ? data.image_id_list.split(",").map((word) => "https://royalmotors.azurewebsites.net/image/" + word).slice(1) : [];
-        const promises = imageUrls.map((url) => {
+        // eslint-disable-next-line array-callback-return
+        const imageUrls = data.image_id_list ? data.image_id_list.split(",").map((word) => {
+
+            if (word) {
+                return "https://royalmotors.azurewebsites.net/image/" + word;
+            }
+        }).filter(Boolean).slice(1) : [];
+       const promises = imageUrls.map((url) => {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.onload = () => {
@@ -47,14 +65,61 @@ const CarListing = () => {
 
   const currentImage = loadedImages[currentImageIndex];
       
-    
+
+
+    const [open, setOpen] = React.useState(false);
+  
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    useEffect(() => {
+        setUserToken(getUserToken());
+      }, [userToken]);
+
   return (
     <div>
         <div className="mainCarSection">
             <div className="big-car-info">
                 <h2>{data.name}</h2>
+                <h2>{savedEmail}</h2>
                 <h2 className="buffer">buffer</h2> 
-                <button>TEST DRIVE</button>
+
+                {userToken !== null ? (
+        <Link to={`/TestDriveForm?id=${data.name}`}>
+          <button>TEST DRIVE</button>
+        </Link>
+      ) : (
+        <div>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        TEST DRIVE
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Login or Register"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+           Please login or register to schedule a testdrive.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+        
+      )}
+
             </div>
         <img className="mainImg" src={data.image_id_list ? data.image_id_list.split(",").map((word) => "https://royalmotors.azurewebsites.net/image/" + word)[0] : ""} alt="Main" />
         </div>
@@ -74,7 +139,9 @@ const CarListing = () => {
         </div>
 
         <div className="info" >
-            <div className="picture" >
+
+            <div className="pictureMain" >
+
             {currentImage && (<img src={currentImage.url} alt="" className="images" />)}
             {loadedImages.length > 1 && (
             <>
