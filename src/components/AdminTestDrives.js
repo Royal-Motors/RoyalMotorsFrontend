@@ -39,7 +39,7 @@ const AdminTestDrives = () => {
   return (
     <div>
       {/* Section break */}
-    <div class="kitkat"></div>
+    <div className="kitkat"></div>
     {/* Search Bar */}
     <div className="SFS">
       <div className="search-container">
@@ -56,12 +56,18 @@ const AdminTestDrives = () => {
         </tr>
         {/* Rows */}
         {testDrives.length > 0 ? (
-        <div>
-          {testDrives.map((obj, i) => (
-            <TableRowTestDrives key={i} name={obj.car.name} firstname={obj.account.firstname} lastname={obj.account.lastname} time={obj.time} id={obj.id}/>))}
-        </div>
+          testDrives.map((obj, i) => (
+            <TableRowTestDrives
+              key={i}
+              name={obj.car.name}
+              firstname={obj.account.firstname}
+              lastname={obj.account.lastname}
+              time={obj.time}
+              id={obj.id}
+            />
+          ))
         ) : (
-        <p>Loading data...</p>
+          <p>Loading data...</p>
         )}  
     </table>
     </div>
