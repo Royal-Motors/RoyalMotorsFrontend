@@ -4,6 +4,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import React, { useState } from "react";
 import "./UserCredentialsDialog.css";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 // Component that presents a dialog to collect credentials from the user
 export default function UserCredentialsDialog({
 open,
@@ -27,6 +28,13 @@ submitText,
             setButtonText(submitText);
           }, 4000);
       };
+    const theme = createTheme({
+    palette: {
+        primary: {
+        main: '#1C2F36',
+        },
+    },
+    });
 
     return (
         <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
@@ -70,12 +78,14 @@ submitText,
                 onChange={({ target: { value } }) => setLastname(value)}
             />
             </div>
+            <ThemeProvider theme={theme}>
             <Button
                 color="primary"
                 variant="contained"
                 onClick={handleButtonClick}>
                 {buttonText}
             </Button>
+            </ThemeProvider>
             </div>
         </Dialog>
     );

@@ -28,6 +28,7 @@ function App() {
           <Route path="/" element={getUserAuth()==='admin' ? <HomePageDealer /> : <HomePage />} />
           <Route path="/CompareCars" element={<CompareCars />} />
           <Route path="/AccessDenied" element={<AccessDenied />} />
+          <Route path="/carAdd" element={<CarListingDealer /> } />
           <Route path="/carAdd" element={getUserAuth()==='admin' ? <CarListingDealer /> : <AccessDenied />} />
           {/* <Route exact path=":name" element={<CarListing />} >
             <Route path="edit" element={getUserAuth()==='admin' ? <CarListingEdit /> : <AccessDenied />} />
