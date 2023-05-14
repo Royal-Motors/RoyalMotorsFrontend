@@ -1,19 +1,84 @@
-//Parts of this code were omitted (fetching testdrive info) to not cause the website to crash will be added when debugged and fully functional
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useParams, useLocation } from 'react-router-dom';
+import { getEmail, getUserToken} from "./localStorage";
 
-function TestDriveForm({ onSubmit }) {
+const TestDriveForm = () => {
+  const { name } = useParams();
+  const [email, setEmail] = useState(getEmail());
   const [selectedDate, setSelectedDate] = useState(null);
-  const [unavailableDates, setUnavailableDates] = useState([
-    new Date('2022-05-10T00:00:00'),
-    new Date('2022-05-12T00:00:00'),
-    new Date('2022-05-14T00:00:00')
-  ]);
+  const [unavailableDates, setUnavailableDates] = useState([]);
+  let [token, setToken] = React.useState(getUserToken());
+
+  useEffect(() => {
+    fetch(`https://royalmotors.azurewebsites.net/testdrive/car/${name}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const dates = data.map((item) => new Date(item.Time));
+        setUnavailableDates(dates);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, [name]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Form submitted');
+    if (selectedDate) {
+      console.log(selectedDate);
+      requestTestDrive(selectedDate);
+    }
+  };
+
+  function requestTestDrive(dateToAdd){
+    const requestParam = {
+      Time: dateToAdd.getTime()/1000,
+      AccountEmail: email,
+      CarName: name
+
+    };
+    fetch('https://royalmotors.azurewebsites.net/testdrive', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(requestParam)
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(JSON.stringify(requestParam));
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log('Test drive request sent:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+  
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="form">
-        <label>Test Drive Date:</label>
+        <label>Car Name: {name}</label>
+        <label>Email: {email}</label>
         <DatePicker
           id="test-drive-date"
           selected={selectedDate}
@@ -21,11 +86,12 @@ function TestDriveForm({ onSubmit }) {
           dateFormat="MM/dd/yyyy  EE hh:mm a"
           onChange={(date) => setSelectedDate(date)}
           minDate={new Date()}
+          excludeDates={unavailableDates}
         />
       </div>
       <button type="submit">Submit</button>
     </form>
   );
-}
+};
 
 export default TestDriveForm;

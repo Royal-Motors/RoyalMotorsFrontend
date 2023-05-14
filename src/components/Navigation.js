@@ -1,3 +1,5 @@
+//Parts of this code were omitted (alerts) to not cause the website to crash. Will be added when debugged and fully functional
+//In this version, compare cars takes you to a general test drive form page (work was being done on the indep car listing page)
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import { useState, useCallback } from "react";
 import { useEffect } from 'react';
@@ -5,21 +7,25 @@ import {Snackbar} from '@mui/material';
 import {Alert} from '@mui/material';
 import UserCredentialsDialog from '../pages/UserCredentialsDialog/UserCredentialsDialog';
 import UserCredentialsDialogIn from '../pages/UserCredentialsDialog/UserCredentialsDialogIn';
-import { getUserToken, saveUserToken, clearUserToken } from "../pages/localStorage";
+import { getUserToken, saveUserToken, clearUserToken, getEmail, saveEmail, clearEmail } from "../pages/localStorage";
 import '../pages/sign-in.css';
-
+import Profile from '../pages/Profile.js';
+import wrapper from '../pages/TestDriveForm';
+import CarListing from '../pages/CarListing';
 import { Link } from 'react-router-dom';
 import { scrollToElement } from './Functions';
 
 const Navigation = () => {
 
   var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
-
+  
   const [anchorEl, setAnchorEl] = useState(null);
   const [showSignUpDialog, setShowSignUpDialog] = useState(false);
   const [showSignInDialog, setShowSignInDialog] = useState(false);
 
   let [userToken, setUserToken] = useState(getUserToken());
+  let [email, setEmail] = useState(getEmail());
+  //let [saveEmail, setSaveEmail] = useState('');
 
     const States = {
         PENDING: "PENDING",
@@ -29,8 +35,6 @@ const Navigation = () => {
         };
 
 let [authState, setAuthState] = useState(States.PENDING);
-let menuContent = null;
-
 
     function sign_in(email, password) {
         return fetch(`${SERVER_URL}/sign_in`, {
@@ -47,12 +51,18 @@ let menuContent = null;
           if (!response.ok) {
             throw new Error(response.statusText);
           }
+          //setSaveEmail(email);
           return response.json();
         })
         .then((body) => {
         setAuthState(States.USER_AUTHENTICATED);
         setUserToken(body.token);
         saveUserToken(body.token);
+        setEmail(email);
+        saveEmail(email);
+        //setSaveEmail(email);
+        //handleSendEmail();
+
         })
         .catch(error => {
           console.error('Error:', error);
@@ -87,6 +97,7 @@ let menuContent = null;
     function sign_out() {
         setUserToken(null);
         clearUserToken();
+        clearEmail();
         setAuthState(States.PENDING);
 
     }
@@ -109,7 +120,14 @@ let menuContent = null;
     handleClose();
   };
 
-  
+  const goToProfile = () =>{
+    Profile(email);
+  };
+
+  //const handleSendEmail = () => {
+    //wrapper(saveEmail);
+  //};
+
   return (
     <div>
       <nav id="nav">
@@ -124,38 +142,41 @@ let menuContent = null;
               className="icon"
               src={process.env.PUBLIC_URL + 'Logos/user.png'}
               alt="logo"
-              onClick={handleProfileClick}
+              onClick={handleProfileClick} 
             />
+            
     <div>
     <Menu
-    anchorEl={anchorEl}
-    open={Boolean(anchorEl)}
-    onClose={() => setAnchorEl(null)}
-  >
-    {userToken !== null ?(
-        <>
-          <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }}>
-          <a href="Profile" style={{ textDecoration: 'none' }}>
-          Profile
-        </a>
-          </MenuItem>
-          <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={sign_out}>
+  anchorEl={anchorEl}
+  open={Boolean(anchorEl)}
+  onClose={() => setAnchorEl(null)}
+>
+  <div>
+    {userToken !== null ? (
+      <>
+        <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={goToProfile}>
+            Profile
+        </MenuItem>
+        <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={sign_out}>
           <a href="HomePage" style={{ textDecoration: 'none' }}>Logout</a>
-          </MenuItem>
-        </>
-      ):(
-        <>
-          <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={handleSignUpClick}>
-            Register
-          </MenuItem>
-          <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={handleSignInClick}>
-            Login
-          </MenuItem>
-        </>
-      )
-      }
-      </Menu>
-      </div>
+        </MenuItem>
+      </>
+    ) : (
+      <>
+        <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={handleSignUpClick}>
+          Register
+        </MenuItem>
+        <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={handleSignInClick}>
+          Login
+        </MenuItem>
+      </>
+    )}
+  </div>
+</Menu>
+
+  </div>
+    <div>
+    </div>
       </nav>
 
       <div className="App">
@@ -198,7 +219,8 @@ let menuContent = null;
     </div>
 
     </div>
-    
+
+
   );
 };
 

@@ -7,6 +7,8 @@ import CarListing from './pages/CarListing';
 import './App.css';
 import HomePage from './pages/HomePage';
 import Profile from './pages/Profile';
+import TestDriveForm from './pages/TestDriveForm';
+
 
 
 
@@ -16,12 +18,13 @@ function App() {
       <Router>
         <Navigation />
         <Routes>
+
           <Route path="/CarListing" element={<CarListing />} />
           <Route path="/CompareCars" element={<CompareCars />} />
           <Route path="/HomePage" element={<HomePage />} />
           <Route exact path="/" element={<HomePage />} />
           <Route exact path=":name" element={<CarListing />} />
-          <Route path="/Profile" element={<Profile />} />
+          <Route path="/TestDriveForm/:name" element={<TestDriveForm />} />
           </Routes>
         <Footer />
       </Router>
