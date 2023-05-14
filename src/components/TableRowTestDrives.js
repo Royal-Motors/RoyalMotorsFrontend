@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 
-function TableRowTestDrives(props) {
+const TableRowTestDrives = (props) => {
 
     function deleteTestDrive(id) {
         axios.delete(`https://royalmotors.azurewebsites.net/testdrive/${id}`)

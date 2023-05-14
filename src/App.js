@@ -8,6 +8,7 @@ import CarListingDealer from './pages/CarListingDealer';
 import './App.css';
 import HomePage from './pages/HomePage';
 import Profile from './pages/Profile';
+import AdminTestDrives from './components/AdminTestDrives';
 
 
 
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/" element={<HomePage />} />
           <Route exact path=":name" element={<CarListing />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/AdminTest" element={<AdminTestDrives />} />
           </Routes>
         <Footer />
       </Router>

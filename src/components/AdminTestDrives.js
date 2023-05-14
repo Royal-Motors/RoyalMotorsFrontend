@@ -2,9 +2,9 @@ import React from 'react'
 import axios from 'axios';
 import "./AdminTestDrives.css"
 import { useState, useEffect } from 'react';
-import TableRowTestDrives from '../components/TableRowTestDrives';
+import TableRowTestDrives from './TableRowTestDrives';
 
-function AdminTestDrives() {
+const AdminTestDrives = () => {
   const [testDrives, setTestDrives] = useState([]);
   const [testCars, setTestCars] = useState([]);
   const [testName, setTestFirstName] = useState([]);
