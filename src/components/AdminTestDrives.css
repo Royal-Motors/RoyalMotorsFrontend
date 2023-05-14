@@ -91,41 +91,22 @@ td {
 }
 
     .delButton button {
-        background-color: #293f47;
+        background-color: #1C2F36;
+        border: none;
+        padding: 7px 15px;
+        border-radius: 5px;
     }
 
         .delButton button p {
             font-family: 'Roboto';
             font-style: normal;
-            color: #A0AEB3;
+            color: white;
             font-size: 1vw;
             font-weight: 400;
             text-align: center;
         }
 
     .delButton p:hover {
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-    }
-
-.editButton {
-    background-color: transparent;
-}
-
-    .editButton button {
-        background-color: #293f47;
-    }
-
-        .editButton button p {
-            font-family: 'Roboto';
-            font-style: normal;
-            color: #A0AEB3;
-            font-size: 1vw;
-            font-weight: 400;
-            text-align: center;
-        }
-
-    .editButton p:hover {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         cursor: pointer;
     }
@@ -168,3 +149,19 @@ td {
             background-color: #aaa;
             color: #fff;
         }
+
+.sort {
+    font-family: 'Roboto';
+    float:right;
+    width: 160px;
+    background-color: #293f47;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+    .sort:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+    }
