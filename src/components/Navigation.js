@@ -9,7 +9,7 @@ import UserCredentialsDialogIn from '../pages/UserCredentialsDialog/UserCredenti
 import '../pages/sign-in.css';
 import Profile from '../pages/Profile.js';
 import CarListing from '../pages/CarListing';
-import { getUserToken, saveUserToken, clearUserToken, setUserEmail, clearUserEmail, clearUserAuth, setUserAuth, reload } from "../pages/localStorage";
+import { getUserToken, saveUserToken, clearUserToken, getUserEmail, setUserEmail, clearUserEmail, clearUserAuth, setUserAuth, reload } from "../pages/localStorage";
 import "./Navigation.css"
 
 import { Link, NavLink } from 'react-router-dom';
@@ -123,9 +123,6 @@ let [authState, setAuthState] = useState(States.PENDING);
     handleClose();
   };
 
-  const goToProfile = () =>{
-    Profile(email);
-  };
 
   //const handleSendEmail = () => {
     //wrapper(saveEmail);
@@ -154,8 +151,8 @@ let [authState, setAuthState] = useState(States.PENDING);
   <div>
     {userToken !== null ? (
       <>
-        <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={goToProfile}>
-            Profile
+        <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }}>
+        <a href="Profile" style={{ textDecoration: 'none' }}>Profile</a>
         </MenuItem>
         <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={sign_out}>
           <a href="HomePage" style={{ textDecoration: 'none' }}>Logout</a>

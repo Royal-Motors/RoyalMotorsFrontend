@@ -1,60 +1,112 @@
 import React from 'react';
 import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import { getUserToken } from './localStorage';
+import { getUserToken, getUserEmail } from './localStorage';
 import './styleProfile.css';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import { useParams } from 'react-router-dom';
-
 
 var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
 
-const Profile = (email) => {
+const Profile = () => {
   const [isEditMode, setIsEditMode] = React.useState(false);
-  const [firstName, setFirstName] = React.useState();
-  const [lastName, setLastName] = React.useState();
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
   let [token, setToken] = React.useState(getUserToken());
+  let [email, setEmail] = React.useState(getUserEmail());
+  const [open, setOpen] = React.useState(false);
+  const [password, setPassword] = React.useState("");
+  
+  const handlePassword = (event) => {
+  setPassword(event.target.value);
+};
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleEditClick = () => {
     setIsEditMode(true);
   };
-
+  function sign_in() {
+    return fetch(`${SERVER_URL}/sign_in`, {
+    method: "POST",
+    headers: {
+    "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+    email: email,
+    password: password,
+    }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then((body) => {
+    })
+    .catch(error => {
+      console.log(password)
+      console.error('Error:', error);
+      const errorMessage = error.message;
+      alert(`Sign-in failed: ${errorMessage==='Unauthorized' ? "Wrong Password: please try again" : ""}`);
+            })
+}
   const handleSaveClick = () => {
-    setIsEditMode(false);
+    sign_in();
     fetch(`${SERVER_URL}/edit/${email}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
-      },
+            },
       body: JSON.stringify({
-        firstName,
-        lastName,
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        password: password,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        setIsEditMode(false);
       })
       .catch((error) => console.error(error));
-  };
+  };  
 
-
-  fetch(`${SERVER_URL}/edit/${email}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    }
-  })
-  .then((response) => {
-    return response.json();
-  })
+  
+  
+  
+  React.useEffect(() => {
+    fetch(`${SERVER_URL}/${email}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        email : email,
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
     .then((data) => {
       console.log(data)
       setFirstName(data.firstname);
       setLastName(data.lastname);
     })
     .catch((error) => console.error(error));
+  }, [email, token]);
 
 
   return (
@@ -95,13 +147,31 @@ const Profile = (email) => {
                 style={{color: 'black'}}
               />
             </Box>
-            <Button
-              variant="contained"
-              style={{color: 'white'}}
-              onClick={handleSaveClick}
-            >
-              Save
+            <Button variant="outlined" onClick={handleClickOpen}>
+        Save
             </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To confirm these changes, please re-enter your password:
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Password"
+            type="password"
+            fullWidth
+            variant="standard"
+            onChange={handlePassword}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSaveClick}>Save changes</Button>
+        </DialogActions>
+      </Dialog>
           </>
         )}
       </section>
