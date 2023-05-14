@@ -9,7 +9,7 @@ import UserCredentialsDialogIn from '../pages/UserCredentialsDialog/UserCredenti
 import '../pages/sign-in.css';
 import Profile from '../pages/Profile.js';
 import CarListing from '../pages/CarListing';
-import { getUserToken, saveUserToken, clearUserToken, setUserEmail, clearUserEmail, clearUserAuth, setUserAuth, reload } from "../pages/localStorage";
+import { getUserToken, saveUserToken, clearUserToken, setUserEmail,getUserEmail, clearUserEmail, clearUserAuth, setUserAuth, reload } from "../pages/localStorage";
 import "./Navigation.css"
 
 import { Link, NavLink } from 'react-router-dom';

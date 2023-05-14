@@ -90,7 +90,7 @@ const CarListing = ({ email}) => {
                 <h2 className="buffer">buffer</h2> 
 
                 {userToken !== null ? (
-        <Link to={`/TestDriveForm/${data.name}`}>
+        <Link to={`/TestDriveForm?id=${data.name}`}>
           <button>TEST DRIVE</button>
         </Link>
       ) : (
