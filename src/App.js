@@ -14,6 +14,7 @@ import './App.css';
 import { getUserAuth } from './pages/localStorage';
 import HomePageDealer from './pages/HomePageDealer';
 import AccessDenied from './pages/AccessDenied';
+import UserTestDrives from './components/UserTestDrives';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
           {/* <Route exact path="edit" element={getUserAuth()==='admin' ? <CarListingEdit /> : <AccessDenied />} /> */}
           <Route path="/Profile" element={<Profile />} />
           <Route path="/AdminTest" element={<AdminTestDrives />} />
+          <Route path="/UserTest" element={<UserTestDrives />} />
           </Routes>
         <Footer />
       </Router>
