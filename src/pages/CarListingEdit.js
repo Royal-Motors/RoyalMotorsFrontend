@@ -7,9 +7,9 @@ import { useLocation } from 'react-router-dom';
 
 // {`/edit?id=${props.name}`}
 const CarListingEdit = () => {
-    // const location = useLocation();
-    // const name = new URLSearchParams(location.search).get('id');
-    const name="GAC GS3"
+    const location = useLocation();
+    const name = new URLSearchParams(location.search).get('id');
+    // const name="GAC GS3"
     const [data, setData] = useState({
         name: '',
         make: '',
