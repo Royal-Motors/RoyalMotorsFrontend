@@ -3,21 +3,16 @@ import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { getUserToken } from './localStorage';
 import './styleProfile.css';
+import { useParams } from 'react-router-dom';
+
 
 var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
-var email='fawziehzeitoun@gmail.com';
-const Profile = () => {
-  const [isEditMode, setIsEditMode] = React.useState(false);
-  const [firstName, setFirstName] = React.useState('Fawzia');
-  const [lastName, setLastName] = React.useState('Zeitoun');
 
-  const token = getUserToken('token');
-  const headers = {
-    'Content-Type': 'application/json',
-  };
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
-  }
+const Profile = (email) => {
+  const [isEditMode, setIsEditMode] = React.useState(false);
+  const [firstName, setFirstName] = React.useState();
+  const [lastName, setLastName] = React.useState();
+  let [token, setToken] = React.useState(getUserToken());
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -28,8 +23,8 @@ const Profile = () => {
     fetch(`${SERVER_URL}/edit/${email}`, {
       method: 'PUT',
       headers: {
-        ...headers,
-        Authorization: headers.Authorization,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         firstName,
@@ -47,17 +42,17 @@ const Profile = () => {
   fetch(`${SERVER_URL}/edit/${email}`, {
     method: 'GET',
     headers: {
-      ...headers,
-      Authorization: headers.Authorization,
-    },
-    body: JSON.stringify({
-      firstName,
-      lastName,
-    }),
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    }
   })
-    .then((response) => response.json())
+  .then((response) => {
+    return response.json();
+  })
     .then((data) => {
-      console.log(data);
+      console.log(data)
+      setFirstName(data.firstname);
+      setLastName(data.lastname);
     })
     .catch((error) => console.error(error));
 
