@@ -60,6 +60,19 @@
   button.edit-profile:hover {
     background-color: #444;
   }
+  button.change-password {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  button.change-password:hover {
+    background-color: #444;
+  }
   
   button.reschedule{
     background-color: #333;
