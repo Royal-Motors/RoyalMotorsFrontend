@@ -17,6 +17,16 @@ submitText,
     let [password, setPassword] = useState("");
     let [firstname, setFirstname] = useState("");
     let [lastname, setLastname] = useState("");
+    let [buttonText, setButtonText] = useState(submitText);
+
+    const handleButtonClick = () => {
+        setButtonText("Loading...");
+        onSubmit(email, password, firstname, lastname);
+        setButtonText("Done!");
+        setTimeout(() => {
+            setButtonText(submitText);
+          }, 4000);
+      };
 
     return (
         <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
@@ -63,8 +73,8 @@ submitText,
             <Button
                 color="primary"
                 variant="contained"
-                onClick={() => onSubmit(email, password, firstname, lastname)}>
-                {submitText}
+                onClick={handleButtonClick}>
+                {buttonText}
             </Button>
             </div>
         </Dialog>
