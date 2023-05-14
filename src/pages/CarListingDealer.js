@@ -22,7 +22,7 @@ const CarListingDealer = () => {
         fuelconsumption: '', 
         fueltankcapacity: '',
         transmissiontype: '',
-        image_id_list: "",
+        image_id_list: "string",
         video_id: "string"
     });
     
@@ -204,15 +204,15 @@ const CarListingDealer = () => {
         
                 console.log('New car added!', info.data);
             } catch(error) {
-                console.log(error);
                 console.log(error.message);
-                console.log(error.response);
-                console.log(error.response.data);
-                console.log(error.response.data.title);
                 if (error.message==="Request failed with status code 400"){
-                    alert("Car already exists.\nOnly images will be updated")
+                    // alert("Car already exists.\nOnly images will be updated")
+                    alert("Please fill all car information fields")
                 }else if (error.message==="Request failed with status code 401"){
-                    alert("You don't have the needed authorization")
+                    alert("You don't have the needed authorization.\nIf you are admin, your session timed out.\nPlease login again")
+                }else if (error.message ==="Request failed with status code 409"){
+                    console.log(error.response.data)
+                    alert("Car already exists.\nOnly images will be updated")
                 }
             }
 

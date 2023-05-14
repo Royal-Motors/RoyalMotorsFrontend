@@ -13,28 +13,27 @@ nav a {
   color : white;
   font-family: 'Roboto';
   font-weight: 400;
-  font-size: 20px;
-  padding: 10px 16px; 
-  margin: 40px 16px;
+  font-size: 2vw;
+  padding: 0.7vw 1vw; 
+  margin: 4vw 1.8vw;
 }
+nav .icon{
+  /* max-width: 2.5vw; */
+  height: 2.6vw;
+}
+
+
+
 nav a:hover,.icon:hover {
   background-color: rgba(242, 242, 242,0.40);
   color: #f2f2f2;
 }
 
-nav .noDesign{
-  float:none;
-  color : white;
-  font-family: 'Roboto';
-  font-weight: 400;
-  font-size: 20px;
-  padding: 0px 0px; 
-  margin: 0px 0px;
-}
+
 .Logo {
   float:left;
-  width: 149px;
-  height: 63px;
+  max-width: 12vw;
+  height: 5vw;
   margin: 24px 22px 24px 15px;
   vertical-align: middle;
   line-height: 120px;
@@ -46,9 +45,8 @@ nav .noDesign{
   float: right;
   color: white;
   text-align: center;
-  margin:35px 10px;
-  padding: 10px 6px;
-  height:28px;
+  margin:3vw 10px;
+  padding: 1vw 0.4vw;
   vertical-align: middle;
   line-height: 120px;
 }
