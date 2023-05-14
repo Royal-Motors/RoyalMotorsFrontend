@@ -32,7 +32,7 @@ function App() {
             <Route path="edit" element={getUserAuth()==='admin' ? <CarListingEdit /> : <AccessDenied />} />
           </Route> */}
           <Route exact path=":name" element={<CarListing />} />
-          <Route path="/TestDriveForm/:name" element={<TestDriveForm />} />
+          <Route path="/TestDriveForm" element={<TestDriveForm />} />
           <Route exact path="edit" element={<CarListingEdit />} />
           {/* <Route exact path="edit" element={getUserAuth()==='admin' ? <CarListingEdit /> : <AccessDenied />} /> */}
           <Route path="/Profile" element={<Profile />} />

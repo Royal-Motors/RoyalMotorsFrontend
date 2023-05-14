@@ -204,7 +204,11 @@ const CarListingDealer = () => {
         
                 console.log('New car added!', info.data);
             } catch(error) {
+                console.log(error);
                 console.log(error.message);
+                console.log(error.response);
+                console.log(error.response.data);
+                console.log(error.response.data.title);
                 if (error.message==="Request failed with status code 400"){
                     alert("Car already exists.\nOnly images will be updated")
                 }else if (error.message==="Request failed with status code 401"){
