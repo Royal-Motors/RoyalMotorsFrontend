@@ -156,7 +156,7 @@ let [authState, setAuthState] = useState(States.PENDING);
         <a href="Profile" style={{ textDecoration: 'none' }}>Profile</a>
         </MenuItem>
         <MenuItem sx={{ fontSize: '18px', pr: '35px', pl: '15px' }} onClick={sign_out}>
-          <a href="HomePage" style={{ textDecoration: 'none' }}>Logout</a>
+          <a href="/" style={{ textDecoration: 'none' }}>Logout</a>
         </MenuItem>
       </>
     ) : (

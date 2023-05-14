@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const CarDisplayHP = (props) => {
   const mainImage = props.image_id_list.split(",")[1] || props.image_id_list.split(",")[2] || props.image_id_list.split(",")[3] || props.image_id_list.split(",")[4] || props.image_id_list.split(",")[5] || props.image_id_list.split(",")[6] || props.image_id_list.split(",")[7] || props.image_id_list.split(",")[8] || props.image_id_list.split(",")[9] || props.image_id_list.split(",")[10]; 
-  console.log(props)
   return (
     <div className="image-box">
       <img id="GridPic" src={props.image_id_list ? "https://royalmotors.azurewebsites.net/image/" + mainImage : ""} alt="" />

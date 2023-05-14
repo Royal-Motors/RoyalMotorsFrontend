@@ -293,7 +293,7 @@ const CarListingEdit = () => {
             return "https://royalmotors.azurewebsites.net/image/" + word;
         }else{return "";}
       }).slice(1) : [];
-      [image2, image3, image4, image5, image6, image7,image8, image9, image10] = imageUrls;
+      [image2, image3, image4, image5, image6, image7, image8, image9, image10] = imageUrls;
       setoriginalFile2(image2)
       setoriginalFile3(image3)
       setoriginalFile4(image4)
@@ -302,6 +302,7 @@ const CarListingEdit = () => {
       setoriginalFile7(image7)
       setoriginalFile8(image8)
       setoriginalFile9(image9)
+      console.log(originalFile9)
       setoriginalFile10(image10)
     }, [data]);
 
@@ -328,6 +329,20 @@ const CarListingEdit = () => {
           }
         };
         
+        //Sending car information
+        fetch(`https://royalmotors.azurewebsites.net/car/edit/${name}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getUserToken()}`
+          },
+          body: JSON.stringify(formValues)
+        })
+        .then(response => response.json())
+        .then(formValues=> console.log(formValues))
+        .catch(error => console.error(error))
+        console.log(formValues)
+
         if (!booleanMainFileURL){
           try {
             const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=1`, headerAuth);
@@ -344,19 +359,64 @@ const CarListingEdit = () => {
             console.error(error); // handle error
           }
         }
-        //Sending car information
-        fetch(`https://royalmotors.azurewebsites.net/car/edit/${name}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${getUserToken()}`
-          },
-          body: JSON.stringify(formValues)
-        })
-        .then(response => response.json())
-        .then(formValues=> console.log(formValues))
-        .catch(error => console.error(error))
-        console.log(formValues)
+        if (!booleanFile3){
+          try {
+            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=3`, headerAuth);
+            console.log(response.data); // handle success
+          } catch (error) {
+            console.error(error); // handle error
+          }
+        }if (!booleanFile4){
+          try {
+            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=4`, headerAuth);
+            console.log(response.data); // handle success
+          } catch (error) {
+            console.error(error); // handle error
+          }
+        }if (!booleanFile5){
+          try {
+            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=5`, headerAuth);
+            console.log(response.data); // handle success
+          } catch (error) {
+            console.error(error); // handle error
+          }
+        }if (!booleanFile6){
+          try {
+            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=6`, headerAuth);
+            console.log(response.data); // handle success
+          } catch (error) {
+            console.error(error); // handle error
+          }
+        }if (!booleanFile7){
+          try {
+            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=7`, headerAuth);
+            console.log(response.data); // handle success
+          } catch (error) {
+            console.error(error); // handle error
+          }
+        }if (!booleanFile8){
+          try {
+            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=8`, headerAuth);
+            console.log(response.data); // handle success
+          } catch (error) {
+            console.error(error); // handle error
+          }
+        }if (!booleanFile9){
+          try {
+            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=9`, headerAuth);
+            console.log(response.data); // handle success
+          } catch (error) {
+            console.error(error); // handle error
+          }
+        }if (!booleanFile10){
+          try {
+            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=10`, headerAuth);
+            console.log(response.data); // handle success
+          } catch (error) {
+            console.error(error); // handle error
+          }
+        }
+        
 
         //Sending the main image
         if (formMainData && formMainData.get('File')) {

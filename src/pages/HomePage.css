@@ -56,6 +56,7 @@
     background-color: #293f47;
     color: white;
     padding: 10px;
+    border: none;
     border-radius: 5px;
     font-size: 1em;
 }
@@ -72,6 +73,7 @@
     background-color: #293f47;
     color: white;
     padding: 10px;
+    border: none;
     border-radius: 5px;
     font-size: 1em;
 }

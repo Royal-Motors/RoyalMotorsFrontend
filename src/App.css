@@ -1,4 +1,67 @@
 
+footer{
+  
+    display: flex;
+    align-items: center;
+    height: 100%;
+    clear: both;
+    margin-bottom: 0;
+    background-color: #1C2F36;
+    height: 15vw;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 0;
+    clear:both;
+  }
+  section{
+    float:left;
+    width: 22%;
+    justify-content:center;
+    color:#ffffff;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    margin:0;
+    padding:0;
+  }
+  .Logo_footer {
+    width: 18vw;
+    padding:0vw 0vw 0 2vw;
+    margin:0;
+  }
+  
+  .mainNavButtons{
+    font-size: 1.6vw;
+    line-height: 2.5vw;
+    padding:0vw 0 0 5vw;
+    margin:0;
+  
+  }
+  
+  section .fa{
+    font-size: 1.9vw;
+  }
+  .icons{
+    font-size: 1.6vw;
+    line-height: 2.3vw;
+    padding:0 2vw 0 2vw;
+    margin: 0vw 0 0 0;
+  }
+  
+  .HQ{
+    font-size: 1.5vw;
+    line-height: 2vw;
+    padding:0vw 0 0 0;
+  }
+  
+  .HQ .padding{
+    margin:15px 0 0 0;
+  } 
+
+body{
+    font-family: 'Roboto';
+}
 
 /* --------------------------- Compare Cars Begins --------------------*/
 
