@@ -1,0 +1,238 @@
+/*Section break*/
+.kitkat {
+    padding: 5px;
+    background-color: #A0AEB3;
+}
+/*Pictures with slogan*/
+.Info {
+    align-items: center;
+    background-color: #192A31;
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+
+.InfoLeft {
+    text-align: center;
+    height: auto;
+    color: white;
+    font-size: 5vw;
+    line-height: 36px;
+    padding-top: 3.5%;
+    padding-bottom: 3.5%;
+}
+
+#L2 {
+    padding-bottom: 3%;
+    padding-top: 3%;
+}
+
+.CarRight {
+    width: 50%;
+    float: right;
+    padding-top: 2%;
+}
+
+@media (max-width: 768px) {
+    img {
+        max-width: 50%;
+    }
+}
+/*Section break*/
+#inSection {
+    padding: 2.4%;
+}
+/*Search bar, Filter and  Sort*/
+.SFS {
+    background-color: #192A31;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter {
+    font-family: 'Roboto';
+    width: 160px;
+    background-color: #293f47;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+    .filter:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+    }
+
+.sort {
+    font-family: 'Roboto';
+    float:right;
+    width: 160px;
+    background-color: #293f47;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+    .sort:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+    }
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+    .search-container input[type="text"] {
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+        width: 500px;
+        padding: 10px;
+        border: none;
+        font-size: 16px;
+    }
+
+    .search-container button[type="submit"] {
+        background-color: #ddd;
+        border: none;
+        color: #666;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .search-container button[type="submit"]:hover {
+            background-color: #aaa;
+            color: #fff;
+        }
+
+.butt1{
+    padding-right: 0.7vw;
+}
+
+.butt2 {
+    padding-right: 10vw;
+}
+
+.butt3 {
+    padding-left: 7vw;
+}
+
+/*Pictures*/
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-box {
+    position: relative;
+    margin: 10px;
+    padding: 10px;
+    width: 25%;
+}
+
+#GridPic {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+}
+
+.color-box {
+    display: block;
+    height: auto;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    background-color: #1c2f36;
+    padding: 4px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+    .CarName{
+        padding-top:0%;
+        font-size: 1.5em;
+    }
+
+    .subText{
+        padding-top: 1%;
+        font-size: 1em;
+        color:#666;
+    }
+
+    .Pen{
+        background-color: #1c2f36;
+        color:white;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+    }
+
+    .Pen:hover{
+        background-color: transparent;
+        color:white;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+        cursor:pointer;
+    }
+    
+    .Trash{
+        background-color: #1c2f36;
+        color:white;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+
+    }
+
+    .Trash:hover{
+        background-color: transparent;
+        color:white;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+        cursor:pointer;
+    }
+/* Ticked Box --> Add car */
+.border-dashed {
+    border: 2px dashed #1C2F36;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 2%;
+    text-align: center;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    }
+      
+      .border-dashed:hover,
+      .border-dashed:hover .Plus {
+        border-color: #c5c5c5;
+        color: #c5c5c5;
+        cursor: pointer;
+      }
+
+      .butt4{
+        background-color: transparent;
+        border:none;
+      }
+      
+      .Plus {
+        color: #1C2F36;
+        font-size: 35px;
+        display: grid;
+        place-items: center;
+      }   

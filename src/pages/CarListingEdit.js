@@ -4,6 +4,8 @@ import "./CarListingDealer.css"
 import axios from 'axios';
 import { getUserToken } from './localStorage';
 import { useLocation } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 // {`/edit?id=${props.name}`}
 const CarListingEdit = () => {
@@ -587,7 +589,8 @@ const CarListingEdit = () => {
                 <div className="custom-file-upload">
                     <label htmlFor="imageInput" >
                         <div className='MainImageContainer'>
-                            <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                         <FontAwesomeIcon icon={faCirclePlus} />
+                            {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                         </div>
                     </label>
                     <input
