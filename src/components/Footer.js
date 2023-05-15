@@ -2,6 +2,8 @@
 import React from 'react'
 import { scrollToElement } from './Functions';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = () => {
   return (
@@ -17,7 +19,7 @@ const Footer = () => {
 
             </section>
             <section className="icons">
-                <p><i className="fa fa-envelope-o" aria-hidden="true"></i>
+                <p><FontAwesomeIcon icon={faEnvelope} />
                 <span>&nbsp;Contact Us:</span></p>
                 <p>+961 1 234 567</p>
                 <p>royalmotorslb@gmail.com</p>

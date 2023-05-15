@@ -589,8 +589,8 @@ const CarListingEdit = () => {
                 <div className="custom-file-upload">
                     <label htmlFor="imageInput" >
                         <div className='MainImageContainer'>
-                         <FontAwesomeIcon icon={faCirclePlus} />
-                            {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
+                          <FontAwesomeIcon icon={faCirclePlus} />
+                          {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                         </div>
                     </label>
                     <input
