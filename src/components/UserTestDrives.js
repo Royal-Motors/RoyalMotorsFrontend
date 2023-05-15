@@ -104,7 +104,7 @@ const AdminTestDrives = () => {
               <option value="" onClick={handleSortReset}>
                 No Sort
               </option>
-              <option value="alphab">Car Alphabetically</option>
+              <option value="alphab">Car</option>
               <option value="DT">Date/Time</option>
             </select>
           </div>
