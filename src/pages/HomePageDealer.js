@@ -1,8 +1,11 @@
 import React from 'react';
-import "./HomePage.css"
+import "./HomePageDealer.css"
 import { useState, useEffect }from 'react';
 import CarDisplayHPAdmin from '../components/CarDisplayHPAdmin';
 import { getUserToken } from '../pages/localStorage';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 const HomePageDealer = () => {
     const [data_all, setData] = useState([]); //array of jsons with all cars
@@ -258,7 +261,15 @@ const HomePageDealer = () => {
         <div className="image-grid">
             {displayedCars.map((car, i) => (
                 <CarDisplayHPAdmin key={i} name={car.name} year={car.year} price={car.price} image_id_list={car.image_id_list}/>))}
-        </div>
+                {/* Add Image */}
+                <Link to={`/carAdd`} className="border-dashed" style={{ cursor: 'pointer', textDecoration: 'none' }}>
+                  <button className="butt4">
+                      <div className="Plus">
+                        <FontAwesomeIcon icon={faCirclePlus} />
+                      </div>
+                    </button>
+                  </Link>
+                </div>
         ) : (
         <p>Loading data...</p>
         )}
