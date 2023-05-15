@@ -10,6 +10,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useParams } from 'react-router-dom';
 import {Alert} from '@mui/material';
+import AdminTestDrives from '../components/AdminTestDrives';
+import UserTestDrives from '../components/UserTestDrives';
+import axios from 'axios';
+
 
 var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
 
@@ -24,6 +28,30 @@ const Profile = () => {
   const [password, setPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [newPasswordAgain, setNewPasswordAgain] = React.useState("");
+
+  const [isAdmin, setIsAdmin] = React.useState(false);
+
+  const checkAdminStatus = (token) => {
+    return axios.get('https://your-server.com/checkAdminStatus', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  };
+
+  React.useEffect(() => {
+    const token = getUserToken(); // Retrieve the token from wherever you store it
+    if (token) {
+      checkAdminStatus(token)
+        .then((response) => {
+          const isAdmin = response.data.isAdmin; // Assuming the server returns the admin status
+          setIsAdmin(isAdmin);
+        })
+        .catch((error) => {
+          // Handle error if the request fails
+        });
+    }
+  }, []);
   
   function compare(newPassword,newPasswordAgain){
     if(newPassword==newPasswordAgain){
@@ -296,6 +324,11 @@ setOpenPass(true);
           </div>
         </section>
       </main>
+      {isAdmin ? (
+        <AdminTestDrives /> // Render the admin profile component
+      ) : (
+        <UserTestDrives /> // Render the user profile component
+      )}
     </div>
   );
 };
