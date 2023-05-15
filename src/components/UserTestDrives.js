@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './AdminTestDrives.css';
 import { useState, useEffect } from 'react';
-import TableRowTestDrives from './TableRowTestDrives';
+import TableRowTestDrives2 from './TableRowTestDrives2';
 import { getUserToken } from '../pages/localStorage';
 
 const AdminTestDrives = () => {

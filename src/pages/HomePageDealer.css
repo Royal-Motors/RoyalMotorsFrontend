@@ -180,7 +180,7 @@
 
     .Pen:hover{
         background-color: transparent;
-        color:white;
+        color: rgb(35, 35, 192);
         border:none;
         padding:10px;
         font-size: 1.3vw;
@@ -198,7 +198,7 @@
 
     .Trash:hover{
         background-color: transparent;
-        color:white;
+        color:gray;
         border:none;
         padding:10px;
         font-size: 1.3vw;
