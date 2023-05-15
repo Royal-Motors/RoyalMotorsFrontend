@@ -6,6 +6,7 @@ import { getUserToken } from './localStorage';
 import { useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // {`/edit?id=${props.name}`}
 const CarListingEdit = () => {
@@ -626,14 +627,16 @@ const CarListingEdit = () => {
                     <div className="containerForX">
                         <img style={{ width :'100%', borderRadius:'10px', margin:'2%'}}src={selectedFile2?(URL.createObjectURL(selectedFile2)):(originalFile2)} alt="selected"/>
                             <div className="deleteIcon" onClick={imageDeleteButton2}>
-                                <i className="fa fa-times" aria-hidden="true" />
+                            <FontAwesomeIcon icon={faTimes} />
+                                {/* <i className="fa fa-times" aria-hidden="true" /> */}
                             </div>
                     </div>
                 ):(
                     <div className="image">
                         <label htmlFor="imageInput2" >
                             <div className='imageContainer'>
-                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                                <FontAwesomeIcon icon={faCirclePlus} />
+                                {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                             </div>
                         </label>
                         <input
@@ -650,14 +653,16 @@ const CarListingEdit = () => {
                     <div className="containerForX">
                         <img style={{ width :'100%', borderRadius:'10px', margin:'2%'}}src={selectedFile3?(URL.createObjectURL(selectedFile3)):(originalFile3)} alt="selected"/>
                             <div className="deleteIcon" onClick={imageDeleteButton3}>
-                                <i className="fa fa-times" aria-hidden="true" />
+                            <FontAwesomeIcon icon={faTimes} />
+                                {/* <i className="fa fa-times" aria-hidden="true" /> */}
                             </div>
                     </div>
                 ):(
                     <div className="image">
                         <label htmlFor="imageInput3" >
                             <div className='imageContainer'>
-                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                            <FontAwesomeIcon icon={faCirclePlus} />
+                                {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                             </div>
                         </label>
                         <input
@@ -674,14 +679,16 @@ const CarListingEdit = () => {
                     <div className="containerForX">
                         <img style={{ width :'100%', borderRadius:'10px', margin:'2%'}}src={selectedFile4?(URL.createObjectURL(selectedFile4)):(originalFile4)} alt="selected"/>
                             <div className="deleteIcon" onClick={imageDeleteButton4}>
-                                <i className="fa fa-times" aria-hidden="true" />
+                            <FontAwesomeIcon icon={faTimes} />
+                                {/* <i className="fa fa-times" aria-hidden="true" /> */}
                             </div>
                     </div>
                 ):(
                     <div className="image">
                         <label htmlFor="imageInput4" >
                             <div className='imageContainer'>
-                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                            <FontAwesomeIcon icon={faCirclePlus} />
+                                {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                             </div>
                         </label>
                         <input
@@ -698,14 +705,16 @@ const CarListingEdit = () => {
                     <div className="containerForX">
                         <img style={{ width :'100%', borderRadius:'10px', margin:'2%'}}src={selectedFile5?(URL.createObjectURL(selectedFile5)):(originalFile5)} alt="selected"/>
                             <div className="deleteIcon" onClick={imageDeleteButton5}>
-                                <i className="fa fa-times" aria-hidden="true" />
+                            <FontAwesomeIcon icon={faTimes} />
+                                {/* <i className="fa fa-times" aria-hidden="true" /> */}
                             </div>
                     </div>
                 ):(
                     <div className="image">
                         <label htmlFor="imageInput5" >
                             <div className='imageContainer'>
-                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                            <FontAwesomeIcon icon={faCirclePlus} />
+                                {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                             </div>
                         </label>
                         <input
@@ -722,14 +731,16 @@ const CarListingEdit = () => {
                     <div className="containerForX">
                         <img style={{ width :'100%', borderRadius:'10px', margin:'2%'}}src={selectedFile6?(URL.createObjectURL(selectedFile6)):(originalFile6)} alt="selected"/>
                             <div className="deleteIcon" onClick={imageDeleteButton6}>
-                                <i className="fa fa-times" aria-hidden="true" />
+                            <FontAwesomeIcon icon={faTimes} />
+                                {/* <i className="fa fa-times" aria-hidden="true" /> */}
                             </div>
                     </div>
                 ):(
                     <div className="image">
                         <label htmlFor="imageInput6" >
                             <div className='imageContainer'>
-                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                            <FontAwesomeIcon icon={faCirclePlus} />
+                                {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                             </div>
                         </label>
                         <input
@@ -746,14 +757,16 @@ const CarListingEdit = () => {
                     <div className="containerForX">
                         <img style={{ width :'100%', borderRadius:'10px', margin:'2%'}}src={selectedFile7?(URL.createObjectURL(selectedFile7)):(originalFile7)} alt="selected"/>
                             <div className="deleteIcon" onClick={imageDeleteButton7}>
-                                <i className="fa fa-times" aria-hidden="true" />
+                            <FontAwesomeIcon icon={faTimes} />
+                                {/* <i className="fa fa-times" aria-hidden="true" /> */}
                             </div>
                     </div>
                 ):(
                     <div className="image">
                         <label htmlFor="imageInput7" >
                             <div className='imageContainer'>
-                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                            <FontAwesomeIcon icon={faCirclePlus} />
+                                {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                             </div>
                         </label>
                         <input
@@ -770,14 +783,16 @@ const CarListingEdit = () => {
                     <div className="containerForX">
                         <img style={{ width :'100%', borderRadius:'10px', margin:'2%'}}src={selectedFile8?(URL.createObjectURL(selectedFile8)):(originalFile8)} alt="selected"/>
                             <div className="deleteIcon" onClick={imageDeleteButton8}>
-                                <i className="fa fa-times" aria-hidden="true" />
+                            <FontAwesomeIcon icon={faTimes} />
+                                {/* <i className="fa fa-times" aria-hidden="true" /> */}
                             </div>
                     </div>
                 ):(
                     <div className="image">
                         <label htmlFor="imageInput8" >
                             <div className='imageContainer'>
-                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                            <FontAwesomeIcon icon={faCirclePlus} />
+                                {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                             </div>
                         </label>
                         <input
@@ -794,14 +809,16 @@ const CarListingEdit = () => {
                     <div className="containerForX">
                         <img style={{ width :'100%', borderRadius:'10px', margin:'2%'}}src={selectedFile9?(URL.createObjectURL(selectedFile9)):(originalFile9)} alt="selected"/>
                             <div className="deleteIcon" onClick={imageDeleteButton9}>
-                                <i className="fa fa-times" aria-hidden="true" />
+                            <FontAwesomeIcon icon={faTimes} />
+                                {/* <i className="fa fa-times" aria-hidden="true" /> */}
                             </div>
                     </div>
                 ):(
                     <div className="image">
                         <label htmlFor="imageInput9" >
                             <div className='imageContainer'>
-                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                            <FontAwesomeIcon icon={faCirclePlus} />
+                                {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                             </div>
                         </label>
                         <input
@@ -818,14 +835,16 @@ const CarListingEdit = () => {
                     <div className="containerForX">
                         <img style={{ width :'100%', borderRadius:'10px', margin:'2%'}}src={selectedFile10?(URL.createObjectURL(selectedFile10)):(originalFile10)} alt="selected"/>
                             <div className="deleteIcon" onClick={imageDeleteButton10}>
-                                <i className="fa fa-times" aria-hidden="true" />
+                            <FontAwesomeIcon icon={faTimes} />
+                                {/* <i className="fa fa-times" aria-hidden="true" /> */}
                             </div>
                     </div>
                 ):(
                     <div className="image">
                         <label htmlFor="imageInput10" >
                             <div className='imageContainer'>
-                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>
+                            <FontAwesomeIcon icon={faCirclePlus} />
+                                {/* <i className="fa fa-plus-square-o" aria-hidden="true"></i> */}
                             </div>
                         </label>
                         <input
