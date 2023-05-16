@@ -3,18 +3,20 @@
   padding: 0;
   font-family: Arial, sans-serif;
   background-color: #A0AEB3;
+  color: #fff;
+
 }
 
 profile {
   background-color: #333;
-  color: #fff;
   padding: 20px;
 }
 
 h1 {
   margin: 0;
-  color: #333;
   font-size: 40;
+  color: #fff;
+
 }
 
 main {
@@ -25,17 +27,23 @@ main {
   grid-gap: 20px;
   padding: 20px;
   grid-template-rows: auto 1fr;
+  color: #fff;
+
 }
 
 .profile-info {
   grid-column: 1 / -1;
   grid-row: 1;
+  color: #fff;
+
 }
 
 .testdrives {
   grid-column: 1 / -1;
   grid-row: 2;
   margin-bottom: 20px;
+  color: #fff;
+
 }
 
 .previous ul,
@@ -43,6 +51,8 @@ main {
   margin: 0;
   padding: 0;
   list-style: none;
+  color: #fff;
+
 }
 
 button.edit-profile {
@@ -73,34 +83,29 @@ button.change-password:hover {
   background-color: #444;
 }
 
-button.reschedule{
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 0px;
-}
-
 button.reschedule:hover {
   background-color: #444;
 }
 
 .profile-info,
-.testdrives,
-.previous {
+.testdrives {
   margin: 10px;
   padding: 20px;
-  background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  color:#333;
+  color:#fff;
 }
 
 @media (max-width: 767px) {
   main {
     display: block;
     padding: 20px;
+    color: #fff;
   }
 }
+
+.button-wrapper {
+  display: flex;
+  gap: 10px;
+}
+

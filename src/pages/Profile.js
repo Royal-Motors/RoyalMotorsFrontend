@@ -188,29 +188,32 @@ setOpenPass(true);
     <div className="bodyProfile">
     <main>
       <section className="profile-info">
-        <h1 style={{color: 'black', fontSize: '30px', paddingBottom:'30px', paddingTop:'0px'}}>Profile Information</h1>
+        <h1 style={{color: 'white', fontSize: '30px', paddingBottom:'30px', paddingTop:'0px'}}>Profile Information</h1>
         {!isEditMode && (
           <>
             <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>First Name:</strong> {firstName}</p>
             <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>Last Name:</strong> {lastName}</p>
             <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>Email:</strong> {email}</p>
-            <Button
-              style={{color: 'white'}}
-              className="edit-profile"
-              id="edit-profile"
-              onClick={handleEditClick}
-            >
-              Edit Profile
-            </Button>
+            <div className="button-wrapper">
+  <Button
+    style={{ color: 'white' }}
+    className="edit-profile"
+    id="edit-profile"
+    onClick={handleEditClick}
+  >
+    Edit Profile
+  </Button>
 
-            <Button
-              style={{color: 'white'}}
-              className="change-password"
-              id="change-password"
-              onClick={handleClickOpenPass}
-            >
-              Change Password
-            </Button>
+  <Button
+    style={{ color: 'white' }}
+    className="change-password"
+    id="change-password"
+    onClick={handleClickOpenPass}
+  >
+    Change Password
+  </Button>
+</div>
+
         <Dialog open={openPass} onClose={handleClosePass}>
         <DialogTitle>Change Password</DialogTitle>
         <DialogContent>
@@ -302,7 +305,7 @@ setOpenPass(true);
         )}
       </section>
         <section className="testdrives">
-        <h1 style={{color: 'black', fontSize: '30px'}}>Test Drives</h1>
+        <h1 style={{color: 'white', fontSize: '30px'}}>Test Drives</h1>
         </section>
       </main>
       {getUserAuth()==="admin"? (
