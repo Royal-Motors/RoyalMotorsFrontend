@@ -49,7 +49,7 @@ table {
 
 
 /* ---------------NAV BAR----------- */
-nav {
+/* nav {
     background-color: #1C2F36;
     overflow: hidden;
     width: 100%;
@@ -67,7 +67,7 @@ nav a{
     font-size: 20px;
     padding: 10px 16px; 
     margin: 40px 16px;
-}
+} */
 nav a:hover,.icon:hover {
     background-color: rgba(242, 242, 242,0.40);
     color: #f2f2f2;
@@ -91,7 +91,7 @@ nav .noDesign{
     line-height: 120px;
 }
 
-.icon{
+/* .icon{
     float: right;
     text-align: center;
     float: right;
@@ -102,11 +102,11 @@ nav .noDesign{
     height:28px;
     vertical-align: middle;
     line-height: 120px;
-}
+} */
 /* ---------NAV BAR---------- */
 
 
-/* -----FOOTER---------- */
+/* -----FOOTER----------
 footer{
   
     display: flex;
@@ -116,12 +116,14 @@ footer{
     margin-bottom: 0;
     background-color: #1C2F36;
     height: 15vw;
-    bottom: 0;
     left: 0;
     right: 0;
     padding-bottom: 0;
     clear:both;
+    position: relative;
+    bottom: -500px;
   }
+
   section{
     float:left;
     width: 22%;
@@ -165,7 +167,7 @@ footer{
   
   .HQ .padding{
     margin:15px 0 0 0;
-  } 
+  }  */
   /* -------FOOTER--------- */
 
   /*   

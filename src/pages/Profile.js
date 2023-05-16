@@ -13,6 +13,7 @@ import {Alert} from '@mui/material';
 import AdminTestDrives from '../components/AdminTestDrives';
 import UserTestDrives from '../components/UserTestDrives';
 import axios from 'axios';
+import CarMonthlyChart from './Dashboard.js'
 
 
 var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
@@ -315,13 +316,6 @@ setOpenPass(true);
       </section>
         <section className="testdrives">
         <h1 style={{color: 'black', fontSize: '30px'}}>Test Drives</h1>
-          <div className="current">
-            <h3>Current Testdrives</h3>
-            <Button className="reschedule">Reschedule</Button>
-          </div>
-          <div className="previous">
-            <h3>Previous Testdrives</h3>
-          </div>
         </section>
       </main>
       {getUserAuth()==="admin"? (
@@ -329,6 +323,9 @@ setOpenPass(true);
       ) : (
         <UserTestDrives /> // Render the user profile component
       )}
+
+<CarMonthlyChart /> 
+
     </div>
   );
 };

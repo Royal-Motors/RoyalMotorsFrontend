@@ -77,6 +77,16 @@ const CarListing = ({ email}) => {
       setOpen(false);
     };
 
+    const [openCalendar, setOpenCalendar] = React.useState(false);
+  
+    const handleClickOpenCalendar = () => {
+      setOpenCalendar(true);
+    };
+  
+    const handleCloseCalendar = () => {
+      setOpenCalendar(false);
+    };
+
     useEffect(() => {
         setUserToken(getUserToken());
       }, [userToken]);
@@ -90,9 +100,12 @@ const CarListing = ({ email}) => {
                 <h2 className="buffer">buffer</h2> 
 
                 {userToken !== null ? (
-        <Link to={`/TestDriveForm?id=${data.name}`}>
-          <button>TEST DRIVE</button>
-        </Link>
+        //<Link to={`/TestDriveForm?id=${data.name}`}>
+        <div>
+          <button onClick={handleClickOpenCalendar}>TEST DRIVE</button>
+          <TestDriveForm open={openCalendar} onClose={handleCloseCalendar} name={data.name}/>
+          </div>
+        //</Link>
       ) : (
         <div>
       <Button variant="outlined" onClick={handleClickOpen}>

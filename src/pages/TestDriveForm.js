@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
+import StaticDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useLocation } from 'react-router-dom';
-import { getUserEmail, getUserToken} from "./localStorage";
+import { getUserEmail, getUserToken } from './localStorage';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 
-
-const TestDriveForm = () => {
-  const location = useLocation();
-  const name = new URLSearchParams(location.search).get('id');
+export default function TestDriveForm({ open, onClose, name }) {
   const [email, setEmail] = useState(getUserEmail());
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableDates, setAvailableDates] = useState([]);
-  let [token, setToken] = React.useState(getUserToken());
+  const [token, setToken] = useState(getUserToken());
+  var convertedDates = [];
 
   useEffect(() => {
     fetch(`https://royalmotors.azurewebsites.net/testdrive/slots/${name}`, {
@@ -19,7 +21,7 @@ const TestDriveForm = () => {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
-
+        name: name,
       },
     })
       .then((response) => {
@@ -29,8 +31,11 @@ const TestDriveForm = () => {
         return response.json();
       })
       .then((data) => {
-        const dates = data.map((item) => new Date(item.Time));
-        setAvailableDates(dates);
+        console.log(data);
+        const dates = data.map((item) => new Date(item * 1000));
+        console.log(dates);
+        convertedDates = dates.map((dateString) => new Date(dateString));
+        setAvailableDates(convertedDates);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -46,12 +51,11 @@ const TestDriveForm = () => {
     }
   };
 
-  function requestTestDrive(dateToAdd){
+  function requestTestDrive(dateToAdd) {
     const requestParam = {
-      Time: dateToAdd.getTime()/1000,
+      Time: dateToAdd.getTime() / 1000,
       AccountEmail: email,
-      CarName: name
-
+      CarName: name,
     };
     fetch('https://royalmotors.azurewebsites.net/testdrive', {
       method: 'POST',
@@ -59,14 +63,14 @@ const TestDriveForm = () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(requestParam)
+      body: JSON.stringify(requestParam),
     })
       .then((response) => {
         if (!response.ok) {
           console.log(JSON.stringify(requestParam));
           throw new Error(response.statusText);
         }
-        
+
         return response.json();
       })
       .then((data) => {
@@ -76,25 +80,31 @@ const TestDriveForm = () => {
         console.error('Error:', error);
       });
   }
-  
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="form">
-        <label>Car Name: {name}</label>
-        <label>Email: {email}</label>
-        <DatePicker
-          id="test-drive-date"
-          selected={selectedDate}
-          showTimeSelect
-          dateFormat="MM/dd/yyyy  EE hh:mm a"
-          onChange={(date) => setSelectedDate(date)}
-          minDate={new Date()}
-          includeDates={availableDates}
-        />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  );
-};
 
-export default TestDriveForm;
+  return (
+    <>
+      <Dialog open={open} onClose={onClose} maxWidth="md">
+        <DialogTitle>Test Drive Form</DialogTitle>
+        <DialogContent>
+          <form onSubmit={handleSubmit}>
+            <div className="form">
+              <label>Car Name: {name}</label>
+              <StaticDatePicker
+                id="test-drive-date"
+                selected={selectedDate}
+                showTimeSelect
+                dateFormat="MM/dd/yyyy  EE hh:mm a"
+                onChange={(date) => setSelectedDate(date)}
+                includeDates={availableDates}
+              />
+            </div>
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
