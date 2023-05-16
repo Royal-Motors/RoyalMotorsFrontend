@@ -180,7 +180,7 @@
 
     .Pen:hover{
         background-color: transparent;
-        color: rgb(35, 35, 192);
+        color: gray;
         border:none;
         padding:10px;
         font-size: 1.3vw;
@@ -197,6 +197,24 @@
     }
 
     .Trash:hover{
+        background-color: transparent;
+        color:gray;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+        cursor:pointer;
+    }
+
+    .Bill{
+        background-color: #1c2f36;
+        color:white;
+        border:none;
+        padding:10px;
+        font-size: 1.3vw;
+
+    }
+
+    .Bill:hover{
         background-color: transparent;
         color:gray;
         border:none;

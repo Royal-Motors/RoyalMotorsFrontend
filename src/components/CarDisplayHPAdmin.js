@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPencilAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faTrash, faMoneyBill1Wave } from '@fortawesome/free-solid-svg-icons';
 import { getUserToken } from '../pages/localStorage';
 
 const CarDisplayHPAdmin = (props) => {
@@ -43,6 +43,11 @@ const CarDisplayHPAdmin = (props) => {
             <button className="Trash">
               <FontAwesomeIcon icon={faTrash} onClick={handleDelete} />
             </button>
+          <Link to={`/Sell?id=${props.name}`} style={{ cursor: 'pointer', textDecoration: 'none' }}>
+            <button className="Bill">
+              <FontAwesomeIcon icon={faMoneyBill1Wave} />
+            </button>
+          </Link>
           </div>
         </div>
 
