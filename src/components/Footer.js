@@ -7,7 +7,6 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const Footer = () => {
   return (
-    <div>
         <footer id="footer">
             <section>
                 <img className="Logo_footer" src="Logos/LOGO.png" alt="logo" />
@@ -29,7 +28,6 @@ const Footer = () => {
                     <p>Clemenceau St. Hamra, Beirut</p>
             </section>
         </footer>
-    </div>
   )
 }
 
