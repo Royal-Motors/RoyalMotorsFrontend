@@ -9,6 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { TextField } from '@mui/material';
 import Navigation from '../components/Navigation.js';
 
 const CarListing = ({ email}) => {
@@ -68,7 +69,10 @@ const CarListing = ({ email}) => {
 
 
     const [open, setOpen] = React.useState(false);
-  
+    const [testOpen, setTestOpen] = React.useState(false);
+
+    const [reason, setReason] = React.useState("");
+
     const handleClickOpen = () => {
       setOpen(true);
     };
@@ -76,6 +80,47 @@ const CarListing = ({ email}) => {
     const handleClose = () => {
       setOpen(false);
     };
+
+    const handleTestOpen = () => {
+      setTestOpen(true);
+    };
+  
+    const handleTestClose = () => {
+      setTestOpen(false);
+    };
+
+    const handleTestSubmit = () => {
+      SaveReason();
+      handleTestClose();
+    };
+
+    const handleReasonChange = (event) => {
+      setReason(event.target.value);
+    };
+    
+
+    function SaveReason(){
+      return fetch(`https://royalmotors.azurewebsites.net/testdrive/49`, {
+        method: "DELETE",
+        headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${userToken}`,
+        },
+        body: JSON.stringify({
+        reason: reason
+        }),
+        }).then(response => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          const errorMessage = error.message;
+        })
+    };
+    
 
     useEffect(() => {
         setUserToken(getUserToken());
@@ -90,9 +135,42 @@ const CarListing = ({ email}) => {
                 <h2 className="buffer">buffer</h2> 
 
                 {userToken !== null ? (
+                  <div>
         <Link to={`/TestDriveForm?id=${data.name}`}>
           <button>TEST DRIVE</button>
         </Link>
+        <Button variant="outlined" onClick={handleTestOpen}>
+        Delete Test Drive
+        </Button>
+        <Dialog
+        open={testOpen}
+        onClose={handleTestClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Add reason"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+           Why are you cancelling this test drive?
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="reason"
+            label="Reason"
+            fullWidth
+            value={reason}
+            onChange={handleReasonChange}
+    /> 
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleTestSubmit}>Submit</Button>
+        </DialogActions>
+      </Dialog>
+            </div>
+        
       ) : (
         <div>
       <Button variant="outlined" onClick={handleClickOpen}>
