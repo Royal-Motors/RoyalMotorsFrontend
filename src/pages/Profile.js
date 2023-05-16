@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
-import { getUserToken, getUserEmail } from './localStorage';
+import { getUserToken, getUserEmail, getUserAuth } from './localStorage';
 import './styleProfile.css';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -324,7 +324,7 @@ setOpenPass(true);
           </div>
         </section>
       </main>
-      {isAdmin ? (
+      {getUserAuth()==="admin"? (
         <AdminTestDrives /> // Render the admin profile component
       ) : (
         <UserTestDrives /> // Render the user profile component
