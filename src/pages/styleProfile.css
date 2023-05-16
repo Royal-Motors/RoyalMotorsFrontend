@@ -87,13 +87,23 @@ button.reschedule:hover {
   background-color: #444;
 }
 
-.profile-info,
-.testdrives {
+.profile-info {
   margin: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  color:#fff;
+  background-color: #fff;
+}
+
+.testdrives {
+  margin: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 80%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 @media (max-width: 767px) {

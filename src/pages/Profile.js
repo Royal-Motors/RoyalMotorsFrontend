@@ -188,7 +188,7 @@ setOpenPass(true);
     <div className="bodyProfile">
     <main>
       <section className="profile-info">
-        <h1 style={{color: 'white', fontSize: '30px', paddingBottom:'30px', paddingTop:'0px'}}>Profile Information</h1>
+        <h1 style={{color: 'black', fontSize: '30px', paddingBottom:'30px', paddingTop:'0px'}}>Profile Information</h1>
         {!isEditMode && (
           <>
             <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>First Name:</strong> {firstName}</p>
@@ -305,7 +305,7 @@ setOpenPass(true);
         )}
       </section>
         <section className="testdrives">
-        <h1 style={{color: 'white', fontSize: '30px'}}>Test Drives</h1>
+        <h1 style={{color: 'black', fontSize: '30px'}}>Test Drives</h1>
         </section>
       </main>
       {getUserAuth()==="admin"? (
