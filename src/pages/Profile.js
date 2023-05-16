@@ -40,19 +40,6 @@ const Profile = () => {
     });
   };
 
-  React.useEffect(() => {
-    const token = getUserToken(); // Retrieve the token from wherever you store it
-    if (token) {
-      checkAdminStatus(token)
-        .then((response) => {
-          const isAdmin = response.data.isAdmin; // Assuming the server returns the admin status
-          setIsAdmin(isAdmin);
-        })
-        .catch((error) => {
-          // Handle error if the request fails
-        });
-    }
-  }, []);
   
   function compare(newPassword,newPasswordAgain){
     if(newPassword==newPasswordAgain){

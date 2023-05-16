@@ -15,6 +15,7 @@ import { getUserAuth } from './pages/localStorage';
 import HomePageDealer from './pages/HomePageDealer';
 import AccessDenied from './pages/AccessDenied';
 import UserTestDrives from './components/UserTestDrives';
+import SellCarAdmin from './pages/SellCarAdmin';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
           <Route exact path=":name" element={<CarListing />} />
           <Route path="/TestDriveForm" element={<TestDriveForm />} />
           <Route exact path="edit" element={getUserAuth()==='admin' ? <CarListingEdit /> : <AccessDenied />} />
+          <Route exact path="Sell" element={getUserAuth()==='admin' ? <SellCarAdmin /> : <AccessDenied />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/AdminTest" element={<AdminTestDrives />} />
           <Route path="/UserTest" element={<UserTestDrives />} />
