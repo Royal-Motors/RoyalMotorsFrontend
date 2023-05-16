@@ -10,11 +10,11 @@ const TestDriveForm = () => {
   const name = new URLSearchParams(location.search).get('id');
   const [email, setEmail] = useState(getUserEmail());
   const [selectedDate, setSelectedDate] = useState(null);
-  const [unavailableDates, setUnavailableDates] = useState([]);
+  const [availableDates, setAvailableDates] = useState([]);
   let [token, setToken] = React.useState(getUserToken());
 
   useEffect(() => {
-    fetch(`https://royalmotors.azurewebsites.net/testdrive/car/${name}`, {
+    fetch(`https://royalmotors.azurewebsites.net/testdrive/slots/${name}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ const TestDriveForm = () => {
       })
       .then((data) => {
         const dates = data.map((item) => new Date(item.Time));
-        setUnavailableDates(dates);
+        setAvailableDates(dates);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -66,6 +66,7 @@ const TestDriveForm = () => {
           console.log(JSON.stringify(requestParam));
           throw new Error(response.statusText);
         }
+        
         return response.json();
       })
       .then((data) => {
@@ -88,7 +89,7 @@ const TestDriveForm = () => {
           dateFormat="MM/dd/yyyy  EE hh:mm a"
           onChange={(date) => setSelectedDate(date)}
           minDate={new Date()}
-          excludeDates={unavailableDates}
+          includeDates={availableDates}
         />
       </div>
       <button type="submit">Submit</button>
