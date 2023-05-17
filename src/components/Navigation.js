@@ -91,7 +91,7 @@ let [authState, setAuthState] = useState(States.PENDING);
           if (!response.ok) {
             throw new Error(response.statusText);
           }
-          return response.json();
+          alert("Sign_Up successful")
           
         })
         .catch(error => {

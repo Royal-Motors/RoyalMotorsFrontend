@@ -24,7 +24,7 @@ const CarDisplayHPAdmin = (props) => {
       deleteTestDrive(props.id);
   }
 
-  const mainImage = props.image_id_list.split(",")[1] || props.image_id_list.split(",")[2] || props.image_id_list.split(",")[3] || props.image_id_list.split(",")[4] || props.image_id_list.split(",")[5] || props.image_id_list.split(",")[6] || props.image_id_list.split(",")[7] || props.image_id_list.split(",")[8] || props.image_id_list.split(",")[9] || props.image_id_list.split(",")[10]; 
+  const mainImage = props.image_id_list.split(",")[1] || props.image_id_list.split(",")[2] || props.image_id_list.split(",")[3] || props.image_id_list.split(",")[4] || props.image_id_list.split(",")[5] || props.image_id_list.split(",")[6] || props.image_id_list.split(",")[7] || props.image_id_list.split(",")[8] || props.image_id_list.split(",")[9] || props.image_id_list.split(",")[0]; 
   return (
     <div className="image-box">
       <Link to={`/${props.name}`} style={{ cursor: 'pointer', textDecoration: 'none' }}>
