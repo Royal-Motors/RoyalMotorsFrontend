@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import React, { useState } from "react";
 import "./UserCredentialsDialog.css";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { getUserToken, getUserEmail } from '../localStorage';
+import { getUserToken, getUserEmail, reload } from '../localStorage';
 // Component that presents a dialog to collect credentials from the user
 export default function UserCredentialsDialogIn({
 open,
@@ -22,11 +22,16 @@ submitText,
     let [password, setPassword] = useState("");
     let [newPassword, setNewPassword] = useState("");
     let [openForgot, setOpenForgot] = useState(false);
+    let [openForgot2, setOpenForgot2] = useState(false);
     let [code, setCode] = useState("");
     let [token, setToken] = useState(getUserToken());
 
     const handleForgotPassword = () =>{
 setOpenForgot(true);
+    }
+    const handleNext1 = () => {
+        sendResetCode();
+        setOpenForgot2(true);
     }
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -37,17 +42,45 @@ setOpenForgot(true);
     const handleClosePass = () => {
         setOpenForgot(false);
     }
+    const handleClosePass2 = () => {
+        setOpenForgot2(false);
+        handleClosePass();
+    }
+    function sendResetCode(){
+    return fetch(`https://royalmotors.azurewebsites.net/account/reset/${email}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          email: email,
+              },
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        console.log(response);
+        return response.json();
+      })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => console.error(error));
+}
+const handleNext = () =>{
+    resetPass(email,newPassword);
+}
 
-    function handleNext(){
+    function resetPass(email, password){
         return fetch(`https://royalmotors.azurewebsites.net/account/reset`, {
-            method: 'PUT',
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
                   },
             body: JSON.stringify({
             code : code,
-            password: newPassword,
+            password: password,
             email: email,
             }),
           })
@@ -55,8 +88,11 @@ setOpenForgot(true);
             if (!response.ok) {
               throw new Error(response.statusText);
             }
+            console.log(email);
             console.log(response);
+            handleClosePass2();
             handleClosePass();
+            reload();
             return response.json();
           })
             .then((data) => {
@@ -102,7 +138,8 @@ setOpenForgot(true);
                 value={password} 
                 onChange={({ target: { value } }) => setPassword(value)}
             />
-            <div>
+            <div class='forgot'>
+            <br></br>
                 <p onClick={handleForgotPassword}>Forgot password?</p>
             </div>
             </div>
@@ -118,7 +155,7 @@ setOpenForgot(true);
         </Dialog>
 
 <Dialog open={openForgot} onClose={handleClosePass}>
-        <DialogTitle>Change Password</DialogTitle>
+        <DialogTitle>Reset Password</DialogTitle>
         <DialogContent>
         <TextField
             autoFocus
@@ -130,6 +167,16 @@ setOpenForgot(true);
             variant="standard"
             onChange={handleEmail}
           />
+          </DialogContent>
+          <DialogActions>
+          <Button onClick={handleClosePass}>Cancel</Button>
+          <Button onClick={handleNext1}>Enter</Button>
+        </DialogActions>
+</Dialog>
+
+<Dialog open={openForgot2} onClose={handleClosePass2}>
+        <DialogTitle>Reset Password</DialogTitle>
+        <DialogContent>
           <TextField
             autoFocus
             margin="dense"
@@ -152,7 +199,7 @@ setOpenForgot(true);
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClosePass}>Cancel</Button>
+          <Button onClick={handleClosePass2}>Cancel</Button>
           <Button onClick={handleNext}>Enter</Button>
         </DialogActions>
       </Dialog>
