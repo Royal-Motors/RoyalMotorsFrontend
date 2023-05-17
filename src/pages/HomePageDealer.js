@@ -271,7 +271,14 @@ const HomePageDealer = () => {
                   </Link>
                 </div>
         ) : (
-        <p>Loading data...</p>
+        <><p>No cars available...</p>
+        <Link to={`/carAdd`} className="border-dashed" style={{ cursor: 'pointer', textDecoration: 'none' }}>
+              <button className="butt4">
+                <div className="Plus">
+                  <FontAwesomeIcon icon={faCirclePlus} />
+                </div>
+              </button>
+            </Link></>
         )}
     </div>
     {/* <!-- Section break --> */}
