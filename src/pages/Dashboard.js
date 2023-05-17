@@ -13,8 +13,8 @@ function CarMonthlyChart() {
     const newDataDay = [];
     const newDataDayTimes = [];
 
-    for (let dayoffset = -15; dayoffset < 15; dayoffset++) {
-      const unixTime = dayoffset * 3600 * 24 + currentTime;
+    for (let dayoffset = -30; dayoffset < 0; dayoffset++) {
+      const unixTime = dayoffset * 3600* 24 * 30 + currentTime;
       const salesData = await fetchSalesDay(unixTime);
       newDataDay.push(salesData);
       newDataDayTimes.push(unixTime);
@@ -25,7 +25,7 @@ function CarMonthlyChart() {
   }
 
   function fetchSalesDay(unixTime) {
-    return fetch(`https://royalmotors.azurewebsites.net/dashboard/sales/day/${unixTime}`, {
+    return fetch(`https://royalmotors.azurewebsites.net/dashboard/sales/month/${unixTime}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

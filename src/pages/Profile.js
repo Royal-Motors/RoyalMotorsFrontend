@@ -14,6 +14,8 @@ import AdminTestDrives from '../components/AdminTestDrives';
 import UserTestDrives from '../components/UserTestDrives';
 import axios from 'axios';
 import CarDailyChart from './Dashboard1.js'
+import CarMonthlyChart from './Dashboard.js'
+
 
 
 var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
@@ -315,6 +317,8 @@ setOpenPass(true);
       )}
 
 <CarDailyChart /> 
+<CarMonthlyChart /> 
+
 
     </div>
   );

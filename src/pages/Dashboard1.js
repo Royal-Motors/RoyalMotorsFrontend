@@ -13,7 +13,7 @@ function CarDailyChart() {
     const newDataDay = [];
     const newDataDayTimes = [];
 
-    for (let dayoffset = -15; dayoffset < 15; dayoffset++) {
+    for (let dayoffset = -30; dayoffset < 0; dayoffset++) {
       const unixTime = dayoffset * 3600 * 24 + currentTime;
       const salesData = await fetchSalesDay(unixTime);
       newDataDay.push(salesData);
@@ -61,6 +61,7 @@ function CarDailyChart() {
 
   return (
     <div>
+    {data ? (
       <Chart
         width={'800px'}
         height={'400px'}
@@ -72,7 +73,9 @@ function CarDailyChart() {
             title: 'Total Sales by Day',
           },
         }}
-      />
+      />) : (
+        <div>Loading chart data...</div>
+      )}
     </div>
   );
 }
