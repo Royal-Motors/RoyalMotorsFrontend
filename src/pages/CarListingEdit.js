@@ -8,11 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-// {`/edit?id=${props.name}`}
 const CarListingEdit = () => {
     const location = useLocation();
     const name = new URLSearchParams(location.search).get('id');
-    // const name="GAC GS3"
     const [data, setData] = useState({
         name: '',
         make: '',
@@ -28,6 +26,7 @@ const CarListingEdit = () => {
         transmissiontype: '',
       });
   
+    let image1;
     let image2;
     let image3;
     let image4;
@@ -245,30 +244,30 @@ const CarListingEdit = () => {
       setselectedFile10(null);
       setbooleanFile10(false);
     }; 
-
+    const [formValues, setFormValues] = useState({
+      name: "",
+      make: "",
+      model: "",
+      year: "",
+      color: "",
+      used : true,
+      price : "",
+      description: "",
+      mileage: "",
+      horsepower: "",
+      fuelconsumption: "", 
+      fueltankcapacity: "",
+      transmissiontype: "",
+      image_id_list: "",
+      video_id: ""
+  });
     useEffect(() => {
         fetch(`https://royalmotors.azurewebsites.net/car/${name}`)
         .then((response) => response.json())
         .then((data) => setData(data));
     }, [name]);
 
-    const [formValues, setFormValues] = useState({
-        name: "",
-        make: "",
-        model: "",
-        year: "",
-        color: "",
-        used : true,
-        price : "",
-        description: "",
-        mileage: "",
-        horsepower: "",
-        fuelconsumption: "", 
-        fueltankcapacity: "",
-        transmissiontype: "",
-        image_id_list: "",
-        video_id: ""
-    });
+    
       
     useEffect(() => {
       setFormValues({
@@ -288,15 +287,16 @@ const CarListingEdit = () => {
         image_id_list: data.image_id_list||"",
         video_id: data.video_id||""
       });
+      console.log(formValues);
 
-      setselectedMainFileURL(data.image_id_list ? data.image_id_list.split(",").map((word) => "https://royalmotors.azurewebsites.net/image/" + word)[0] : null)
      
       const imageUrls = data.image_id_list ? data.image_id_list.split(",").map((word) => {
         if (word) {
             return "https://royalmotors.azurewebsites.net/image/" + word;
         }else{return "";}
-      }).slice(1) : [];
-      [image2, image3, image4, image5, image6, image7, image8, image9, image10] = imageUrls;
+      }) : [];
+      [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10] = imageUrls;
+      setselectedMainFileURL(image1)
       setoriginalFile2(image2)
       setoriginalFile3(image3)
       setoriginalFile4(image4)
@@ -305,7 +305,6 @@ const CarListingEdit = () => {
       setoriginalFile7(image7)
       setoriginalFile8(image8)
       setoriginalFile9(image9)
-      console.log(originalFile9)
       setoriginalFile10(image10)
     }, [data]);
 
@@ -341,10 +340,9 @@ const CarListingEdit = () => {
           },
           body: JSON.stringify(formValues)
         })
-        .then(response => response.json())
+        .then(response => console.log(response.json()))
         .then(formValues=> console.log(formValues))
         .catch(error => console.error(error))
-        console.log(formValues)
 
         if (!booleanMainFileURL){
           try {

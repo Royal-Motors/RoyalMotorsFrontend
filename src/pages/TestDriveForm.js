@@ -6,6 +6,7 @@ import { getUserEmail, getUserToken } from './localStorage';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import "./testdrive.css";
 import {Snackbar} from '@mui/material';
@@ -19,7 +20,13 @@ export default function TestDriveForm({ open, onClose, name }) {
   const [availableTimes, setAvailableTimes] = useState([]);
   const [openAlert, setOpenAlert] = useState(false);
 
-
+  const theme = createTheme({
+    palette: {
+        primary: {
+        main: '#1C2F36',
+        },
+    },
+    });
 
   useEffect(() => {
     fetch(`https://royalmotors.azurewebsites.net/testdrive/slots/${name}`, {
@@ -58,9 +65,14 @@ export default function TestDriveForm({ open, onClose, name }) {
     }
   }, [selectedDate, availableDates]);
 
+  const submitBtn = document.getElementById('submit-btn');
   const handleSubmit = (event) => {
+
     event.preventDefault();
-    console.log('Form submitted');
+
+    submitBtn.disabled = true;
+    submitBtn.classList.add('loading');
+    submitBtn.innerHTML = 'Loading...';
     if (selectedDate) {
       console.log(selectedDate);
       requestTestDrive(selectedDate);
@@ -97,13 +109,17 @@ export default function TestDriveForm({ open, onClose, name }) {
       .catch((error) => {
         console.error('Error:', error);
       });
+
+      submitBtn.innerHTML = 'Submitted';
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('loading');
   }
 
   return (
     <>
-      <Dialog open={open} onClose={onClose} maxWidth="md">
-        <DialogTitle>Test Drive Form</DialogTitle>
-        <DialogContent>
+      <Dialog open={open} onClose={onClose} >
+        <DialogTitle >Test Drive Form</DialogTitle>
+        <DialogContent style={{height:"270px", width:"350px"}}>
           <form onSubmit={handleSubmit}>
             <div className="form">
               <label>Car Name: {name}</label>
@@ -117,9 +133,11 @@ export default function TestDriveForm({ open, onClose, name }) {
                 includeTimes={availableTimes}
               />
             </div>
-            <Button style={{ color: 'white' }} type="submit" variant="contained">
+            <ThemeProvider theme={theme}>
+            <Button style={{ color: 'white', margin:"2% 0" }} type="submit" variant="contained" id="submit-btn">
               Submit
             </Button>
+            </ThemeProvider>
           </form>
         </DialogContent>
       </Dialog>

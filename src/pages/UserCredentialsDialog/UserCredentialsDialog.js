@@ -18,11 +18,13 @@ submitText,
     let [password, setPassword] = useState("");
     let [firstname, setFirstname] = useState("");
     let [lastname, setLastname] = useState("");
+    let [address, setAddress] = useState("");
+    let [phoneNumber, setPhone] = useState("");
     let [buttonText, setButtonText] = useState(submitText);
 
     const handleButtonClick = () => {
         setButtonText("Loading...");
-        onSubmit(email, password, firstname, lastname);
+        onSubmit(email, password, firstname, lastname,address,phoneNumber);
         setButtonText("Done!");
         setTimeout(() => {
             setButtonText(submitText);
@@ -77,6 +79,25 @@ submitText,
                 value={lastname} 
                 onChange={({ target: { value } }) => setLastname(value)}
             />
+            </div>
+            <div className="form-item">
+                <TextField
+                    fullWidth
+                    label="Address"
+                    type="text"
+                    value={address} 
+                    onChange={({ target: { value } }) => setAddress(value)}
+                />
+            </div>
+            <div className="form-item">
+                <TextField
+                    fullWidth
+                    label="Phone number"
+                    type="text"
+                    value={phoneNumber} 
+                    onChange={({ target: { value } }) => setPhone(value)}
+                />
+
             </div>
             <ThemeProvider theme={theme}>
             <Button
