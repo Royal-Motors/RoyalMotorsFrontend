@@ -55,7 +55,7 @@ function CarMonthlyChart() {
   }, []); // Run the fetchAllDays function only once on component mount
 
   const data = [
-    ['Time', 'Sales'],
+    ['Time', 'Sales(in $)'],
     ...dataDay.map((number, index) => [formatDate(dataDayTimes[index]), number]),
   ];
 

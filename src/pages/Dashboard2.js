@@ -13,7 +13,7 @@ function CarYearlyChart() {
     const newDataDay = [];
     const newDataDayTimes = [];
 
-    for (let dayoffset = -30; dayoffset < 0; dayoffset++) {
+    for (let dayoffset = -10; dayoffset < 0; dayoffset++) {
       const unixTime = dayoffset * 3600 * 24 * 30 * 365 + currentTime;
       const salesData = await fetchSalesDay(unixTime);
       newDataDay.push(salesData);
@@ -55,7 +55,7 @@ function CarYearlyChart() {
   }, []); // Run the fetchAllDays function only once on component mount
 
   const data = [
-    ['Time', 'Sales'],
+    ['Time', 'Sales(in $)'],
     ...dataDay.map((number, index) => [formatDate(dataDayTimes[index]), number]),
   ];
 
