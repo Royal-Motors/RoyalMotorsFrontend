@@ -140,7 +140,7 @@ const handleNext = () =>{
             />
             <div class='forgot'>
             <br></br>
-                <p onClick={handleForgotPassword}>Forgot password?</p>
+                <p onClick={handleForgotPassword} style={{cursor:"pointer", width:"fit-content"}} >Forgot password?</p>
             </div>
             </div>
             <ThemeProvider theme={theme}>

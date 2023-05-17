@@ -340,10 +340,9 @@ const CarListingEdit = () => {
           },
           body: JSON.stringify(formValues)
         })
-        .then(response => response.json())
+        .then(response => console.log(response.json()))
         .then(formValues=> console.log(formValues))
         .catch(error => console.error(error))
-        console.log(formValues)
 
         if (!booleanMainFileURL){
           try {

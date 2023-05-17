@@ -69,11 +69,11 @@ let [authState, setAuthState] = useState(States.PENDING);
         .catch(error => {
           console.error('Error:', error);
           const errorMessage = error.message;
-          alert(`Sign-in failed: ${errorMessage==='Unauthorized' ? "Email and Password don't match" : ""}`);
+          alert(`Sign-in failed ${errorMessage==='Unauthorized' ? ": Email and Password don't match" : ""}`);
                 })
     }
 
-    function sign_up(email, password, firstname, lastname) {
+    function sign_up(email, password, firstname, lastname, address, phoneNumber) {
         return fetch(`${SERVER_URL}/sign_up`, {
         method: "POST",
         headers: {
@@ -83,17 +83,24 @@ let [authState, setAuthState] = useState(States.PENDING);
         email: email,
         password: password,
         firstname: firstname,
-        lastname: lastname
+        lastname: lastname,
+        phoneNumber : phoneNumber,
+        address : address
         }),
         }).then(response => {
           if (!response.ok) {
             throw new Error(response.statusText);
           }
           return response.json();
+          
         })
         .catch(error => {
           console.error('Error:', error);
-          const errorMessage = error.message;
+          if (error.message==="Bad Request"){
+            alert("Please make sure you filled all fields \n Also make sure of the following:\n- The email is in the correct format\n- The password is at least 8 characters, 1 number, and one special character\n- The phone number is in the correct format ")
+        }else if (error.message ==="Conflict"){
+            alert("Email already taken. Sign up with another email, or sign in.")
+        }
         })
     }
 
@@ -186,7 +193,7 @@ let [authState, setAuthState] = useState(States.PENDING);
             open = {authState === States.USER_CREATION}
             title = "Register"
             submitText={"Submit"}
-            onSubmit={(email, password, firstname, lastname) => sign_up(email, password, firstname, lastname)}
+            onSubmit={(email, password, firstname, lastname, address, phoneNumber) => sign_up(email, password, firstname, lastname, address, phoneNumber)}
             onClose = {() => setAuthState(States.PENDING)}
         />
 
