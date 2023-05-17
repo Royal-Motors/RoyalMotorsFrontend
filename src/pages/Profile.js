@@ -8,11 +8,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useParams } from 'react-router-dom';
 import {Alert} from '@mui/material';
 import AdminTestDrives from '../components/AdminTestDrives';
 import UserTestDrives from '../components/UserTestDrives';
-import axios from 'axios';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CarDailyChart from './Dashboard1.js'
 import CarMonthlyChart from './Dashboard.js'
@@ -23,7 +21,7 @@ import YearlyChart from './Dashboard5.js'
 import TestDailyChart from './Dashboard6.js'
 import TestMonthlyChart from './Dashboard7.js'
 import TestYearlyChart from './Dashboard8.js'
-import DashboardBox from './DashboardBox';
+// import DashboardBox from './DashboardBox';
 
 
 
@@ -35,25 +33,17 @@ const Profile = () => {
   const [lastName, setLastName] = React.useState("");
   const [address, setAddress] = React.useState("");
   const [phoneNumber, setPhoneNumber] = React.useState("");
-  let [token, setToken] = React.useState(getUserToken());
-  let [email, setEmail] = React.useState(getUserEmail());
+  let token= React.useState(getUserToken());
+  let email = React.useState(getUserEmail());
   const [open, setOpen] = React.useState(false);
   const [openPass, setOpenPass] = React.useState(false);
   const [password, setPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [newPasswordAgain, setNewPasswordAgain] = React.useState("");
 
-  const checkAdminStatus = (token) => {
-    return axios.get('https://your-server.com/checkAdminStatus', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  };
-
   
   function compare(newPassword,newPasswordAgain){
-    if(newPassword==newPasswordAgain){
+    if(newPassword===newPasswordAgain){
       console.log("equal");
       setPassword(newPassword);
       setOpenPass(false);
@@ -367,7 +357,7 @@ setOpenPass(true);
         <UserTestDrives /> // Render the user profile component
       )}
       
-{getUserAuth()==="admin"? (<DashboardBox/>):("")}
+{/* {getUserAuth()==="admin"? (<DashboardBox/>):("")} */}
 <div  className="graphs" style={{marginLeft: "100px"}}>
   {getUserAuth()==="admin"? (<CarDailyChart />):("")}
   {getUserAuth()==="admin"? (<CarMonthlyChart /> ):("")}
