@@ -69,6 +69,7 @@ body{
   border-collapse:collapse;
   font-family: 'Roboto';
   border-spacing: 0 10px;
+  font-size: 1.7vw;
   width: 90%;
   margin: auto;
   margin-bottom: 3vw;
@@ -104,7 +105,7 @@ body{
     color:#A0AEB3;
     border-radius: 5px;
     padding: 3px;
-
+    font-size: 1.7vw;
 }
 
  #firstCar, #secondCar{

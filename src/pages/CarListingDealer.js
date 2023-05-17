@@ -212,7 +212,6 @@ const CarListingDealer = () => {
             } catch(error) {
                 console.log(error.message);
                 if (error.message==="Request failed with status code 400"){
-                    // alert("Car already exists.\nOnly images will be updated")
                     alert("Please fill all car information fields")
                 }else if (error.message==="Request failed with status code 401"){
                     alert("You don't have the needed authorization.\nIf you are admin, your session timed out.\nPlease login again")

@@ -3,3 +3,21 @@
     top: -900px;
     z-index: 999;
   }
+
+  .react-datepicker__input-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#submit-btn.loading {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
