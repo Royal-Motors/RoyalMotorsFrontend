@@ -13,16 +13,17 @@ import {Alert} from '@mui/material';
 import AdminTestDrives from '../components/AdminTestDrives';
 import UserTestDrives from '../components/UserTestDrives';
 import axios from 'axios';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CarDailyChart from './Dashboard1.js'
 import CarMonthlyChart from './Dashboard.js'
 import CarYearlyChart from './Dashboard2.js'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import DailyChart from './Dashboard3.js'
 import MonthlyChart from './Dashboard4.js'
 import YearlyChart from './Dashboard5.js'
 import TestDailyChart from './Dashboard6.js'
 import TestMonthlyChart from './Dashboard7.js'
 import TestYearlyChart from './Dashboard8.js'
+import DashboardBox from './DashboardBox';
 
 
 
@@ -41,11 +42,6 @@ const Profile = () => {
   const [password, setPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [newPasswordAgain, setNewPasswordAgain] = React.useState("");
-  const [cars, setCars] = React.useState("");
-  const [sales, setSales] = React.useState("");
-  const [drives, setDrives] = React.useState("");
-  const [costumers, setCostumers] = React.useState("");
-  const [isAdmin, setIsAdmin] = React.useState(false);
 
   const checkAdminStatus = (token) => {
     return axios.get('https://your-server.com/checkAdminStatus', {
@@ -211,95 +207,7 @@ setOpenPass(true);
         },
     },
     });
-  function fetchTotalSales() {
-    return fetch(`https://royalmotors.azurewebsites.net/dashboard/totalsales`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setSales(data);
-      });
-  }
-
-  function fetchTotalCars() {
-    return fetch(`https://royalmotors.azurewebsites.net/dashboard/totalcarssold`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data)
-        setCars(data);
-      });
-  }
-
-  function fetchTotalTest() {
-    return fetch(`https://royalmotors.azurewebsites.net/dashboard/totaltestdriverequested`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setDrives(data);
-      });
-  }
-
-  function fetchTotalCostumers() {
-    return fetch(`https://royalmotors.azurewebsites.net/dashboard/totalcustomers`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        console.log(response);
-        if (!response.ok) {
-          throw new Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setCostumers(data);
-      });
-  }
-
-  fetchTotalCars();
-  fetchTotalCostumers();
-  fetchTotalSales();
-  fetchTotalTest();
-
+  
   return (
     <div className="bodyProfile">
     <main>
@@ -459,40 +367,19 @@ setOpenPass(true);
         <UserTestDrives /> // Render the user profile component
       )}
       
-
-
-<section className="dashboard">
-  <div>
-<h1 style={{color: 'black', fontSize: '30px'}}>Dashboard</h1>
-<br></br>
-<h3 style={{color: 'black', fontSize: '20px'}}>Total Sales (in $): {sales}</h3>
-<br></br>
-<h3 style={{color: 'black', fontSize: '20px'}}>Total Number of Cars Sold: {cars}</h3>
-<br></br>
-<h3 style={{color: 'black', fontSize: '20px'}}>Total Number of Testdrives: {drives} </h3>
-<br></br>
-<h3 style={{color: 'black', fontSize: '20px'}}>Total Number of Costumers: {costumers}</h3>
+{getUserAuth()==="admin"? (<DashboardBox/>):("")}
+<div  className="graphs" style={{marginLeft: "100px"}}>
+  {getUserAuth()==="admin"? (<CarDailyChart />):("")}
+  {getUserAuth()==="admin"? (<CarMonthlyChart /> ):("")}
+  {getUserAuth()==="admin"? (<CarYearlyChart /> ):("")}
+  {getUserAuth()==="admin"? (<DailyChart />):("")}
+  {getUserAuth()==="admin"? (<MonthlyChart /> ):("")}
+  {getUserAuth()==="admin"? (<YearlyChart /> ):("")}
+  {getUserAuth()==="admin"? (<TestDailyChart />):("")}
+  {getUserAuth()==="admin"? (<TestMonthlyChart />):("")}
+  {getUserAuth()==="admin"? (<TestYearlyChart />):("")}
 </div>
-</section>
-<section className="graphs">
-<div>
-<CarDailyChart /> 
-<CarMonthlyChart /> 
-<CarYearlyChart /> 
-<DailyChart />
-<MonthlyChart />
-<YearlyChart />
-<TestDailyChart />
-<TestMonthlyChart />
-<TestYearlyChart />
 </div>
-</section> 
-
-
-
-
-
-    </div>
   );
 };
 

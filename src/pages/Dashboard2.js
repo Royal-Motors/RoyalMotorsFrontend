@@ -13,8 +13,10 @@ function CarYearlyChart() {
     const newDataDay = [];
     const newDataDayTimes = [];
 
-    for (let dayoffset = -10; dayoffset < 0; dayoffset++) {
-      const unixTime = dayoffset * 3600 * 24 * 30 * 365 + currentTime;
+    for (let yearOffset = 10; yearOffset >= 0; yearOffset--) {
+      const currentDate = new Date();
+      currentDate.setFullYear(currentDate.getFullYear() - yearOffset);
+      const unixTime = Math.floor(currentDate.getTime() / 1000);
       const salesData = await fetchSalesDay(unixTime);
       newDataDay.push(salesData);
       newDataDayTimes.push(unixTime);
@@ -70,7 +72,7 @@ function CarYearlyChart() {
         data={data}
         options={{
           chart: {
-            title: 'Total Sales by Day',
+            title: 'Total Sales by Year',
           },
         }}
       />) : (
