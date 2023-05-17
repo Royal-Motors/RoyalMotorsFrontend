@@ -7,9 +7,15 @@
 
 }
 
-profile {
+.profile {
   background-color: #333;
   padding: 20px;
+}
+.profile-info {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  color: #fff;
+  width: 95%;
 }
 
 h1 {
@@ -26,23 +32,29 @@ main {
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
   padding: 20px;
+  padding-bottom: 0;
   grid-template-rows: auto 1fr;
   color: #fff;
 
 }
-
-.profile-info {
-  grid-column: 1 / -1;
-  grid-row: 1;
-  color: #fff;
-
+.text1{
+  display: inline-block;
+  margin: 2%;
 }
+
+
 
 .testdrives {
   grid-column: 1 / -1;
   grid-row: 2;
   margin-bottom: 20px;
   color: #fff;
+  width: 95%;
+  margin: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-color: #fff;
 
 }
 
@@ -95,16 +107,6 @@ button.reschedule:hover {
   background-color: #fff;
 }
 
-.testdrives {
-  margin: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 80%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  background-color: #fff;
-}
 
 .dashboard {
   margin: 10px;
