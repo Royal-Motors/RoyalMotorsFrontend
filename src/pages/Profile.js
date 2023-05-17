@@ -16,7 +16,12 @@ import axios from 'axios';
 import CarDailyChart from './Dashboard1.js'
 import CarMonthlyChart from './Dashboard.js'
 import CarYearlyChart from './Dashboard2.js'
-
+import DailyChart from './Dashboard3.js'
+import MonthlyChart from './Dashboard4.js'
+import YearlyChart from './Dashboard5.js'
+import TestDailyChart from './Dashboard6.js'
+import TestMonthlyChart from './Dashboard7.js'
+import TestYearlyChart from './Dashboard8.js'
 
 
 
@@ -33,7 +38,10 @@ const Profile = () => {
   const [password, setPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
   const [newPasswordAgain, setNewPasswordAgain] = React.useState("");
-
+  const [cars, setCars] = React.useState("");
+  const [sales, setSales] = React.useState("");
+  const [drives, setDrives] = React.useState("");
+  const [costumers, setCostumers] = React.useState("");
   const [isAdmin, setIsAdmin] = React.useState(false);
 
   const checkAdminStatus = (token) => {
@@ -187,6 +195,95 @@ setOpenPass(true);
     .catch((error) => console.error(error));
   }, [email, token]);
 
+  function fetchTotalSales() {
+    return fetch(`https://royalmotors.azurewebsites.net/dashboard/totalsales`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setSales(data);
+      });
+  }
+
+  function fetchTotalCars() {
+    return fetch(`https://royalmotors.azurewebsites.net/dashboard/totalcarssold`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data)
+        setCars(data);
+      });
+  }
+
+  function fetchTotalTest() {
+    return fetch(`https://royalmotors.azurewebsites.net/dashboard/totaltestdriverequested`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setDrives(data);
+      });
+  }
+
+  function fetchTotalCostumers() {
+    return fetch(`https://royalmotors.azurewebsites.net/dashboard/totalcustomers`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setCostumers(data);
+      });
+  }
+
+  fetchTotalCars();
+  fetchTotalCostumers();
+  fetchTotalSales();
+  fetchTotalTest();
+
 
   return (
     <div className="bodyProfile">
@@ -319,9 +416,36 @@ setOpenPass(true);
         <UserTestDrives /> // Render the user profile component
       )}
 
+
+<section className="dashboard">
+  <div>
+<h1 style={{color: 'black', fontSize: '30px'}}>Dashboard</h1>
+<br></br>
+<h3 style={{color: 'black', fontSize: '20px'}}>Total Sales (in $): {sales}</h3>
+<br></br>
+<h3 style={{color: 'black', fontSize: '20px'}}>Total Number of Cars Sold: {cars}</h3>
+<br></br>
+<h3 style={{color: 'black', fontSize: '20px'}}>Total Number of Testdrives: {drives} </h3>
+<br></br>
+<h3 style={{color: 'black', fontSize: '20px'}}>Total Number of Costumers: {costumers}</h3>
+</div>
+</section>
+<section className="graphs">
+<div>
 <CarDailyChart /> 
 <CarMonthlyChart /> 
 <CarYearlyChart /> 
+<DailyChart />
+<MonthlyChart />
+<YearlyChart />
+<TestDailyChart />
+<TestMonthlyChart />
+<TestYearlyChart />
+</div>
+</section> 
+
+
+
 
 
     </div>
