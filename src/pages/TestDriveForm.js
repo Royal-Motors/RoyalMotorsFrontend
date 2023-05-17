@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import StaticDatePicker from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useLocation } from 'react-router-dom';
 import { getUserEmail, getUserToken } from './localStorage';
@@ -13,7 +13,7 @@ export default function TestDriveForm({ open, onClose, name }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [availableDates, setAvailableDates] = useState([]);
   const [token, setToken] = useState(getUserToken());
-  var convertedDates = [];
+  const [availableTimes, setAvailableTimes] = useState([]);
 
   useEffect(() => {
     fetch(`https://royalmotors.azurewebsites.net/testdrive/slots/${name}`, {
@@ -34,13 +34,23 @@ export default function TestDriveForm({ open, onClose, name }) {
         console.log(data);
         const dates = data.map((item) => new Date(item * 1000));
         console.log(dates);
-        convertedDates = dates.map((dateString) => new Date(dateString));
-        setAvailableDates(convertedDates);
+        setAvailableDates(dates);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   }, [name]);
+
+  useEffect(() => {
+    if (selectedDate) {
+      const formattedDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate());
+      const timeslots = availableDates.filter(date => {
+        const formattedAvailableDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        return formattedAvailableDate.getTime() === formattedDate.getTime();
+      });
+      setAvailableTimes(timeslots);
+    }
+  }, [selectedDate, availableDates]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -70,7 +80,6 @@ export default function TestDriveForm({ open, onClose, name }) {
           console.log(JSON.stringify(requestParam));
           throw new Error(response.statusText);
         }
-
         return response.json();
       })
       .then((data) => {
@@ -89,13 +98,14 @@ export default function TestDriveForm({ open, onClose, name }) {
           <form onSubmit={handleSubmit}>
             <div className="form">
               <label>Car Name: {name}</label>
-              <StaticDatePicker
+              <DatePicker
                 id="test-drive-date"
                 selected={selectedDate}
                 showTimeSelect
                 dateFormat="MM/dd/yyyy  EE hh:mm a"
                 onChange={(date) => setSelectedDate(date)}
                 includeDates={availableDates}
+                includeTimes={availableTimes}
               />
             </div>
             <Button type="submit" variant="contained">
@@ -107,4 +117,5 @@ export default function TestDriveForm({ open, onClose, name }) {
     </>
   );
 }
+
 
