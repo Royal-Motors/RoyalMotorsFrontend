@@ -3,7 +3,7 @@ import axios from 'axios';
 import './AdminTestDrives.css';
 import { useState, useEffect } from 'react';
 import TableRowTestDrives2 from './TableRowTestDrives2';
-import { getUserToken } from '../pages/localStorage';
+import { getUserEmail, getUserToken } from '../pages/localStorage';
 
 const AdminTestDrives = () => {
   const [testDrives, setTestDrives] = useState([]);
@@ -12,8 +12,10 @@ const AdminTestDrives = () => {
   const [selectedSortOption, setSelectedSortOption] = useState('');
   const [sortSwitch, setSortSwitch] = useState(false);
 
+  const accountEmail=getUserEmail();
+
   useEffect(() => {
-    fetch('https://royalmotors.azurewebsites.net/testdrive', { 
+    fetch( `https://royalmotors.azurewebsites.net/testdrive/account/${accountEmail}`, { 
       headers: {
         Authorization: `Bearer ${getUserToken()}`,
       },
