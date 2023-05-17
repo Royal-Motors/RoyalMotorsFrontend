@@ -101,13 +101,13 @@ export default function TestDriveForm({ open, onClose, name }) {
 
   return (
     <>
-      <Dialog open={open} onClose={onClose} maxWidth="md">
-        <DialogTitle>Test Drive Form</DialogTitle>
-        <DialogContent>
+      <Dialog open={open} onClose={onClose} >
+        <DialogTitle >Test Drive Form</DialogTitle>
+        <DialogContent style={{height:"270px", width:"350px"}}>
           <form onSubmit={handleSubmit}>
             <div className="form">
               <label>Car Name: {name}</label>
-              <DatePicker
+              <DatePicker 
                 id="test-drive-date"
                 selected={selectedDate}
                 showTimeSelect
@@ -117,7 +117,7 @@ export default function TestDriveForm({ open, onClose, name }) {
                 includeTimes={availableTimes}
               />
             </div>
-            <Button style={{ color: 'white' }} type="submit" variant="contained">
+            <Button style={{ color: 'white', margin:"2% 0" }} type="submit" variant="contained">
               Submit
             </Button>
           </form>
