@@ -15,6 +15,8 @@ import UserTestDrives from '../components/UserTestDrives';
 import axios from 'axios';
 import CarDailyChart from './Dashboard1.js'
 import CarMonthlyChart from './Dashboard.js'
+import CarYearlyChart from './Dashboard2.js'
+
 
 
 
@@ -312,12 +314,14 @@ setOpenPass(true);
       </main>
       {getUserAuth()==="admin"? (
         <AdminTestDrives /> // Render the admin profile component
+
       ) : (
         <UserTestDrives /> // Render the user profile component
       )}
 
 <CarDailyChart /> 
 <CarMonthlyChart /> 
+<CarYearlyChart /> 
 
 
     </div>
