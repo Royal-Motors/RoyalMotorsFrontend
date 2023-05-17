@@ -1,21 +1,60 @@
-import React from 'react';
-import { Line } from 'react-chartjs-2';
-import { useTheme } from '@mui/material/styles';
-import { Paper } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Chart } from 'react-google-charts';
+import { getUserEmail, getUserToken } from './localStorage';
 
-import ReactFrappeChart from "react-frappe-charts";
+export default function CarMonthlyChart() {
+  const [chartData, setChartData] = useState(null);
+  const [token, setToken] = useState(getUserToken());
 
-export default function CarMonthlyChart(props) {
-  return (
-    <ReactFrappeChart
-      type="bar"
-      colors={["#fff"]}
-      axisOptions={{ xAxisMode: "tick", yAxisMode: "tick", xIsSeries: 1 }}
-      height={250}
-      data={{
-        labels: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-        datasets: [{ values: [18, 40, 30, 35, 8, 52, 17, 4] }],
-      }}
-    />
-  );
+  var currentTime = Math.floor((new Date()).getTime()/1000);
+  var unixTime;
+  var dataDay = [];
+  var dataDayTimes = [];
+  
+  function fetchSalesDay(unixTime){
+         return fetch(`https://royalmotors.azurewebsites.net/dashboard/sales/day/${unixTime}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            console.log(response);
+            if (!response.ok) {
+              throw new Error(response.statusText);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
     }
+
+    for (let dayoffset=-15; dayoffset<15; dayoffset++){
+    unixTime = dayoffset*3600*24 + currentTime;
+    dataDay.push(fetchSalesDay(unixTime));
+    dataDayTimes.push(unixTime);
+    }
+    
+  return (
+    <div>
+      {chartData ? (
+        <Chart
+          width={'800px'}
+          height={'400px'}
+          chartType="LineChart"
+          loader={<div>Loading Chart</div>}
+          data={dataDay}
+          options={{
+            chart: {
+              title: 'Total Sales by Day',
+            },
+          }}
+        />
+      ) : (
+        <div>Loading chart data...</div>
+      )}
+    </div>
+  );
+}
