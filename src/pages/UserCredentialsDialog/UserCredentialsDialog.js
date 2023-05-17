@@ -23,12 +23,7 @@ submitText,
     let [buttonText, setButtonText] = useState(submitText);
 
     const handleButtonClick = () => {
-        setButtonText("Loading...");
         onSubmit(email, password, firstname, lastname,address,phoneNumber);
-        setButtonText("Done!");
-        setTimeout(() => {
-            setButtonText(submitText);
-          }, 4000);
       };
     const theme = createTheme({
     palette: {

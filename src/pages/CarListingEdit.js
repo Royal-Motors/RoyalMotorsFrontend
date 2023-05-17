@@ -340,235 +340,261 @@ const CarListingEdit = () => {
           },
           body: JSON.stringify(formValues)
         })
-        .then(response => console.log(response.json()))
-        .then(formValues=> console.log(formValues))
-        .catch(error => console.error(error))
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }          
+          if (!booleanMainFileURL){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=1`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }
+          if (!booleanFile2){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=2`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }
+          if (!booleanFile3){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=3`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }if (!booleanFile4){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=4`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }if (!booleanFile5){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=5`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }if (!booleanFile6){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=6`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }if (!booleanFile7){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=7`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }if (!booleanFile8){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=8`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }if (!booleanFile9){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=9`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }if (!booleanFile10){
+            try {
+              const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=10`, headerAuth);
+              console.log(response.data); // handle success
+            } catch (error) {
+              console.error(error); // handle error
+            }
+          }
+          
+  
+          //Sending the main image
+          if (formMainData && formMainData.get('File')) {
+            try {
+                formMainData.append('carName', formValues.name);
+                const response = axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=1`, formMainData, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Main Image uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+          }
+  
+          //Sending the rest of the images one by one
+          if (formData2 && formData2.get('File')) {
+            try {
+                formData2.append('carName', formValues.name);
+                const response =  axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=2`, formData2, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Image 2 uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+        }
+        if (formData3 && formData3.get('File')) {
+            try {
+                formData3.append('carName', formValues.name);
+                const response =  axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=3`, formData3, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Image 3 uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+        }if (formData4 && formData4.get('File')) {
+            try {
+                formData4.append('carName', formValues.name);
+                const response =  axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=4`, formData4, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Image 4 uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+        }if (formData5 && formData5.get('File')) {
+            try {
+                formData5.append('carName', formValues.name);
+                const response =  axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=5`, formData5, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Image 5 uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+        }if (formData6 && formData6.get('File')) {
+            try {
+                formData6.append('carName', formValues.name);
+                const response = axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=6`, formData6, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Image 6 uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+        }if (formData7 && formData7.get('File')) {
+            try {
+                formData7.append('carName', formValues.name);
+                const response = axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=7`, formData7, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Image 7 uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+        }if (formData8 && formData8.get('File')) {
+            try {
+                formData8.append('carName', formValues.name);
+                const response = axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=8`, formData8, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Image 8 uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+        }if (formData9 && formData9.get('File')) {
+            try {
+                formData9.append('carName', formValues.name);
+                const response = axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=9`, formData9, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Image 9 uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+        }if (formData10 && formData10.get('File')) {
+            try {
+                formData10.append('carName', formValues.name);
+                const response = axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=10`, formData10, {
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      'Authorization': `Bearer ${getUserToken()}`
+                    }
+                  });
+              
+                  console.log('Image 10 uploaded successfully!', response.data);
+                } catch (error) {
+                  console.error('Error uploading image:', error);
+                }
+        }
+        if(submitBtn.innerHTML!=="Error"){
+          submitBtn.innerHTML = 'Submitted';
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+        }
+        setTimeout(() => {
+          submitBtn.innerHTML = 'Submit';
+          submitBtn.classList.remove('Submitted');
+        }, 4000);
 
-        if (!booleanMainFileURL){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=1`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
+
+        })
+        .catch(error => {
+          const errorM =error;
+          if (error.message==="Bad Request"){
+            alert("Please fill all car information fields")
+          }else if (error.message==="Unauthorized"){
+              alert("You don't have the needed authorization.\nIf you are admin, your session timed out.\nPlease login again")
           }
-        }
-        if (!booleanFile2){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=2`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
-          }
-        }
-        if (!booleanFile3){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=3`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
-          }
-        }if (!booleanFile4){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=4`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
-          }
-        }if (!booleanFile5){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=5`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
-          }
-        }if (!booleanFile6){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=6`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
-          }
-        }if (!booleanFile7){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=7`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
-          }
-        }if (!booleanFile8){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=8`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
-          }
-        }if (!booleanFile9){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=9`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
-          }
-        }if (!booleanFile10){
-          try {
-            const response = axios.delete(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=10`, headerAuth);
-            console.log(response.data); // handle success
-          } catch (error) {
-            console.error(error); // handle error
-          }
-        }
+          
+          submitBtn.innerHTML = 'Error';
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('loading');
+          setTimeout(() => {
+            submitBtn.innerHTML = 'Submit';
+            submitBtn.classList.remove('Error');
+          }, 4000);
+        })
+
         
-
-        //Sending the main image
-        if (formMainData && formMainData.get('File')) {
-          try {
-              formMainData.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=1`, formMainData, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Main Image uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-        }
-
-        //Sending the rest of the images one by one
-        if (formData2 && formData2.get('File')) {
-          try {
-              formData2.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=2`, formData2, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Image 2 uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-      }
-      if (formData3 && formData3.get('File')) {
-          try {
-              formData3.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=3`, formData3, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Image 3 uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-      }if (formData4 && formData4.get('File')) {
-          try {
-              formData4.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=4`, formData4, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Image 4 uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-      }if (formData5 && formData5.get('File')) {
-          try {
-              formData5.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=5`, formData5, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Image 5 uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-      }if (formData6 && formData6.get('File')) {
-          try {
-              formData6.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=6`, formData6, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Image 6 uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-      }if (formData7 && formData7.get('File')) {
-          try {
-              formData7.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=7`, formData7, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Image 7 uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-      }if (formData8 && formData8.get('File')) {
-          try {
-              formData8.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=8`, formData8, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Image 8 uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-      }if (formData9 && formData9.get('File')) {
-          try {
-              formData9.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=9`, formData9, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Image 9 uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-      }if (formData10 && formData10.get('File')) {
-          try {
-              formData10.append('carName', formValues.name);
-              const response = await axios.post(`https://royalmotors.azurewebsites.net/image?carName=${formValues.name}&order=10`, formData10, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${getUserToken()}`
-                  }
-                });
-            
-                console.log('Image 10 uploaded successfully!', response.data);
-              } catch (error) {
-                console.error('Error uploading image:', error);
-              }
-      }
-
-      submitBtn.innerHTML = 'Submitted';
-      submitBtn.disabled = false;
-      submitBtn.classList.remove('loading');
     };
     
   return (
