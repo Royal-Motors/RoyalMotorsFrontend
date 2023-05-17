@@ -7,6 +7,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import "./testdrive.css";
+import {Snackbar} from '@mui/material';
+import {Alert} from '@mui/material';
 
 export default function TestDriveForm({ open, onClose, name }) {
   const [email, setEmail] = useState(getUserEmail());
@@ -14,6 +17,9 @@ export default function TestDriveForm({ open, onClose, name }) {
   const [availableDates, setAvailableDates] = useState([]);
   const [token, setToken] = useState(getUserToken());
   const [availableTimes, setAvailableTimes] = useState([]);
+  const [openAlert, setOpenAlert] = useState(false);
+
+
 
   useEffect(() => {
     fetch(`https://royalmotors.azurewebsites.net/testdrive/slots/${name}`, {
@@ -78,8 +84,11 @@ export default function TestDriveForm({ open, onClose, name }) {
       .then((response) => {
         if (!response.ok) {
           console.log(JSON.stringify(requestParam));
+
           throw new Error(response.statusText);
         }
+        setOpenAlert(true);
+
         return response.json();
       })
       .then((data) => {
@@ -108,12 +117,21 @@ export default function TestDriveForm({ open, onClose, name }) {
                 includeTimes={availableTimes}
               />
             </div>
-            <Button type="submit" variant="contained">
+            <Button style={{ color: 'white' }} type="submit" variant="contained">
               Submit
             </Button>
           </form>
         </DialogContent>
       </Dialog>
+      <Snackbar
+            elevation={6}
+            variant="filled"
+            open={openAlert}
+            autoHideDuration={4000}
+            onClose={() => setOpenAlert(false) }
+            >
+            <Alert severity="success">Successfully scheduled testdrive!</Alert>
+    </Snackbar>
     </>
   );
 }
