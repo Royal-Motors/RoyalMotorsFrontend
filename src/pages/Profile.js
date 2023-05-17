@@ -13,7 +13,7 @@ import {Alert} from '@mui/material';
 import AdminTestDrives from '../components/AdminTestDrives';
 import UserTestDrives from '../components/UserTestDrives';
 import axios from 'axios';
-import CarMonthlyChart from './Dashboard.js'
+import CarDailyChart from './Dashboard1.js'
 
 
 var SERVER_URL = "https://royalmotors.azurewebsites.net/account";
@@ -314,7 +314,7 @@ setOpenPass(true);
         <UserTestDrives /> // Render the user profile component
       )}
 
-<CarMonthlyChart /> 
+<CarDailyChart /> 
 
     </div>
   );
