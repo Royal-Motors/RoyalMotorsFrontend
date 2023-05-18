@@ -16,6 +16,7 @@ import axios from 'axios';
 import CarDailyChart from './Dashboard1.js'
 import CarMonthlyChart from './Dashboard.js'
 import CarYearlyChart from './Dashboard2.js'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import DailyChart from './Dashboard3.js'
 import MonthlyChart from './Dashboard4.js'
 import YearlyChart from './Dashboard5.js'
@@ -31,6 +32,8 @@ const Profile = () => {
   const [isEditMode, setIsEditMode] = React.useState(false);
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
   let [token, setToken] = React.useState(getUserToken());
   let [email, setEmail] = React.useState(getUserEmail());
   const [open, setOpen] = React.useState(false);
@@ -133,6 +136,8 @@ setOpenPass(true);
         lastname: lastName,
         email: email,
         password: password,
+        phoneNumber : phoneNumber,
+        address : address,
       }),
     })
       .then((response) => response.json())
@@ -155,6 +160,8 @@ setOpenPass(true);
         lastname: lastName,
         email: email,
         password: newpass,
+        phoneNumber : phoneNumber,
+        address: address
       }),
     })
       .then((response) => response.json())
@@ -191,10 +198,19 @@ setOpenPass(true);
       console.log(data)
       setFirstName(data.firstname);
       setLastName(data.lastname);
+      setPhoneNumber(data.phoneNumber);
+      setAddress(data.address);
     })
     .catch((error) => console.error(error));
   }, [email, token]);
 
+  const theme = createTheme({
+    palette: {
+        primary: {
+        main: '#1C2F36',
+        },
+    },
+    });
   function fetchTotalSales() {
     return fetch(`https://royalmotors.azurewebsites.net/dashboard/totalsales`, {
       method: 'GET',
@@ -284,18 +300,28 @@ setOpenPass(true);
   fetchTotalSales();
   fetchTotalTest();
 
-
   return (
     <div className="bodyProfile">
     <main>
-      <section className="profile-info">
+      <div className="profile-info">
         <h1 style={{color: 'black', fontSize: '30px', paddingBottom:'30px', paddingTop:'0px'}}>Profile Information</h1>
         {!isEditMode && (
           <>
-            <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>First Name:</strong> {firstName}</p>
-            <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>Last Name:</strong> {lastName}</p>
-            <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>Email:</strong> {email}</p>
+          <div className='text'>
+            <div className='text1' style={{marginLeft:"0"}}>
+              <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>First Name:</strong> {firstName}</p>
+              <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>Last Name:</strong> {lastName}</p>
+            </div><div className='text1'>
+              <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>Email:</strong></p>
+              <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}>{email}</p>
+            </div>
+            <div className='text1'>
+              <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>Address:</strong> {address}</p>
+              <p style={{color: 'black', paddingBottom:'10px', paddingTop:'0px'}}><strong>Phone Number:</strong> {phoneNumber}</p>
+            </div>
+          </div>
             <div className="button-wrapper">
+          
   <Button
     style={{ color: 'white' }}
     className="edit-profile"
@@ -328,7 +354,7 @@ setOpenPass(true);
             variant="standard"
             onChange={handlePassword}
           />
-                    <TextField
+          <TextField
             autoFocus
             margin="dense"
             id="new"
@@ -350,8 +376,10 @@ setOpenPass(true);
           />
         </DialogContent>
         <DialogActions>
+        <ThemeProvider theme={theme}>
           <Button onClick={handleClosePass}>Cancel</Button>
           <Button onClick={handleNext}>Enter</Button>
+        </ ThemeProvider>
         </DialogActions>
       </Dialog>
           </>
@@ -373,13 +401,29 @@ setOpenPass(true);
                 onChange={(e) => setLastName(e.target.value)}
                 style={{color: 'black'}}
               />
+              <TextField
+                id="address"
+                label="Address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                style={{color: 'black'}}
+              /><TextField
+                id="phoneNumber"
+                label="Phone Number"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                style={{color: 'black'}}
+              />
             </Box>
-            <Button variant="outlined" onClick={handleClickOpen}>
-        Save
-            </Button>
-            <Button variant="outlined" onClick={handleCloseNoChanges}>
-        Cancel
-            </Button>
+            <ThemeProvider theme={theme}>
+              <Button variant="contained" onClick={handleClickOpen} style={{marginTop:"1%",marginRight:'1%'}}>
+                Save
+              </Button>
+              <Button variant="contained" onClick={handleCloseNoChanges} style={{marginTop:"1%"}}>
+                Cancel
+              </Button>
+            </ThemeProvider>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Confirm Changes</DialogTitle>
         <DialogContent>
@@ -398,16 +442,15 @@ setOpenPass(true);
           />
         </DialogContent>
         <DialogActions>
+        <ThemeProvider theme={theme}>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSaveClick}>Save changes</Button>
+        </ThemeProvider>
         </DialogActions>
       </Dialog>
           </>
         )}
-      </section>
-        <section className="testdrives">
-        <h1 style={{color: 'black', fontSize: '30px'}}>Test Drives</h1>
-        </section>
+      </div>
       </main>
       {getUserAuth()==="admin"? (
         <AdminTestDrives /> // Render the admin profile component
@@ -415,6 +458,7 @@ setOpenPass(true);
       ) : (
         <UserTestDrives /> // Render the user profile component
       )}
+      
 
 
 <section className="dashboard">
