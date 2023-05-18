@@ -55,7 +55,7 @@ function TestDailyChart() {
   }, []); // Run the fetchAllDays function only once on component mount
 
   const data = [
-    ['Time', 'Costumers'],
+    ['Time', 'Testdrives'],
     ...dataDay.map((number, index) => [formatDate(dataDayTimes[index]), number]),
   ];
 
