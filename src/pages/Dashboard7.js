@@ -13,7 +13,7 @@ function TestMonthlyChart() {
     const newDataDay = [];
     const newDataDayTimes = [];
 
-    for (let dayoffset = -30; dayoffset < 0; dayoffset++) {
+    for (let dayoffset = -12; dayoffset <=0; dayoffset++) {
       const unixTime = dayoffset * 3600 * 24 * 30 + currentTime;
       const salesData = await fetchSalesDay(unixTime);
       newDataDay.push(salesData);
