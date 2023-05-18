@@ -15,7 +15,7 @@ function TestYearlyChart() {
 
     /*for (let dayoffset = -10; dayoffset < 0; dayoffset++) {
       const unixTime = dayoffset * 3600 * 24 * 30 * 365 + currentTime;*/
-      const unixTime = 1672617601;
+      const unixTime = 1672531200;
       const salesData = await fetchSalesDay(unixTime);
       newDataDay.push(salesData);
       newDataDayTimes.push(unixTime);
