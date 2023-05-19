@@ -12,16 +12,20 @@ function YearlyChart() {
   async function fetchAllDays() {
     const newDataDay = [];
     const newDataDayTimes = [];
-
-    for (let yearOffset = 10; yearOffset >= 0; yearOffset--) {
-      const currentDate = new Date();
-      currentDate.setFullYear(currentDate.getFullYear() - yearOffset);
-      const unixTime = Math.floor(currentDate.getTime() / 1000);
+    const currentDate = new Date();
+    currentDate.setMonth(0);
+    currentDate.setDate(1);
+    currentDate.setHours(0, 0, 0, 0);
+  
+    for (let yearOffset = -10; yearOffset <= 0; yearOffset++) {
+      const date = new Date(currentDate);
+      date.setFullYear(date.getFullYear() + yearOffset);
+      const unixTime = Math.floor(date.getTime() / 1000);
       const salesData = await fetchSalesDay(unixTime);
       newDataDay.push(salesData);
       newDataDayTimes.push(unixTime);
     }
-
+  
     setDataDay(newDataDay);
     setDataDayTimes(newDataDayTimes);
   }
