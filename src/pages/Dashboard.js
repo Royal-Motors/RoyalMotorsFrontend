@@ -59,8 +59,10 @@ function CarMonthlyChart() {
     ...dataDay.map((number, index) => [formatDate(dataDayTimes[index]), number]),
   ];
 
-  return (
-    <div>
+  let chartComponent;
+
+  if (data && data.length > 1) {
+    chartComponent = (
       <Chart
         width={'800px'}
         height={'400px'}
@@ -73,6 +75,15 @@ function CarMonthlyChart() {
           },
         }}
       />
+    );
+  } else {
+    chartComponent = <div>Loading chart data...</div>;
+  }
+
+  return (
+    <div>
+      <h2 style={{ color: 'white', fontSize: '20px' }}> Total Sales by Month</h2>
+      {chartComponent}
     </div>
   );
 }

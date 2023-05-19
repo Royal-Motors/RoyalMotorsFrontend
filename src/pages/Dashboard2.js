@@ -61,9 +61,10 @@ function CarYearlyChart() {
     ...dataDay.map((number, index) => [formatDate(dataDayTimes[index]), number]),
   ];
 
-  return (
-    <div>
-    {data ? (
+  let chartComponent;
+
+  if (data && data.length > 1) {
+    chartComponent = (
       <Chart
         width={'800px'}
         height={'400px'}
@@ -72,12 +73,19 @@ function CarYearlyChart() {
         data={data}
         options={{
           chart: {
-            title: 'Total Sales by Year',
+            title: 'Total Sales by Day',
           },
         }}
-      />) : (
-        <div>Loading chart data...</div>
-      )}
+      />
+    );
+  } else {
+    chartComponent = <div>Loading chart data...</div>;
+  }
+
+  return (
+    <div>
+      <h2 style={{ color: 'white', fontSize: '20px' }}> Total Sales by Year</h2>
+      {chartComponent}
     </div>
   );
 }

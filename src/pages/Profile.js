@@ -368,16 +368,28 @@ setOpenPass(true);
       )}
       
 {getUserAuth()==="admin"? (<DashboardBox/>):("")}
-<div  className="graphs" style={{marginLeft: "100px"}}>
+<div  className="graphs" style={{marginLeft: "100px", marginRight: "100px"}}>
+  <div>
   {getUserAuth()==="admin"? (<CarDailyChart />):("")}
+  </div>
+  <div>
   {getUserAuth()==="admin"? (<CarMonthlyChart /> ):("")}
+  </div>
+  <div>
   {getUserAuth()==="admin"? (<CarYearlyChart /> ):("")}
+  </div> <div>
   {getUserAuth()==="admin"? (<DailyChart />):("")}
+  </div> <div>
   {getUserAuth()==="admin"? (<MonthlyChart /> ):("")}
+  </div> <div>
   {getUserAuth()==="admin"? (<YearlyChart /> ):("")}
+  </div> <div>
   {getUserAuth()==="admin"? (<TestDailyChart />):("")}
+  </div> <div>
   {getUserAuth()==="admin"? (<TestMonthlyChart />):("")}
+  </div> <div>
   {getUserAuth()==="admin"? (<TestYearlyChart />):("")}
+  </div>
 </div>
 </div>
   );

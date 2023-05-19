@@ -59,9 +59,10 @@ function DailyChart() {
     ...dataDay.map((number, index) => [formatDate(dataDayTimes[index]), number]),
   ];
 
-  return (
-    <div>
-    {data ? (
+  let chartComponent;
+
+  if (data && data.length > 1) {
+    chartComponent = (
       <Chart
         width={'800px'}
         height={'400px'}
@@ -73,9 +74,16 @@ function DailyChart() {
             title: 'Total Sales by Day',
           },
         }}
-      />) : (
-        <div>Loading chart data...</div>
-      )}
+      />
+    );
+  } else {
+    chartComponent = <div>Loading chart data...</div>;
+  }
+
+  return (
+    <div>
+      <h2 style={{ color: 'white', fontSize: '20px' }}> Total Number of Cars by Day</h2>
+      {chartComponent}
     </div>
   );
 }
