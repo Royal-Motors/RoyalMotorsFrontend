@@ -91,7 +91,7 @@ let [authState, setAuthState] = useState(States.PENDING);
           if (!response.ok) {
             throw new Error(response.statusText);
           }
-          alert("Sign_Up successful")
+          alert("Sign_Up successful\n\nPlease check your email verfication to be able to log in")
           
         })
         .catch(error => {
