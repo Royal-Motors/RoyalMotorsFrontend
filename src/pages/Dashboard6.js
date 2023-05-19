@@ -24,6 +24,14 @@ function TestDailyChart() {
     setDataDayTimes(newDataDayTimes);
   }
 
+  function getNextDay(unixTime) {
+    const date = new Date(unixTime * 1000);
+    date.setHours(0, 0, 0, 0);
+    date.setDate(date.getDate() + 1);
+    const nextDayUnixTime = Math.floor(date.getTime() / 1000);
+    return nextDayUnixTime;
+  }
+
   function fetchSalesDay(unixTime) {
     return fetch(`https://royalmotors.azurewebsites.net/dashboard/testdrive/day/${unixTime}`, {
       method: 'GET',
