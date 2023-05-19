@@ -12,17 +12,22 @@ function CarMonthlyChart() {
   async function fetchAllDays() {
     const newDataDay = [];
     const newDataDayTimes = [];
-
-    for (let dayoffset = -12; dayoffset <=0; dayoffset++) {
-      const unixTime = dayoffset * 3600* 24 * 30 + currentTime;
+    const currentDate = new Date();
+    currentDate.setDate(1);
+    currentDate.setHours(0, 0, 0, 0);
+  
+    for (let dayOffset = -12; dayOffset <= 0; dayOffset++) {
+      const date = new Date(currentDate);
+      date.setMonth(date.getMonth() + dayOffset);
+      const unixTime = Math.floor(date.getTime() / 1000);
       const salesData = await fetchSalesDay(unixTime);
       newDataDay.push(salesData);
       newDataDayTimes.push(unixTime);
     }
-
+  
     setDataDay(newDataDay);
     setDataDayTimes(newDataDayTimes);
-  }
+  }  
 
   function fetchSalesDay(unixTime) {
     return fetch(`https://royalmotors.azurewebsites.net/dashboard/sales/month/${unixTime}`, {

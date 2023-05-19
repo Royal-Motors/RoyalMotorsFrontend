@@ -84,7 +84,7 @@ function YearlyChart() {
 
   return (
     <div>
-      <h2 style={{ color: 'white', fontSize: '20px' }}> Total Number of Cars by Year</h2>
+      <h2 style={{ color: 'white', fontSize: '20px' }}> Total Number of Cars Sold by Year</h2>
       {chartComponent}
     </div>
   );

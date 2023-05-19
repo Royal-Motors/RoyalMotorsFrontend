@@ -12,9 +12,13 @@ function TestDailyChart() {
   async function fetchAllDays() {
     const newDataDay = [];
     const newDataDayTimes = [];
-
-    for (let dayoffset = -15; dayoffset <=0; dayoffset++) {
-      const unixTime = dayoffset * 3600 * 24 + currentTime;
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+  
+    for (let dayOffset = -15; dayOffset <= 0; dayOffset++) {
+      const date = new Date(currentDate); 
+      date.setDate(date.getDate() + dayOffset); 
+      const unixTime = Math.floor(date.getTime() / 1000); 
       const salesData = await fetchSalesDay(unixTime);
       newDataDay.push(salesData);
       newDataDayTimes.push(unixTime);
